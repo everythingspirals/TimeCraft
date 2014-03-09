@@ -1,9 +1,0 @@
-I:\Joseph\Projects\Timeporal\Timeporal\bin\Timeporal.dll.config
-I:\Joseph\Projects\Timeporal\Timeporal\bin\Timeporal.dll
-I:\Joseph\Projects\Timeporal\Timeporal\bin\Timeporal.pdb
-I:\Joseph\Projects\Timeporal\Timeporal\bin\Timeporal.xml
-I:\Joseph\Projects\Timeporal\Timeporal\obj\Debug\Timeporal.Resources.resources
-I:\Joseph\Projects\Timeporal\Timeporal\obj\Debug\Timeporal.vbproj.GenerateResource.Cache
-I:\Joseph\Projects\Timeporal\Timeporal\obj\Debug\Timeporal.dll
-I:\Joseph\Projects\Timeporal\Timeporal\obj\Debug\Timeporal.xml
-I:\Joseph\Projects\Timeporal\Timeporal\obj\Debug\Timeporal.pdb
