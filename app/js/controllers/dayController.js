@@ -1,6 +1,12 @@
-﻿function dayController($scope, $rootScope, Auth, Day, $route, $location) {
+app.config(function($asideProvider) {
+  angular.extend($asideProvider.defaults, {
+    container: 'body',
+    html: true
+  });
+})
+function dayController($scope, $rootScope, Auth, Day, $route, $location, $aside) {
 
-    $scope.timelog = {
+   $scope.timelog = {
         Issue:null,
         TimeIn:null,
         TimeOut:null,

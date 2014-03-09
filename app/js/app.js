@@ -17,5 +17,5 @@
         'miscDirectives',
 
         //Plugins
-        'mgcrea.ngStrap'
+        'mgcrea.ngStrap',
     ]);
