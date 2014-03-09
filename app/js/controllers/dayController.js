@@ -1,9 +1,10 @@
 ﻿function dayController($scope, $rootScope, Auth, Day, $route, $location) {
+
     $scope.timelog = {
         Issue:null,
         TimeIn:null,
         TimeOut:null,
-        
+        PublicUserID: $rootScope.session.PublicUserID 
     }  
 
 
