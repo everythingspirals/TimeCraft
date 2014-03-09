@@ -1,4 +1,12 @@
 ﻿function dayController($scope, $rootScope, Auth, Day, $route, $location) {
+    $scope.timelog = {
+        Issue:null,
+        TimeIn:null,
+        TimeOut:null,
+        
+    }  
+
+
     $scope.$on('$routeChangeSuccess', function (event, current, previous) {
 
         //if we landed on this page with route params
