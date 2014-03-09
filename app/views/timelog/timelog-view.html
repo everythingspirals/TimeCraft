@@ -1,28 +1,32 @@
 ﻿    <div ng-controller="dayController">
-
+        
+        <!--tooltip-->
         <div class="navbar navbar-default navbar-static-top navbar-tooltip">
-
-
-
+            
+            <!--datepicker-->
             <form class="navbar-form navbar-right">
-<div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-<div class="input-group" style="width:300px">
-    <input type="text" class="form-control" ng-model="selectedDateAsNumber" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
-  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-</div>              
-  </div>
-         
-        </form>
-        <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/timelog/timelog-create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
-    </button>
+                <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+                    <div class="input-group" style="width:300px">
+                        <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>              
+                </div>
+            </form>
+            
+            <!-- aside button -->
+            <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/timelog/timelog-create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
+            </button>
+        </div>
+        
+        <pre>{{timelog}}</pre>
 
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                         <div class="panel-heading">Timelogs</div>
-                <table class="table table-striped">
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <!--timelogs repeater -->
+                <div class="panel panel-default">
+                   <div class="panel-heading">Timelogs</div>
+                   <table class="table table-striped">
                     <thead>
                         <tr>
                             <th width="40%">Issue</th>
@@ -37,9 +41,9 @@
                             <td>{{timelog.IssueNumber}}</td>
                             <td>{{timelog.TimeIn | date }}</td>
                             <td>{{timelog.TimeOut | date:'hh'}}</td>
-                            <td></td>
+                            <td>{{diff(timelog.TimeIn,timelog.TimeOut)}}</td>
                             <td>
-                                <a href="#/timelog/" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                                <button ng-click="edit(timelog)" data-template="views/timelog/timelog-edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
                                 <a href="#/timelog/" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
                                 <a href="#/timelog/" class="btn btn-default"><i class="fa fa-file-text-o"></i></a>
                             </td>
@@ -48,6 +52,5 @@
                 </table>
             </div>
         </div>
-  
-</div>
+    </div>
 </div>

@@ -7,7 +7,6 @@
       
         //Services
         'authServices',
-        'dayServices',
         'miscServices',
         'projectServices',
         'rateServices',

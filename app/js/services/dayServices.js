@@ -6,6 +6,7 @@
             { getbydate: { method: "GET", params: { method: "getbydate" }, isArray:true } });
 
         var timeLogs = {};
+        
         return {
             getTimelogs: function (params, callback) {
                 return resource.getbydate(params, function (cb) {
