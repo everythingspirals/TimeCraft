@@ -1,9 +1,10 @@
 ﻿var app = angular.module('app',
     [
         //Core
-        'ngRoute',
+        'ngAnimate',
         'ngCookies',
-
+        'ngRoute',
+      
         //Services
         'authServices',
         'dayServices',
@@ -16,5 +17,5 @@
         'miscDirectives',
 
         //Plugins
-        'ui.bootstrap'
+        'mgcrea.ngStrap'
     ]);
