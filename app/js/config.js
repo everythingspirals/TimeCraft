@@ -13,7 +13,7 @@
                 templateUrl: 'views/period.html'
             })
             .when('/day/:date', {
-                templateUrl: 'views/day.html'
+                templateUrl: 'views/timelog/timelog-view.html'
             })
             .when('/timelog/create/:date', {
                 templateUrl: 'views/timelog-create.html'
