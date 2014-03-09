@@ -7,7 +7,6 @@
         PublicUserID: $rootScope.session.PublicUserID 
     }  
 
-
     $scope.$on('$routeChangeSuccess', function (event, current, previous) {
 
         //if we landed on this page with route params

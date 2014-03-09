@@ -9,6 +9,9 @@
             .when('/home', {
                 templateUrl: 'views/home.html'
             })
+            .when('/period', {
+                templateUrl: 'views/period.html'
+            })
             .when('/day/:date', {
                 templateUrl: 'views/day.html'
             })
