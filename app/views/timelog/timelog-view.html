@@ -4,19 +4,20 @@
 
 
 
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-    <label class="control-label"><i class="fa fa-calendar"></i> Date <small>(as number)</small></label>
+            <form class="navbar-form navbar-right">
+<div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+<div class="input-group" style="width:300px">
     <input type="text" class="form-control" ng-model="selectedDateAsNumber" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
+  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+</div>              
   </div>
          
         </form>
+        <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/timelog/timelog-create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
+    </button>
 
     </div>
-<button type="button" class="btn btn-lg btn-danger" data-template="views/timelog/timelog-create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Custom aside
-      <br>
-      <small>(using data-template)</small>
-    </button>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
