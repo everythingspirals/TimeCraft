@@ -1,0 +1,7 @@
+<div ng-controller="projectController">  
+  <div class="container">
+    <p ng-repeat="p in projects">
+      {{p.ProjectID}}
+    </p>
+  </div>
+</div>
