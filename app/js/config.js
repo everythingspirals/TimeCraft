@@ -18,4 +18,7 @@
             .when('/timelog/create/:date', {
                 templateUrl: 'views/timelog-create.html'
             })
+            .when('/projects/', {
+                templateUrl: 'views/project/projects.html'
+            })
 }]);

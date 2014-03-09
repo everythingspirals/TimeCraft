@@ -175,5 +175,11 @@ background:rgb(251, 133, 33);
  background:rgb(101, 128, 146);
 }
 
+.edit-icon{
+  color: #eea236;
+}
 
-
+.padless
+{
+  padding:0px;
+}

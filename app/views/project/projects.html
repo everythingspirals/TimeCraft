@@ -1,0 +1,27 @@
+<div ng-controller="projectController">  
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body padless">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Manager</th>
+              <th style="text-align:center;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="project in projects">
+              <td>{{project.ProjectName}}</td>
+              <td></td>
+              <td align="center">
+                <a href="#/projects/" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                <a href="#/projects/" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
