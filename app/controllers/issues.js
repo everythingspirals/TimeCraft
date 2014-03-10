@@ -4,97 +4,98 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Article = mongoose.model('Article'),
+    Issue = mongoose.model('Issue'),
     _ = require('lodash');
 
 
 /**
- * Find article by id
+ * Find issue by id
  */
-exports.article = function(req, res, next, id) {
-    Article.load(id, function(err, article) {
+exports.issue = function(req, res, next, id) {
+    Issue.load(id, function(err, issue) {
         if (err) return next(err);
-        if (!article) return next(new Error('Failed to load article ' + id));
-        req.article = article;
+        if (!issue) return next(new Error('Failed to load issue ' + id));
+        req.issue = issue;
         next();
     });
 };
 
+
 /**
- * Create an article
+ * Create a issue
  */
 exports.create = function(req, res) {
-    var article = new Article(req.body);
-    article.user = req.user;
+    var issue = new Issue(req.body);
+    issue.createdBy = req.user;
 
-    article.save(function(err) {
+    issue.save(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                article: article
+                issue: issue
             });
         } else {
-            res.jsonp(article);
+            res.jsonp(issue);
         }
     });
 };
 
 /**
- * Update an article
+ * Update an issue
  */
 exports.update = function(req, res) {
-    var article = req.article;
+    var issue = req.issue;
 
-    article = _.extend(article, req.body);
+    issue = _.extend(issue, req.body);
 
-    article.save(function(err) {
+    issue.save(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                article: article
+                issue: issue
             });
         } else {
-            res.jsonp(article);
+            res.jsonp(issue);
         }
     });
 };
 
 /**
- * Delete an article
+ * Delete an issue
  */
 exports.destroy = function(req, res) {
-    var article = req.article;
+    var issue = req.issue;
 
-    article.remove(function(err) {
+    issue.remove(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                article: article
+                issue: issue
             });
         } else {
-            res.jsonp(article);
+            res.jsonp(issue);
         }
     });
 };
 
 /**
- * Show an article
+ * Show an issue
  */
 exports.show = function(req, res) {
-    res.jsonp(req.article);
+    res.jsonp(req.issue);
 };
 
 /**
- * List of Articles
+ * List of Issues
  */
 exports.all = function(req, res) {
-    Article.find().sort('-created').populate('user', 'name username').exec(function(err, articles) {
+    Issue.find().sort('-startTime').populate('user', 'name username').exec(function(err, issues) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
-            res.jsonp(articles);
+            res.jsonp(issues);
         }
     });
 };

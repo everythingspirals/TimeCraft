@@ -8,24 +8,32 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Article Schema
+ * Issue Schema
  */
-var ArticleSchema = new Schema({
-    created: {
+var IssueSchema = new Schema({
+    name: {
         type: Date,
         default: Date.now
     },
-    title: {
+    story: {
+        type: Date,
+        default: Date.now
+    },
+    estimate: {
         type: String,
         default: '',
         trim: true
     },
-    content: {
+    actual: {
         type: String,
         default: '',
         trim: true
+    },    Estimate: {
+    createdBy: String,
+        type: Schema.ObjectId,
+        ref: 'User'
     },
-    user: {
+    assignedTo: {
         type: Schema.ObjectId,
         ref: 'User'
     }
@@ -34,17 +42,17 @@ var ArticleSchema = new Schema({
 /**
  * Validations
  */
-ArticleSchema.path('title').validate(function(title) {
-    return title.length;
-}, 'Title cannot be blank');
+IssueSchema.path('name').validate(function(description) {
+    return name.length;
+}, 'Name cannot be blank');
 
 /**
  * Statics
  */
-ArticleSchema.statics.load = function(id, cb) {
+IssueSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
     }).populate('user', 'name username').exec(cb);
 };
 
-mongoose.model('Article', ArticleSchema);
+mongoose.model('Issue', IssueSchema);

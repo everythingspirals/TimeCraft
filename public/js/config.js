@@ -6,8 +6,21 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
     // For unmatched routes:
     $urlRouterProvider.otherwise('/');
 
-    // states for my app
-    $stateProvider
+     $stateProvider
+    //issues
+    .state('create issue', {
+        url: '/issues/create',
+        templateUrl: 'views/issues/create.html'
+    })
+      .state('edit issue', {
+        url: '/issues/:issueId/edit',
+        templateUrl: 'views/issues/edit.html'
+    })
+      .state('issue by date', {
+        url: '/issues/:date',
+        templateUrl: 'views/issues/list.html'
+    })
+    //timelogs
     .state('create timelog', {
         url: '/timelogs/create',
         templateUrl: 'views/timelogs/create.html'
