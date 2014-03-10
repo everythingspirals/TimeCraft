@@ -17,7 +17,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'views/issues/edit.html'
     })
       .state('issue by date', {
-        url: '/issues/:date',
+        url: '/issues',
         templateUrl: 'views/issues/list.html'
     })
     //timelogs

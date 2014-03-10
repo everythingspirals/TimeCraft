@@ -12,24 +12,24 @@ var mongoose = require('mongoose'),
  */
 var IssueSchema = new Schema({
     name: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: '',
+        trim: true
     },
     story: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: '',
+        trim: true
     },
     estimate: {
-        type: String,
-        default: '',
-        trim: true
+        type: Number,
+        default: 0,
     },
-    actual: {
-        type: String,
-        default: '',
-        trim: true
-    },    Estimate: {
-    createdBy: String,
+    created: {
+        type: Date,
+        default: Date.now,
+    },
+    createdBy: {
         type: Schema.ObjectId,
         ref: 'User'
     },

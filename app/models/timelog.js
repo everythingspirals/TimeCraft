@@ -24,6 +24,10 @@ var TimelogSchema = new Schema({
         default: '',
         trim: true
     },
+    issue: {
+        type: Schema.ObjectId,
+        ref: 'Issue'
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'

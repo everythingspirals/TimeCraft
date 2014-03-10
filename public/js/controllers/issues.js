@@ -8,7 +8,6 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
             name: this.name,
             story: this.story,
             estimate: this.estimate,
-            actual: this.actual,
             assignedTo: this.assignedTo
         });
         issue.$save(function(response) {
@@ -17,7 +16,6 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
             this.name = '';
             this.story = '';
             this.estimate = 0;
-            this.actual = 0;
             this.assignedTo = null;
     };
 

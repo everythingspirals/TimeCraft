@@ -7,7 +7,8 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         var timelog = new Timelogs({
             startTime: this.startTime,
             stopTime: this.stopTime,
-            description: this.description
+            description: this.description,
+            issue: this.issue
         });
         timelog.$save(function(response) {
             $scope.timelogs.push(timelog);
@@ -16,6 +17,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         this.startTime = null;
         this.stopTime = null;
         this.description = '';
+        this.issue = null;
     };
 
     $scope.remove = function(timelog) {
