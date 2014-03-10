@@ -47,7 +47,7 @@ TimelogSchema.path('description').validate(function(description) {
 TimelogSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
-    }).populate('user', 'name username').exec(cb);
+    }).populate('user', 'name username').populate('issue','name').exec(cb);
 };
 
 mongoose.model('Timelog', TimelogSchema);

@@ -25,7 +25,7 @@ exports.timelog = function(req, res, next, id) {
  * Create a timelog
  */
 exports.create = function(req, res) {
-    var timelog = new Timelog(req.body);
+    var timelog = new Timelog(req.body);  
     timelog.user = req.user;
 
     timelog.save(function(err) {
@@ -89,7 +89,7 @@ exports.show = function(req, res) {
  * List of Timelogs
  */
 exports.all = function(req, res) {
-    Timelog.find().sort('-startTime').populate('user', 'name username').exec(function(err, timelogs) {
+    Timelog.find().sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
         if (err) {
             res.render('error', {
                 status: 500

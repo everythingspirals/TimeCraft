@@ -6,22 +6,23 @@
         <h4 class="aside-title"><i class="fa fa-plus"></i> Create</h4>
       </div>
       <div class="aside-body">
+      <pre>{{description}}{{startTime}}</pre>
        <form>
-       <div class="form-group">
+       <div class="form-group" ng-controller="IssuesController" data-ng-init="find()">
           <label>Issue</label>
-          <select id="issue" data-ng-model="issue" class="form-control" required></select>
+          <select id="issue" ng-model="$parent.issue" ng-options="issue._id as issue.name for issue in issues" class="form-control" required></select>
         </div>
         <div class="form-group">
-          <label>Time In</label>
-          <input type="text" class="form-control" data-ng-model="startTime" id="start" placeholder="Start Time" required>
+          <label>Start Time</label>
+          <input type="text" class="form-control" ng-model="startTime" id="start" placeholder="Start Time" data-autoclose="1" placeholder="Time" bs-timepicker required>
         </div>
         <div class="form-group">
-          <label>Time Out</label>
-          <input type="text" class="form-control" data-ng-model="stopTime" id="stop" placeholder="Stop Time" required>
+          <label>Stop Time</label>
+          <input type="text" class="form-control" ng-model="stopTime" id="stop" placeholder="Stop Time" placeholder="Time" bs-timepicker required>
         </div>
         <div class="form-group">
           <label>Description</label>
-          <textarea data-ng-model="description" id="description" cols="30" rows="10" placeholder="Description" class="form-control" required></textarea>
+          <textarea ng-model="description" id="description" cols="30" rows="10" placeholder="Description" class="form-control" required></textarea>
         </div>
       </form>
     </div>

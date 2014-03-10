@@ -1,12 +1,43 @@
 'use strict';
 
 angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$stateParams', '$location', 'Global', 'Timelogs', function ($scope, $stateParams, $location, Global, Timelogs) {
+    
+    //---------------------------------
+    //Variables
+    //---------------------------------
     $scope.global = Global;
+    $scope.timelogs = [];
+    $scope.date = $stateParams.date;
 
+    //---------------------------------
+    //Functions
+    //---------------------------------
+     $scope.diff = function(start,stop){
+        stop = moment(stop);
+        start = moment(start);
+        if (stop < start){
+            stop = stop.add('days',1);
+        }
+        return stop.diff(start,'hours');
+    };
+    
     $scope.create = function() {
+        var startTime = moment(this.startTime);
+        var stopTime = moment(this.stopTime);
+        
+        //set startTime date to today
+        stopTime.year(moment().year());
+        stopTime.month(moment().month());
+        stopTime.date(moment().date());
+
+        //set stopTime date to today
+        startTime.year(moment().year());
+        startTime.month(moment().month());
+        startTime.date(moment().date());
+
         var timelog = new Timelogs({
-            startTime: this.startTime,
-            stopTime: this.stopTime,
+            startTime: startTime.format(),
+            stopTime: stopTime.format(),
             description: this.description,
             issue: this.issue
         });
@@ -61,4 +92,13 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
             $scope.timelog = timelog;
         });
     };
+
+    //---------------------------------
+    //Listeners
+    //---------------------------------
+    $scope.$watch('date',function(){
+        if($scope.date != $stateParams.date){
+            $location.path( "#!/day/" + moment($scope.date).format('L') );
+        }
+    });
 }]);

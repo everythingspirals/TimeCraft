@@ -1,6 +1,4 @@
-  <section data-ng-controller="DayController">
     	<section data-ng-controller="TimelogsController" data-ng-init="find()">
-<pre>{{timelogs}}</pre>
   	<!--tooltip-->
   	<section class="navbar navbar-default navbar-static-top navbar-tooltip">
   		<!--datepicker-->
@@ -37,13 +35,13 @@
   						</thead>
   						<tbody>
   							<tr ng-repeat="timelog in timelogs">
-  								<td>{{timelog.IssueNumber}}</td>
-  								<td>{{timelog.startTime | date }}</td>
-  								<td>{{timelog.stopTime | date}}</td>
-  								<td>{{diff(timelog.TimeIn,timelog.TimeOut)}}</td>
+  								<td>{{timelog.issue.name}}</td>
+  								<td>{{timelog.startTime | date : 'HH:mm a' }}</td>
+  								<td>{{timelog.stopTime | date : 'HH:mm a'}}</td>
+  								<td>{{diff(timelog.startTime,timelog.stopTime)}}</td>
   								<td>
   									<button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-  									<a href="#/timelog/" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+  									<button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
   									<a href="#/timelog/" class="btn btn-default"><i class="fa fa-file-text-o"></i></a>
   								</td>
   							</tr>
@@ -54,10 +52,3 @@
 
   		</div>
   	</section>
-  </section>
-
-
-
-
-
-
