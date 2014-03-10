@@ -1,0 +1,27 @@
+<section data-ng-controller="TimelogsController" data-ng-init="findOne()">
+	<form class="form-horizontal col-md-6" role="form" data-ng-submit="update()">
+		<div class="form-group">
+			<label for="title" class="col-md-2 control-label">Start</label>
+			<div class="col-md-10">
+				<input type="text" class="form-control" data-ng-model="timelog.startTime" id="start" placeholder="Start Time" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="content" class="col-md-2 control-label">Stop</label>
+			<div class="col-md-10">
+				<input type="text" class="form-control" data-ng-model="timelog.stopTime" id="stop" placeholder="Stop Time" required>
+			</div>
+		</div>
+				<div class="form-group">
+			<label for="content" class="col-md-2 control-label">Desription</label>
+			<div class="col-md-10">
+				<textarea data-ng-model="timelog.description" id="description" cols="30" rows="10" placeholder="Description" class="form-control" required></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</div>
+		</div>
+	</form>
+</section>
