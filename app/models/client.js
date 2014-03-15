@@ -28,7 +28,7 @@ var ClientSchema = new Schema({
 ClientSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
-    }).populate('name', 'name')
+    })
     .exec(cb);
 };
 

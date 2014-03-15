@@ -67,35 +67,46 @@ Side Navigation
 }
 #sidenav .title{
   width:200px;
-  background-color: rgba(245, 245, 245, 0.952941);
+  background-color: rgba(245, 245, 245, 0.90);
   color:#333;
 }
 #sidenav .title:hover{
   background-color:inherit;
   color:#fff;
 }
-
-#section .icon,
-#section .title{
-  background:inherit;
-  color:white;
-}
 /*------------------------
 Sub Navigation
 -------------------------*/
 #subnav{
     background:#fff;
+    font-family: 'Roboto', sans-serif;
     height:60px;
-    padding:5px;
+    padding:0px;
     margin-bottom:0;
       -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   -ms-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   box-shadow: 0 1px 0 rgba(0,0,0,0.05);
 }
-#title{
+#current{
   height:60px;
+  width:250px;
+  background:#444;
   color:white;
+}
+#current span{
+  display:inline-block;
+  height:60px;
+  padding:16px 16px 16px 16px;
+}
+#current .icon{
+  width:50px;
+  float:left;
+  color:#fff;
+}
+#current .title{
+  width:200px;
+  color:#fff;
 }
 /*------------------------
 Main

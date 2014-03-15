@@ -89,7 +89,7 @@ exports.show = function(req, res) {
  * List of Projects
  */
 exports.all = function(req, res) {
-    Project.find().sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, projects) {
+    Project.find().sort('-startTime').populate('user', 'name username').populate('issue','name').populate('client','name').exec(function(err, projects) {
         if (err) {
             res.render('error', {
                 status: 500

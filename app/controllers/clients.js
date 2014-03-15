@@ -26,7 +26,6 @@ exports.client = function(req, res, next, id) {
  */
 exports.create = function(req, res) {
     var client = new Client(req.body);
-    client.createdBy = req.user;
 
     client.save(function(err) {
         if (err) {

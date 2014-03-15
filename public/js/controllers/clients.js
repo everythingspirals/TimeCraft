@@ -6,11 +6,16 @@ angular.module('mean.clients').controller('ClientsController', ['$scope', '$stat
     //Variables
     //---------------------------------
     $scope.global = Global;
+    $scope.client = {};
     $scope.clients = [];
 
     //---------------------------------
     //Functions
     //---------------------------------
+    $scope.edit = function(client){
+        $scope.client = client;
+    }
+
     $scope.create = function() {
         var client = new Clients({
             name: this.name,
@@ -46,7 +51,7 @@ angular.module('mean.clients').controller('ClientsController', ['$scope', '$stat
         // client.updated.push(new Date().getTime());
 
         client.$update(function() {
-            $location.path('clients/' + client._id);
+            //$location.path('clients/' + client._id);
         });
     };
 

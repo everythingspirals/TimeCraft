@@ -11,6 +11,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     //---------------------------------
     //Functions
     //---------------------------------
+    $scope.edit = function(project){
+        $scope.project = project;
+    }
+
     $scope.create = function() {
         var project = new Projects({
             name: this.name,
@@ -52,7 +56,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         // project.updated.push(new Date().getTime());
 
         project.$update(function() {
-            $location.path('projects/' + project._id);
         });
     };
 

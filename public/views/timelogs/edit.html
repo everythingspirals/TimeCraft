@@ -6,8 +6,7 @@
         <h4 class="aside-title"><i class="fa fa-plus"></i> Create</h4>
       </div>
       <div class="aside-body">
-      <section data-ng-controller="TimelogsController" data-ng-init="findOne()">
-       <form>
+            <form>
        <div class="form-group" ng-controller="IssuesController" data-ng-init="find()">
           <label>Issue</label>
           <select id="issue" ng-model="$parent.timelog.issue" ng-options="issue._id as issue.name for issue in issues" class="form-control" required></select>
@@ -25,8 +24,7 @@
           <textarea ng-model="description" id="timelog.description" cols="30" rows="10" placeholder="Description" class="form-control" required></textarea>
         </div>
       </form>
-      </section>
-    </div>
+      </div>
     <div class="aside-footer">
       <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
       <button type="button" class="btn btn-primary" ng-click="update(); $hide()">Save changes</button>
