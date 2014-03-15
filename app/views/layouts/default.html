@@ -8,14 +8,16 @@
         <section id="subnav" class="navbar navbar-default navbar-static-top" ng-include="'views/subnav.html'"></section>
 
         <!-- sidenav -->
-        <section ng-include="'views/sidenav.html'"></section>
+        <nav ng-include="'views/sidenav.html'"></nav>
         
-  
+        
         <!-- sidenav -->
         <section id="content">
   		        {% block content %}{% endblock %}
         </section>
 
+        <!-- bottomnav -->
+        <footer id="bottomnav" class="navbar navbar-default navbar-fixed-bottom" ng-include="'views/bottomnav.html'"></footer>
         {% include '../includes/foot.html' %}
     </body>
 </html>

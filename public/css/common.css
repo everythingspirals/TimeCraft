@@ -91,6 +91,7 @@ Sub Navigation
 #current{
   height:60px;
   width:250px;
+  float:left;
   background:#444;
   color:white;
 }
@@ -108,6 +109,32 @@ Sub Navigation
   width:200px;
   color:#fff;
 }
+/*------------------------
+Bottom Nav
+-------------------------*/
+
+/*------------------------
+Chat
+-------------------------*/
+#chat{
+  position:fixed;
+  bottom:51px;
+  right:0;
+  width:500px;
+  height:500px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-bottom:none;
+ }
+ #chat .output{
+  position:absolute;
+  top:0;
+   padding:15px;
+ }
+  #chat .input{
+  position:absolute;
+  bottom:0;
+ }
 /*------------------------
 Main
 -------------------------*/
@@ -140,6 +167,9 @@ Navbar
   box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   height:60px;
   padding-top:4px;
+}
+.navbar-btn{
+  margin-right:15px;
 }
 
 /*----------------------------

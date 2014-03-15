@@ -1,0 +1,20 @@
+<section ng-controller="ChatController">
+	<a ng-click='toggle = !toggle' class="btn btn-default navbar-btn navbar-right"><i class="fa fa-comments"></i> Chat</a>
+	
+	<section id="chat" ng-show="toggle">
+		<section class="output">
+			<section class="message" ng-repeat="message in messages">
+				{{message.text}}
+			</section>
+		</section>
+
+		<section class="input">
+			<div class="input-group">
+		      <input type="text" class="form-control">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Send</button>
+		      </span>
+		    </div>
+		</section>
+	</section>
+</section>
