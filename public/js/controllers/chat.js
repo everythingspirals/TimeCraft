@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.chat').controller('ChatController', ['$scope', '$stateParams', '$location', 'Global', 'socket', function ($scope, $stateParams, $location, Global, Clients) {
+angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 'socket', function ($scope, Global, socket) {
    
 
    //---------------------------------
@@ -27,7 +27,7 @@ angular.module('mean.chat').controller('ChatController', ['$scope', '$stateParam
     // clear message box
     $scope.message = {};
   };
-}
+
 
     //---------------------------------
     //Listeners
