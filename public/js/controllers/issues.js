@@ -1,7 +1,19 @@
 'use strict';
 
 angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateParams', '$location', 'Global', 'Issues', function ($scope, $stateParams, $location, Global, Issues) {
+    //---------------------------------
+    //Variables
+    //---------------------------------
     $scope.global = Global;
+    $scope.issue = {};
+    $scope.issues = [];
+
+    //---------------------------------
+    //Functions
+    //---------------------------------
+    $scope.edit = function(issue){
+        $scope.issue = issue;
+    }
 
     $scope.create = function() {
         var issue = new Issues({
@@ -43,7 +55,7 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
         // issue.updated.push(new Date().getTime());
 
         issue.$update(function() {
-            $location.path('issues/' + issue._id);
+            //$location.path('issues/' + issue._id);
         });
     };
 

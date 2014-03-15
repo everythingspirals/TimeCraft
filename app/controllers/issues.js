@@ -22,7 +22,7 @@ exports.issue = function(req, res, next, id) {
 
 
 /**
- * Create a issue
+ * Create an issue
  */
 exports.create = function(req, res) {
     var issue = new Issue(req.body);
@@ -89,7 +89,7 @@ exports.show = function(req, res) {
  * List of Issues
  */
 exports.all = function(req, res) {
-    Issue.find().sort('-startTime').populate('user', 'name username').exec(function(err, issues) {
+    Issue.find().sort('created').populate('user', 'name username').exec(function(err, issues) {
         if (err) {
             res.render('error', {
                 status: 500

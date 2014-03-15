@@ -1,4 +1,4 @@
-    	<section data-ng-controller="IssuesController" data-ng-init="find()">
+    <section data-ng-controller="IssuesController" data-ng-init="find()">
 
   	<!--tooltip-->
   	<section class="navbar navbar-default navbar-static-top navbar-tooltip">
@@ -41,7 +41,7 @@
   								<td>{{issue.createdBy.name}}</td>
   								<td>
   									<button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-  									<a href="#/issue/" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+  									<button ng-click="remove(client)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
   									<a href="#/issue/" class="btn btn-default"><i class="fa fa-file-text-o"></i></a>
   								</td>
   							</tr>
