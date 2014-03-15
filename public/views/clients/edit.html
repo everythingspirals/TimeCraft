@@ -1,0 +1,24 @@
+	<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header clients">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title"><i class="fa fa-plus"></i> Edit</h4>
+      </div>
+      <div class="aside-body">
+      <section ng-init="findOne()">
+       <form>
+       <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" ng-model="client.name" id="name" placeholder="Name" required>
+        </div>
+      </form>
+      </section>
+    </div>
+    <div class="aside-footer">
+      <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+      <button type="button" class="btn btn-primary" ng-click="update(); $hide()">Save changes</button>
+    </div>
+  </div>
+</div>
+</div>

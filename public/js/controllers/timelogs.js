@@ -6,6 +6,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     //Variables
     //---------------------------------
     $scope.global = Global;
+    $scope.timelog = {};
     $scope.timelogs = [];
     $scope.date = $stateParams.date;
 
@@ -21,6 +22,11 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         return stop.diff(start,'hours');
     };
     
+
+    $scope.edit= function(timelog){
+        $scope.timelog = timelog
+    };
+
     $scope.create = function() {
         var startTime = moment(this.startTime);
         var stopTime = moment(this.stopTime);
@@ -69,10 +75,10 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
 
     $scope.update = function() {
         var timelog = $scope.timelog;
-        if (!timelog.updated) {
-            timelog.updated = [];
-        }
-        timelog.updated.push(new Date().getTime());
+        // if (!timelog.updated) {
+        //     timelog.updated = [];
+        // }
+        // timelog.updated.push(new Date().getTime());
 
         timelog.$update(function() {
             $location.path('timelogs/' + timelog._id);

@@ -37,10 +37,10 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
 
     $scope.update = function() {
         var issue = $scope.issue;
-        if (!issue.updated) {
-            issue.updated = [];
-        }
-        issue.updated.push(new Date().getTime());
+        // if (!issue.updated) {
+        //     issue.updated = [];
+        // }
+        // issue.updated.push(new Date().getTime());
 
         issue.$update(function() {
             $location.path('issues/' + issue._id);

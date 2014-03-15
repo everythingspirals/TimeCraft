@@ -4,98 +4,98 @@
  * Module dependencies.
  */
  var mongoose = require('mongoose'),
-    Client = mongoose.model('Client'),
+    Status = mongoose.model('Status'),
     _ = require('lodash');
  
 
 /**
- * Find client by id
+ * Find status by id
  */
-exports.client = function(req, res, next, id) {
-    Client.load(id, function(err, client) {
+exports.status = function(req, res, next, id) {
+    Status.load(id, function(err, status) {
         if (err) return next(err);
-        if (!client) return next(new Error('Failed to load client ' + id));
-        req.client = client;
+        if (!status) return next(new Error('Failed to load status ' + id));
+        req.status = status;
         next();
     });
 };
 
 
 /**
- * Create a client
+ * Create a status
  */
 exports.create = function(req, res) {
-    var client = new Client(req.body);
-    client.createdBy = req.user;
+    var status = new Status(req.body);
+    status.createdBy = req.user;
 
-    client.save(function(err) {
+    status.save(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                client: client
+                status: status
             });
         } else {
-            res.jsonp(client);
+            res.jsonp(status);
         }
     });
 };
 
 /**
- * Update an client
+ * Update an status
  */
 exports.update = function(req, res) {
-    var client = req.client;
+    var status = req.status;
 
-    client = _.extend(client, req.body);
+    status = _.extend(status, req.body);
 
-    client.save(function(err) {
+    status.save(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                client: client
+                status: status
             });
         } else {
-            res.jsonp(client);
+            res.jsonp(status);
         }
     });
 };
 
 /**
- * Delete an client
+ * Delete an status
  */
 exports.destroy = function(req, res) {
-    var client = req.client;
+    var status = req.status;
 
-    client.remove(function(err) {
+    status.remove(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                client: client
+                status: status
             });
         } else {
-            res.jsonp(client);
+            res.jsonp(status);
         }
     });
 };
 
 /**
- * Show a client
+ * Show an status
  */
 exports.show = function(req, res) {
-    res.jsonp(req.client);
+    res.jsonp(req.status);
 };
 
 /**
- * List of clients
+ * List of Status
  */
 exports.all = function(req, res) {
-    Client.find().sort('name').exec(function(err, clients) {
+    Status.find().sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, status) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
-            res.jsonp(clients);
+            res.jsonp(status);
         }
     });
 };

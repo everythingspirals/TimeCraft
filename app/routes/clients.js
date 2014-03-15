@@ -16,11 +16,11 @@ module.exports = function(app) {
 
     app.get('/clients', clients.all);
     app.post('/clients', authorization.requiresLogin, clients.create);
-    app.get('/clients/:projectId', clients.show);
-    app.put('/clients/:projectId', authorization.requiresLogin, hasAuthorization, clients.update);
-    app.del('/clients/:projectId', authorization.requiresLogin, hasAuthorization, clients.destroy);
+    app.get('/clients/:clientId', clients.show);
+    app.put('/clients/:clientId', authorization.requiresLogin, hasAuthorization, clients.update);
+    app.del('/clients/:clientId', authorization.requiresLogin, hasAuthorization, clients.destroy);
 
-    // Finish with setting up the projectId param
+    // Finish with setting up the clientId param
     app.param('clientId', clients.client);
 
 };

@@ -11,15 +11,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     //---------------------------------
     //Functions
     //---------------------------------
-     $scope.diff = function(start,stop){
-        stop = moment(stop);
-        start = moment(start);
-        if (stop < start){
-            stop = stop.add('days',1);
-        }
-        return stop.diff(start,'hours');
-    };
-    
     $scope.create = function() {
         var project = new Projects({
             name: this.name,
@@ -55,10 +46,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
     $scope.update = function() {
         var project = $scope.project;
-        if (!project.updated) {
-            project.updated = [];
-        }
-        project.updated.push(new Date().getTime());
+        // if (!project.updated) {
+        //     project.updated = [];
+        // }
+        // project.updated.push(new Date().getTime());
 
         project.$update(function() {
             $location.path('projects/' + project._id);

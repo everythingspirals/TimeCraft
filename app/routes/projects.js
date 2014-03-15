@@ -6,10 +6,10 @@ var authorization = require('./middlewares/authorization');
 
 // project authorization helpers
 var hasAuthorization = function(req, res, next) {
-	if (req.project.user.id !== req.user.id) {
-        return res.send(401, 'User is not authorized');
-    }
-    next();
+	// if (req.project.user.id !== req.user.id) {
+ //        return res.send(401, 'User is not authorized');
+ //    }
+ //    next();
 };
 
 module.exports = function(app) {

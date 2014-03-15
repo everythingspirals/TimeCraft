@@ -7,7 +7,8 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
     $urlRouterProvider.otherwise('/');
 
      $stateProvider
-    //issues
+    
+    //Issues
     .state('create issue', {
         url: '/issues/create',
         templateUrl: 'views/issues/create.html'
@@ -20,7 +21,8 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         url: '/issues',
         templateUrl: 'views/issues/list.html'
     })
-    //timelogs
+    
+    //Timelogs
     .state('create timelog', {
         url: '/timelogs/create',
         templateUrl: 'views/timelogs/create.html'
@@ -33,6 +35,36 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         url: '/timelogs/:date',
         templateUrl: 'views/timelogs/list.html'
     })
+
+    //Projects
+    .state('create project', {
+        url: '/projects/create',
+        templateUrl: 'views/projects/create.html'
+    })
+      .state('edit project', {
+        url: '/projects/:projectId/edit',
+        templateUrl: 'views/projects/edit.html'
+    })
+      .state('project by date', {
+        url: '/projects',
+        templateUrl: 'views/projects/list.html'
+    })
+
+    //Clients
+    .state('create client', {
+        url: '/clients/create',
+        templateUrl: 'views/clients/create.html'
+    })
+      .state('edit client', {
+        url: '/clients/:clientId/edit',
+        templateUrl: 'views/clients/edit.html'
+    })
+      .state('client by date', {
+        url: '/clients',
+        templateUrl: 'views/clients/list.html'
+    })
+    
+    //Default
       .state('home', {
         url: '/',
         templateUrl: 'views/index.html'

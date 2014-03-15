@@ -1,0 +1,54 @@
+    	<section data-ng-controller="ProjectsController" data-ng-init="find()">
+       <!--tooltip-->
+       <section class="navbar navbar-default navbar-static-top navbar-tooltip">
+        <!--datepicker-->
+        <form class="navbar-form navbar-right">
+         <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+          <div class="input-group" style="width:300px">
+           <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
+           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+         </div>              
+       </div>
+     </form>
+
+     <!-- aside button -->
+     <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/projects/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
+     </button>
+   </section>
+   <div class="row">
+     <div class="col-lg-12">
+
+      <!--projects repeater -->
+      <section class="panel panel-default">
+       <div class="panel-heading">Projects</div>
+       <table class="table table-striped">
+        <thead>
+         <tr>
+          <th width="40%">Name</th>
+          <th width="10%">Client</th>
+          <th width="15%">URL</th>
+          <th width="10%">Status</th>
+          <th width="10%">Hours</th>
+          <th width="15%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="project in projects">
+        <td>{{project.name}}</td>
+        <td>{{project.client}}</td>
+        <td><a href="http://{{project.url}}" target="_blank">Website</a></td>
+        <td>{{project.status.name}}</td>
+        <td></td>
+        <td>
+         <button ng-click="edit(project)" data-template="views/projects/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
+         <button ng-click="remove(project)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
+         <a href="#/project/" class="btn btn-default"><i class="fa fa-file-text-o"></i></a>
+       </td>
+     </tr>
+   </tbody>
+ </table>
+</section>
+</div>
+
+</div>
+</section>

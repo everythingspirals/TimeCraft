@@ -1,27 +1,36 @@
-<section data-ng-controller="TimelogsController" data-ng-init="findOne()">
-	<form class="form-horizontal col-md-6" role="form" data-ng-submit="update()">
-		<div class="form-group">
-			<label for="title" class="col-md-2 control-label">Start</label>
-			<div class="col-md-10">
-				<input type="text" class="form-control" data-ng-model="timelog.startTime" id="start" placeholder="Start Time" required>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="content" class="col-md-2 control-label">Stop</label>
-			<div class="col-md-10">
-				<input type="text" class="form-control" data-ng-model="timelog.stopTime" id="stop" placeholder="Stop Time" required>
-			</div>
-		</div>
-				<div class="form-group">
-			<label for="content" class="col-md-2 control-label">Desription</label>
-			<div class="col-md-10">
-				<textarea data-ng-model="timelog.description" id="description" cols="30" rows="10" placeholder="Description" class="form-control" required></textarea>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<button type="submit" class="btn btn-default">Submit</button>
-			</div>
-		</div>
-	</form>
-</section>
+	<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title"><i class="fa fa-plus"></i> Create</h4>
+      </div>
+      <div class="aside-body">
+      <section data-ng-controller="TimelogsController" data-ng-init="findOne()">
+       <form>
+       <div class="form-group" ng-controller="IssuesController" data-ng-init="find()">
+          <label>Issue</label>
+          <select id="issue" ng-model="$parent.timelog.issue" ng-options="issue._id as issue.name for issue in issues" class="form-control" required></select>
+        </div>
+        <div class="form-group">
+          <label>Start Time</label>
+          <input type="text" class="form-control" ng-model="timelog.startTime" id="start" placeholder="Start Time" data-autoclose="1" placeholder="Time" bs-timepicker required />
+        </div>
+        <div class="form-group">
+          <label>Stop Time</label>
+          <input type="text" class="form-control" ng-model="timelog.stopTime" id="stop" placeholder="Stop Time" placeholder="Time" bs-timepicker required />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea ng-model="description" id="timelog.description" cols="30" rows="10" placeholder="Description" class="form-control" required></textarea>
+        </div>
+      </form>
+      </section>
+    </div>
+    <div class="aside-footer">
+      <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+      <button type="button" class="btn btn-primary" ng-click="update(); $hide()">Save changes</button>
+    </div>
+  </div>
+</div>
+</div>

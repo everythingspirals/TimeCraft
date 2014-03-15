@@ -1,0 +1,14 @@
+<section data-ng-controller="TimelogsController" data-ng-init="findOne()">
+      Start Time: <span>{{timelog.startTime | date:'medium'}}</span> /
+      End Time: <span>{{timelog.stopTime | date:'medium'}}</span> /
+      User: <span>{{timelog.user.name}}</span>
+    <div data-ng-show="global.user._id == timelog.user._id">
+        <a class="btn" href="/#!/timelogs/{{timelog._id}}/edit">
+        	<i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div>{{timelog.description}}</div>
+</section>
