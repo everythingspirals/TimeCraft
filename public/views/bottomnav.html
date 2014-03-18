@@ -4,15 +4,15 @@
 	<section id="chat" ng-show="toggle">
 		<section class="output">
 			<section class="message" ng-repeat="message in messages">
-				{{message.text}}
+				{{message.user.name}} : {{message.text}}
 			</section>
 		</section>
 
 		<section class="input">
-			<div class="input-group">
-		      <input type="text" class="form-control">
+			<div class="input-group" style="width:500px">
+		      <input type="text" class="form-control" ng-model="message.text">
 		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button">Send</button>
+		        <button class="btn btn-default" type="button" ng-click="sendMessage()">Send</button>
 		      </span>
 		    </div>
 		</section>

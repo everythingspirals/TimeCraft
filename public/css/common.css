@@ -129,7 +129,11 @@ Chat
  #chat .output{
   position:absolute;
   top:0;
+  width:500px;
+  height:465px;
    padding:15px;
+     overflow-y:auto;
+  overflow-x:hidden;
  }
   #chat .input{
   position:absolute;

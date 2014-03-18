@@ -6,6 +6,7 @@ angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 's
    //---------------------------------
     //Variables
     //---------------------------------
+    $scope.global = Global;
     $scope.toggle = false;
     $scope.messages = [];
     $scope.message = {};
@@ -15,14 +16,14 @@ angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 's
     //Function
     //---------------------------------
  $scope.sendMessage = function () {
-    socket.emit('send:message', {
-      message: $scope.message
-    });
+    $scope.message.user = $scope.global.user;
+
+    socket.emit('send:message', {message: $scope.message});
 
     // add the message to our model locally
-    $scope.messages.push({
-      text: $scope.message
-    });
+    $scope.messages.push(
+      $scope.message
+    );
 
     // clear message box
     $scope.message = {};
@@ -32,6 +33,11 @@ angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 's
     //---------------------------------
     //Listeners
     //---------------------------------
+  $scope.$watch('messages.length', function() {
+       var chat = document.getElementById("chat");
+       chat.scrollTop = chat.scrollHeight;
+       $scope.toggle = true;
+   });
 
   socket.on('init', function (data) {
     console.log("Chat Initialized");
