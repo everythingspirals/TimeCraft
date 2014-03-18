@@ -17,6 +17,7 @@ angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 's
     //---------------------------------
  $scope.sendMessage = function () {
     $scope.message.user = $scope.global.user;
+    $scope.message.date = new Date();
 
     socket.emit('send:message', {message: $scope.message});
 
@@ -34,7 +35,8 @@ angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 's
     //Listeners
     //---------------------------------
   $scope.$watch('messages.length', function() {
-       var chat = document.getElementById("chat");
+       document.title = "TimeCraft - New Message";
+       var chat = $("#chat .output");
        chat.scrollTop = chat.scrollHeight;
        $scope.toggle = true;
    });

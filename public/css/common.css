@@ -27,6 +27,7 @@ Top Navigation
    height:60px;
     padding:5px;
   margin-bottom:0;
+  border-bottom:none;
 
 }
 #topnav .navbar-brand{
@@ -119,25 +120,48 @@ Chat
 #chat{
   position:fixed;
   bottom:51px;
-  right:0;
-  width:500px;
-  height:500px;
-  background:#fff;
-  border:1px solid #ddd;
+  right:15px;
+  width:300px;
+  height:400px;
+  background:rgb(229,229,229);
+  border: 1px solid #ccc;
   border-bottom:none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+
  }
  #chat .output{
   position:absolute;
   top:0;
-  width:500px;
-  height:465px;
+
+  width:300px;
+  height:353px;
    padding:15px;
      overflow-y:auto;
   overflow-x:hidden;
  }
   #chat .input{
   position:absolute;
+  width:301px;
   bottom:0;
+    left:-1px;
+ }
+ #chat .input .form-control{
+  border-radius:0;
+ }
+ #chat .message{
+  font-family: arial, sans-serif;
+  font-size: 13px;
+  padding:5px;
+ }
+ #chat .message-body{
+  background:#fff;
+  padding:8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+ }
+ #chat .message-author{
+  padding-top:5px;
+  color:rgba(0, 0, 0, 0.298039);
+  font-size:11px;
  }
 /*------------------------
 Main
@@ -233,4 +257,12 @@ background:rgb(251, 133, 33) !important;
 
 .well-description{
   margin-top:20px;
+}
+
+.avatar{
+  width:36px;
+  height:36px;
+}
+.dropdown-avatar{
+  padding:8px 15px 8px !important;
 }

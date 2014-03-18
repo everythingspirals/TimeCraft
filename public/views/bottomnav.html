@@ -4,17 +4,29 @@
 	<section id="chat" ng-show="toggle">
 		<section class="output">
 			<section class="message" ng-repeat="message in messages">
-				{{message.user.name}} : {{message.text}}
+			<table>
+			<tr>
+			<td valign="top">
+				<img class="avatar pull-left" src="{{message.user.google.picture}}"/>
+			</td>
+			<td>
+			<section class="message-body">
+			{{message.text}}
+		
+			<section class="message-author">
+			{{message.user.name}} • {{message.date | date}}
+			</section>
+				</section>
+			</td>
+			</tr>
+			</table>		
 			</section>
 		</section>
 
 		<section class="input">
-			<div class="input-group" style="width:500px">
-		      <input type="text" class="form-control" ng-model="message.text">
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button" ng-click="sendMessage()">Send</button>
-		      </span>
-		    </div>
+		<form>
+		      <input type="text" class="form-control input-lg" ng-model="message.text" ng-enter="sendMessage()" placeholder="Send a message">
+		      </form>
 		</section>
 	</section>
 </section>
