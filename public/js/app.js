@@ -12,6 +12,7 @@ angular.module('mean', [
 	'mean.issues',
 	'mean.projects',
 	'mean.clients',
+	'mean.users',
 
 	//Third-Party
 	'mgcrea.ngStrap',
@@ -25,3 +26,4 @@ angular.module('mean.timelogs', []);
 angular.module('mean.issues', []);
 angular.module('mean.projects', []);
 angular.module('mean.clients', []);
+angular.module('mean.users', []);
