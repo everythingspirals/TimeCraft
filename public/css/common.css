@@ -1,16 +1,16 @@
 /*------------------------
 Defaults
 -------------------------*/
-html{
-    width: 100%;
-overflow-x: hidden;
+html {
+  width: auto !important;
+  overflow-x: hidden !important;
 }
 body {
   background:#e5e5e5;
   font-family: 'Roboto', sans-serif;
   font-size:18px;
-  width:100%;
-  overflow-x: hidden;
+ width: auto !important;
+  overflow-x: hidden !important;
 }
 textarea {
   resize: none;
@@ -227,3 +227,6 @@ background:rgb(251, 133, 33) !important;
 
 
 
+.well-description{
+  margin-top:20px;
+}

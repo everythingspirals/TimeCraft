@@ -20,7 +20,6 @@
     });
 };
 
-
 /**
  * Create a timelog
  */
@@ -99,3 +98,15 @@
         }
     });
 };
+
+/**
+ * Find timelog by date
+
+ exports.byDay = function(req, res, next, day) {
+    Timelog.load(id, function(err, timelog) {
+        if (err) return next(err);
+        if (!timelog) return next(new Error('Failed to load timelog ' + id));
+        req.timelog = timelog;
+        next();
+    });
+}; */

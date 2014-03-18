@@ -9,7 +9,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     $scope.timelog = {};
     $scope.timelogs = [];
     $scope.date = $stateParams.date;
-
+    $scope.picked = {};
     //---------------------------------
     //Functions
     //---------------------------------
@@ -58,6 +58,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     };
 
     $scope.remove = function(timelog) {
+        if(confirm("Are you sure you want to delete?")){
         if (timelog) {
             timelog.$remove();
 
@@ -70,6 +71,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         else {
             $scope.timelog.$remove();
             $location.path('timelogs');
+        }
         }
     };
 
