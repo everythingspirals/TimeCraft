@@ -122,16 +122,24 @@ Chat
   bottom:51px;
   right:15px;
   width:300px;
-  height:400px;
+  height:436px;
   background:rgb(229,229,229);
   border: 1px solid #ccc;
   border-bottom:none;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
 
  }
- #chat .output{
+ #chat .chat-header{
   position:absolute;
   top:0;
+  left:-1px;
+  height:36px;
+  width:301px;
+  background:#343131;
+ }
+ #chat .chat-output{
+  position:absolute;
+  top:36px;
 
   width:300px;
   height:353px;
@@ -139,13 +147,13 @@ Chat
      overflow-y:auto;
   overflow-x:hidden;
  }
-  #chat .input{
+  #chat .chat-input{
   position:absolute;
   width:301px;
   bottom:0;
     left:-1px;
  }
- #chat .input .form-control{
+ #chat .chat-input .form-control{
   border-radius:0;
  }
  #chat .message{

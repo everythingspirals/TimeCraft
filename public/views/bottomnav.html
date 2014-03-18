@@ -2,7 +2,10 @@
 	<a ng-click='toggle = !toggle' class="btn btn-default navbar-btn navbar-right"><i class="fa fa-comments"></i> Chat</a>
 	
 	<section id="chat" ng-show="toggle">
-		<section class="output">
+		<section class="chat-header">
+			
+		</section>
+		<section class="chat-output">
 			<section class="message" ng-repeat="message in messages">
 			<table>
 			<tr>
@@ -23,7 +26,7 @@
 			</section>
 		</section>
 
-		<section class="input">
+		<section class="chat-input">
 		<form>
 		      <input type="text" class="form-control input-lg" ng-model="message.text" ng-enter="sendMessage()" placeholder="Send a message">
 		      </form>
