@@ -106,7 +106,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     //---------------------------------
     $scope.$watch('date',function(){
         if($scope.date != $stateParams.date){
-            $location.path( '#!/day/' + moment($scope.date).format('L') );
+            $location.path( '#!/timelogs/' + moment($scope.date).format('L') );
         }
     });
 }]);

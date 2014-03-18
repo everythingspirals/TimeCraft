@@ -21,9 +21,9 @@ module.exports = {
         callbackURL: 'http://localhost:3000/auth/github/callback'
     },
     google: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/google/callback'
+        clientID: '184775109234-sg2jmbb4oqp8n28bgosit54ceod3e4lu.apps.googleusercontent.com',
+        clientSecret: '9kMEQzOkc9wHGm-Ig9he8FjN',
+        callbackURL: 'http://timecraft.io/auth/google/callback'
     },
     linkedin: {
         clientID: 'API_KEY',
