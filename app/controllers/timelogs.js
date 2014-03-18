@@ -100,6 +100,23 @@
 };
 
 /**
+ * List of Timelogs by Date
+ */
+ exports.day = function(req, res) {
+    Timelog.find({
+        startTime: {$gte: req.date, $lte: req.date}
+    }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(timelogs);
+        }
+    });
+};
+
+/**
  * Find timelog by date
 
  exports.byDay = function(req, res, next, day) {

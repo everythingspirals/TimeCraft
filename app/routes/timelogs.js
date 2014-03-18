@@ -15,7 +15,7 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(app) {
 
     app.get('/timelogs', timelogs.all);
-    //app.get('/timelogs/day/:timelogDay', timelogs.all);
+    app.get('/timelogs/day/:date', timelogs.day);
     app.post('/timelogs', authorization.requiresLogin, timelogs.create);
     app.get('/timelogs/:timelogId', timelogs.show);
     app.put('/timelogs/:timelogId', authorization.requiresLogin, hasAuthorization, timelogs.update);
@@ -23,5 +23,4 @@ module.exports = function(app) {
 
     // Finish with setting up the timelogId param
     app.param('timelogId', timelogs.timelog);
-    app.param('timelogDay', timelogs.timelog);
 };
