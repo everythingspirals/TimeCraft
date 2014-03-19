@@ -27,10 +27,9 @@
   					<table class="table">
   						<thead>
   							<tr>
-  								<th width="20%">Name</th>
-                  <th width="50%">Description</th>
-  								<th width="5%">Estimate</th>
-  								<th width="5%">Actual</th>
+  								<th width="50%">Name</th>
+  								<th width="15%">Estimate</th>
+  								<th width="15%">Actual</th>
   								<th width="10%">CreatedBy</th>
                   <th width="10%">Action</th>
    							</tr>
@@ -38,14 +37,13 @@
   						<tbody>
   							<tr ng-repeat="issue in issues">
   								<td>{{issue.name}}</td>
-                  <td ng-bind-html="issue.story"></td>
   								<td>{{issue.estimate}}</td>
   								<td></td>
   								<td>{{issue.createdBy.name}}</td>
   								<td>
   									<button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
   									<button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
-<!--   									      <a ng-click="$scope.picked = ($scope.picked != $index ? $index : null)" class="btn btn-default"><i class="fa fa-file-text-o"></i></a> -->
+                    <a href="#!/issues/{{issue._id}}" class="btn btn-default"><i class="fa fa-eye"></i></a>
   								</td>
   							</tr>
   						</tbody>

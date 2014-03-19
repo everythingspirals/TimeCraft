@@ -35,11 +35,15 @@ angular.module('mean.chat').controller('ChatController', ['$scope', 'Global', 's
     //Listeners
     //---------------------------------
   $scope.$watch('messages.length', function() {
-    console.log("lolo");
+    if($scope.messages.length){
     document.title = "TimeCraft - New Message";
-    var chat = document.getElementsByClassName('chat-output')[0];
-    chat.scrollTop = chat.scrollHeight + 200;
+     var chat = document.getElementsByClassName('chat-output')[0];
+     console.log(chat.scrollTop);
+     console.log(chat.scrollHeight);
+     chat.scrollTop = chat.scrollHeight;
+    console.log(chat.scrollTop);
     $scope.toggle = true;
+}
    });
 
   socket.on('init', function (data) {

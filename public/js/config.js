@@ -9,19 +9,24 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
      $stateProvider
     
     //Issues
+    .state('view issue', {
+        url: '/issues/:issueId',
+        templateUrl: 'views/issues/view.html'
+    })
     .state('create issue', {
         url: '/issues/create',
         templateUrl: 'views/issues/create.html'
     })
-      .state('edit issue', {
+    .state('edit issue', {
         url: '/issues/:issueId/edit',
         templateUrl: 'views/issues/edit.html'
     })
-      .state('issue by date', {
+    .state('issue list', {
         url: '/issues',
         templateUrl: 'views/issues/list.html'
     })
-    
+
+
     //Timelogs
     .state('create timelog', {
         url: '/timelogs/create',

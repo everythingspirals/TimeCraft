@@ -171,6 +171,13 @@ Chat
   color:rgba(0, 0, 0, 0.298039);
   font-size:11px;
  }
+ #chat .chat-header{
+  padding:10px;
+  color:#fff;
+ }
+  #chat .chat-header i{
+    cursor:pointer;
+  }
 /*------------------------
 Main
 -------------------------*/
