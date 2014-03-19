@@ -38,14 +38,14 @@
   						<tbody>
   							<tr ng-repeat="issue in issues">
   								<td>{{issue.name}}</td>
-                  <td>{{issue.story}}
+                  <td ng-bind-html="issue.story"></td>
   								<td>{{issue.estimate}}</td>
   								<td></td>
   								<td>{{issue.createdBy.name}}</td>
   								<td>
   									<button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
   									<button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
-  									      <a ng-click="$scope.picked = ($scope.picked != $index ? $index : null)" class="btn btn-default"><i class="fa fa-file-text-o"></i></a>
+<!--   									      <a ng-click="$scope.picked = ($scope.picked != $index ? $index : null)" class="btn btn-default"><i class="fa fa-file-text-o"></i></a> -->
   								</td>
   							</tr>
   						</tbody>

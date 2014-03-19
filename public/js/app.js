@@ -17,7 +17,8 @@ angular.module('mean', [
 
 	//Third-Party
 	'mgcrea.ngStrap',
-	'btford.socket-io'
+	'btford.socket-io',
+	'textAngular'
 ]);
 
 angular.module('mean.system', []);

@@ -274,3 +274,9 @@ background:rgb(251, 133, 33) !important;
 .dropdown-avatar{
   padding:8px 15px 8px !important;
 }
+
+.ta-editor.form-control{
+  height:auto !important;
+  min-height:200px;
+  margin-bottom:20px;
+}
