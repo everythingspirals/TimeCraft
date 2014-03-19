@@ -33,18 +33,20 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     };
 
     $scope.remove = function(project) {
-        if (project) {
-            project.$remove();
+        if(confirm("Are you sure you want to delete?")){
+            if (project) {
+                project.$remove();
 
-            for (var i in $scope.projects) {
-                if ($scope.projects[i] === project) {
-                    $scope.projects.splice(i, 1);
+                for (var i in $scope.projects) {
+                    if ($scope.projects[i] === project) {
+                        $scope.projects.splice(i, 1);
+                    }
                 }
             }
-        }
-        else {
-            $scope.project.$remove();
-            $location.path('projects');
+            else {
+                $scope.project.$remove();
+                $location.path('projects');
+            }
         }
     };
 

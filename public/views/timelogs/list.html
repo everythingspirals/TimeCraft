@@ -16,44 +16,38 @@
      </button>
    </section>
 
-
    <div class="row">
      <div class="col-lg-12">
-
-      <!--timelogs repeater -->
+      <!--issues repeater -->
       <section class="panel panel-default">
-       <div class="panel-heading">Timelogs</div>
-       <ul class="list-group">
-         <li class="list-group-item">
-          <ul class="row">
-            <li class="col-lg-4"><b>Issue</b></li>
-            <li class="col-lg-2"><b>Time In</b></li>
-            <li class="col-lg-2"><b>Time Out</b></li>
-            <li class="col-lg-2"><b>Hours</b></li>
-            <li class="col-lg-2"><b>Action</b></li>
-          </ul>
-        </li>
-        <li class="list-group-item" ng-repeat="timelog in timelogs">
-         <ul class="row">
-          <li class="col-lg-4">{{timelog.issue.name}}</li>
-          <li class="col-lg-2">{{timelog.startTime | date : 'HH:mm a' }}</li>
-          <li class="col-lg-2">{{timelog.stopTime | date : 'HH:mm a'}}</li>
-          <li class="col-lg-2">{{diff(timelog.startTime, timelog.stopTime)}}</li>
-          <li class="col-lg-2">
-           <button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-           <button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
-           <a ng-click="$scope.picked = ($scope.picked != $index ? $index : null)" class="btn btn-default"><i class="fa fa-file-text-o"></i></a>
-         </li>
-       </ul>
-
-       <div class="well well-description" ng-show="$scope.picked == $index">
-             {{timelog.description}}
-      </div>
-    </li>
-
-  </ul>
-</section>
-</div>
-
-</div>
+        <div class="panel-heading">Issues</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="10%">Time In</th>
+              <th width="10%">Time Out</th>
+              <th width="10%">Issue</th>
+              <th width="10%">Hours</th>
+              <th width="50%">Description</th>
+              <th width="10%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="issue in issues">
+              <td>{{timelog.startTime | date : 'HH:mm a' }}</td>
+              <td>{{timelog.stopTime | date : 'HH:mm a'}}</td>
+              <td>{{timelog.issue.name}}</td>
+              <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
+              <td>{{timelog.description}}</td>
+              <td>{{issue.createdBy.name}}</td>
+              <td>
+                <button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
+                <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section> 
+    </div>
+  </div>
 </section>

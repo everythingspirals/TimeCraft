@@ -7,6 +7,7 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
     $scope.global = Global;
     $scope.issue = {};
     $scope.issues = [];
+    $scope.picked = {};
 
     //---------------------------------
     //Functions
@@ -25,25 +26,27 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
         issue.$save(function(response) {
             $scope.issues.push(issue);
         });
-            this.name = '';
-            this.story = '';
-            this.estimate = 0;
-            this.assignedTo = null;
+        this.name = '';
+        this.story = '';
+        this.estimate = 0;
+        this.assignedTo = null;
     };
 
     $scope.remove = function(issue) {
-        if (issue) {
-            issue.$remove();
+        if(confirm("Are you sure you want to delete?")){
+            if (issue) {
+                issue.$remove();
 
-            for (var i in $scope.issues) {
-                if ($scope.issues[i] === issue) {
-                    $scope.issues.splice(i, 1);
+                for (var i in $scope.issues) {
+                    if ($scope.issues[i] === issue) {
+                        $scope.issues.splice(i, 1);
+                    }
                 }
             }
-        }
-        else {
-            $scope.issue.$remove();
-            $location.path('issues');
+            else {
+                $scope.issue.$remove();
+                $location.path('issues');
+            }
         }
     };
 

@@ -28,18 +28,20 @@ angular.module('mean.clients').controller('ClientsController', ['$scope', '$stat
     };
 
     $scope.remove = function(client) {
-        if (client) {
-            client.$remove();
+        if(confirm("Are you sure you want to delete?")){
+            if (client) {
+                client.$remove();
 
-            for (var i in $scope.clients) {
-                if ($scope.clients[i] === client) {
-                    $scope.clients.splice(i, 1);
+                for (var i in $scope.clients) {
+                    if ($scope.clients[i] === client) {
+                        $scope.clients.splice(i, 1);
+                    }
                 }
             }
-        }
-        else {
-            $scope.client.$remove();
-            $location.path('clients');
+            else {
+                $scope.client.$remove();
+                $location.path('clients');
+            }
         }
     };
 
