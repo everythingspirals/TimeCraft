@@ -39,9 +39,9 @@
             <td>{{timelog.issue.name}}</td>
             <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
             <td>
-              <button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-              <button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
-              <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i></a>
+              <button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
+              <button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+              <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
             </td>
           </tr>
         </tbody>
