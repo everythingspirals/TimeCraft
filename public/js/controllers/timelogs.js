@@ -101,6 +101,12 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         });
     };
 
+    $scope.getByDay = function() {
+        Timelogs.getByDay(date: $stateParams.date, function(timelogs){
+            $scope.timelogs = timelogs;
+        });
+    };
+
     //---------------------------------
     //Listeners
     //---------------------------------
