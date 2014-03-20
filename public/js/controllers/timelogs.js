@@ -107,8 +107,8 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         });
     };
 
-    $scope.getByIssue = function(issueId) {
-        Timelogs.getByIssue({'issueId': issueId}, function(timelogs){
+    $scope.getByIssue = function() {
+        Timelogs.getByIssue({'issueId': $stateParams.issueId}, function(timelogs){
             $scope.timelogs = timelogs;
         });
     };
