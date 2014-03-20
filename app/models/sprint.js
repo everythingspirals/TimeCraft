@@ -49,6 +49,7 @@
     this.findOne({
         _id: id
     })
+    .populate('project', 'name')
     .exec(cb);
 };
 

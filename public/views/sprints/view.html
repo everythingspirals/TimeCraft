@@ -1,14 +1,73 @@
-<section data-ng-controller="TimelogsController" data-ng-init="findOne()">
-      Start Time: <span>{{timelog.startTime | date:'medium'}}</span> /
-      End Time: <span>{{timelog.stopTime | date:'medium'}}</span> /
-      User: <span>{{timelog.user.name}}</span>
-    <div data-ng-show="global.user._id == timelog.user._id">
-        <a class="btn" href="/#!/timelogs/{{timelog._id}}/edit">
-        	<i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-        </a>
-    </div>
-    <div>{{timelog.description}}</div>
+      <section data-ng-controller="SprintsController" data-ng-init="findOne()">
+
+        <section class="row">
+          <div class="col-lg-6">
+
+
+            <section class="row">
+              <div class="col-lg-12">
+                <!--sprints repeater -->
+                <section class="panel panel-default">
+                  <div class="panel-heading">Details</div>
+                  <div class="panel-body">   
+                   <div class="form-group">
+                    <label>Name</label>
+                    <div>{{sprint.name}}</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Estimate</label>
+                    <div>{{sprint.estimate}}</div>
+                  </div>
+                  <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
+                    <label>Status</label>
+                    <div>{{sprint.assignedTo.name}}</div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </section>
+          <section class="row">
+           <div class="col-lg-12">
+            <!--sprints repeater -->
+            <section class="panel panel-default">
+              <div class="panel-heading">Comments</div>
+              <div class="panel-body">   
+               <div class="form-group">
+
+               </div>
+             </div>
+           </section>
+         </div>
+         
+       </section>
+
+
+     </div>
+     <div class="col-lg-6">
+       <div class="row">
+         <div class="col-lg-12">
+          <!--sprints repeater -->
+          <section class="panel panel-default">
+            <div class="panel-heading">Issues</div>
+            <div class="panel-body">   
+             <div class="form-group">
+
+             </div>
+           </div>
+         </section>
+       </div>
+
+     </div>
+
+   </div>
+ </div>
 </section>
+</section>
+
+
+
+
+
+
+

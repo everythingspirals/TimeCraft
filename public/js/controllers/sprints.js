@@ -19,12 +19,18 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
     $scope.create = function() {
         var sprint = new Sprints({
             name: this.name,
+            project: this.project,
+            startDate: this.startDate,
+            stopDate: this.stopDate
         });
         sprint.$save(function(response) {
             $scope.sprints.push(sprint);
         });
 
         this.name = '';
+        this.project = null;
+        this.startDate = null;
+        this.stopDate = null;
     };
 
     $scope.remove = function(sprint) {

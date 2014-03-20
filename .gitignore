@@ -1,8 +1,8 @@
 .DS_Store
 .nodemonignore
+node_modules/
 .sass-cache/
 .bower-*/
 .idea/
-node_modules/
 test/coverage
 mean.iml

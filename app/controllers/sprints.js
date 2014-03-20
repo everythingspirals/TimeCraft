@@ -88,7 +88,7 @@
  * List of sprints
  */
  exports.all = function(req, res) {
-    Sprint.find().sort('name').exec(function(err, sprints) {
+    Sprint.find().sort('name').populate('project', 'name').exec(function(err, sprints) {
         if (err) {
             res.render('error', {
                 status: 500

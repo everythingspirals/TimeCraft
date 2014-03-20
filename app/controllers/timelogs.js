@@ -117,6 +117,23 @@
 };
 
 /**
+ * List of Issues by Sprint
+ */
+ exports.issue = function(req, res) {
+    Timelog.find({
+        issue: req.issueId
+    }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(timelogs);
+        }
+    });
+};
+
+/**
  * Find timelog by date
 
  exports.byDay = function(req, res, next, day) {
