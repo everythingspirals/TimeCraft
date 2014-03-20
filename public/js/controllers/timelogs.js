@@ -19,7 +19,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         if (stop < start){
             stop = stop.add('days',1);
         }
-        return stop.diff(start,'hours');
+        return (stop.diff(start,'minutes')/60).toFixed(2);
     };
     
 

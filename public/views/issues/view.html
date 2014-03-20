@@ -79,9 +79,9 @@
         </thead>
         <tbody>
           <tr ng-repeat="timelog in timelogs">
-            <td>{{timelog.startTime | date : 'hh:mm a' }}</td>
+            <td>{{timelog.startTime | date : 'MM-dd-yy' }}</td>
             <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
-            <td>{{timelog.assignedTo.name}}</td>
+            <td>{{timelog.user.name}}</td>
             <td>
               <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
             </td>
