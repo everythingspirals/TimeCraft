@@ -9,6 +9,7 @@ angular.module('mean', [
 	'mean.socket',
 	'mean.chat',
 	'mean.timelogs',
+	'mean.sprints',
 	'mean.issues',
 	'mean.projects',
 	'mean.clients',
@@ -25,6 +26,7 @@ angular.module('mean.system', []);
 angular.module('mean.socket', []);
 angular.module('mean.chat', []);
 angular.module('mean.timelogs', []);
+angular.module('mean.sprints', []);
 angular.module('mean.issues', []);
 angular.module('mean.projects', []);
 angular.module('mean.clients', []);

@@ -19,28 +19,28 @@ ul{
   list-style:none;
 }
 /*------------------------
-Top Navigation
+Header
 -------------------------*/
-#topnav {
+#header {
   background:#343131;
   color:#fff;
-   height:60px;
-    padding:5px;
   margin-bottom:0;
   border-bottom:none;
 
 }
-#topnav .navbar-brand{
+#header .navbar-brand{
   font-size:20px;
 }
-#topnav a{
+#header a{
   color:#fff;
 }
 /*------------------------
 Side Navigation
 -------------------------*/
-#sidenav {
-  position:absolute;
+#nav {
+  position:fixed;
+  top:51px;
+  left:0px;
   width: 250px;
   float: left;
   font-size: 18px;
@@ -49,29 +49,30 @@ Side Navigation
   -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  z-index:9999;
 }
-#sidenav a{
+#nav a{
   padding:0;
 }
-#sidenav a:hover{
+#nav a:hover{
   background-color:inherit !important;
 }
-#sidenav span{
+#nav span{
   display:inline-block;
   height:60px;
   padding:16px 16px 16px 16px;
 }
-#sidenav .icon{
+#nav .icon{
   width:50px;
   float:left;
   color:#fff;
 }
-#sidenav .title{
+#nav .title{
   width:200px;
   background-color: rgba(245, 245, 245, 0.90);
   color:#333;
 }
-#sidenav .title:hover{
+#nav .title:hover{
   background-color:inherit;
   color:#fff;
 }
@@ -111,9 +112,16 @@ Sub Navigation
   color:#fff;
 }
 /*------------------------
-Bottom Nav
+Footer
 -------------------------*/
+.navbar-btn{
+  margin-left:15px;
+  margin-right:15px;
+ }
 
+#footer .nav>li>a:hover, .nav>li>a:focus {
+  background-color:inherit;
+}
 /*------------------------
 Chat
 -------------------------*/
@@ -127,7 +135,7 @@ Chat
   border: 1px solid #ccc;
   border-bottom:none;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
-
+ z-index:9999;
  }
  #chat .chat-header{
   position:absolute;
@@ -182,8 +190,8 @@ Chat
 Main
 -------------------------*/
 #content{
-  position: relative;
-  margin-left: 250px;
+  margin-top:50px;
+  height:100%;
 }
 /*------------------------
 Panels
@@ -211,9 +219,7 @@ Navbar
   height:60px;
   padding-top:4px;
 }
-.navbar-btn{
-  margin-right:15px;
-}
+
 
 /*----------------------------
 MISC
@@ -242,8 +248,11 @@ MISC
 /*----------------------------
 Theme
 -----------------------------*/
-.day{
+.timelogs{
   background:rgb(63, 92, 169) !important;
+}
+.sprints{
+  background:#427fed !important;
 }
 .clients{
  background:rgb(255, 187,27) !important;

@@ -3,14 +3,14 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+ var mongoose = require('mongoose'),
+ Schema = mongoose.Schema;
 
 
 /** 
  * Client Schema
  */
-var ClientSchema = new Schema({
+ var ClientSchema = new Schema({
     name: {
         type: String,
         default: '',
@@ -25,7 +25,7 @@ var ClientSchema = new Schema({
 /**
  * Statics
  */
-ClientSchema.statics.load = function(id, cb) {
+ ClientSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
     })

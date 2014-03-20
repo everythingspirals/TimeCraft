@@ -1,0 +1,38 @@
+ <section id="footer" class="navbar navbar-default navbar-fixed-bottom">
+
+		<a ng-click='chatToggle = !chatToggle' class="btn btn-success navbar-btn navbar-right"><i class="fa fa-comments"></i> &nbsp; Chat</a>
+
+
+ </section>
+
+ 	<section id="chat" ng-show="chatToggle" ng-controller="ChatController">
+ 			<section class="chat-header">
+ 				<i class="fa fa-minus pull-right" ng-click='chatToggle = false'></i>
+ 			</section>
+ 			<section class="chat-output">
+ 				<section class="message" ng-repeat="message in messages">
+ 					<table>
+ 						<tr>
+ 							<td valign="top">
+ 								<img class="avatar pull-left" src="{{message.user.google.picture}}"/>
+ 							</td>
+ 							<td>
+ 								<section class="message-body">
+ 									{{message.text}}
+
+ 									<section class="message-author">
+ 										{{message.user.name}} • {{message.date | date}}
+ 									</section>
+ 								</section>
+ 							</td>
+ 						</tr>
+ 					</table>		
+ 				</section>
+ 			</section>
+
+ 			<section class="chat-input">
+ 				<form>
+ 					<input type="text" class="form-control input-lg" ng-model="message.text" ng-enter="sendMessage()" placeholder="Send a message">
+ 				</form>
+ 			</section>
+ 	</section>

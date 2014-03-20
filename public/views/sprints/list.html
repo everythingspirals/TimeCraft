@@ -1,0 +1,54 @@
+    	<section data-ng-controller="SprintsController" data-ng-init="find()">
+       <!--tooltip-->
+       <section class="navbar navbar-default navbar-static-top navbar-tooltip">
+        <!--datepicker-->
+        <form class="navbar-form navbar-right">
+         <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+          <div class="input-group" style="width:300px">
+           <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
+           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+         </div>              
+       </div>
+     </form>
+
+     <!-- aside button -->
+     <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/timelogs/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
+     </button>
+   </section>
+
+   <div class="row">
+     <div class="col-lg-12">
+      <!--issues repeater -->
+      <section class="panel panel-default">
+        <div class="panel-heading">Sprints</div>
+        <table class="table">
+          <thead>
+            <tr>
+            <th >Title</th>
+              <th >Start Date</th>
+              <th >End Date</th>
+              <th >Project</th>
+              <th >Estimate</th>
+              <th >Actual</th>
+              <th >Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="issue in issues">
+              <td>{{timelog.startTime | date : 'HH:mm a' }}</td>
+              <td>{{timelog.stopTime | date : 'HH:mm a'}}</td>
+              <td>{{timelog.issue.name}}</td>
+              <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
+              <td>{{issue.createdBy.name}}</td>
+              <td>
+                <button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section> 
+    </div>
+  </div>
+</section>

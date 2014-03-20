@@ -1,10 +1,16 @@
 
-<div id="sidenav" ng-controller="SidenavController">
+<div  ng-show="navToggle" ng-controller="SidenavController" >
 	<ul class="nav">
-		<li class="day">
+		<li class="timelogs">
 			<a href="#!/timelogs/day/{{today}}"> 
 				<span class="icon"><i class="fa fa-sun-o"></i></span>
 				<span class="title">Day</span>
+			</a>
+		</li>
+				<li class="sprints">
+			<a href="#!/sprints"> 
+				<span class="icon"><i class="fa fa-rocket"></i></span>
+				<span class="title">Sprints</span>
 			</a>
 		</li>
 				<li class="clients">

@@ -1,6 +1,15 @@
     	<section data-ng-controller="TimelogsController" data-ng-init="find()">
-       <!--tooltip-->
+
+
+   <div class="row">
+     <div class="col-lg-12">
+      <!--issues repeater -->
+      <section class="panel panel-default">
+               <!--tooltip-->
        <section class="navbar navbar-default navbar-static-top navbar-tooltip">
+       <div class="navbar-header">
+          <div class="navbar-brand">Timelogs</div>
+       </div>
         <!--datepicker-->
         <form class="navbar-form navbar-right">
          <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
@@ -15,12 +24,6 @@
      <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/timelogs/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
      </button>
    </section>
-
-   <div class="row">
-     <div class="col-lg-12">
-      <!--issues repeater -->
-      <section class="panel panel-default">
-        <div class="panel-heading">Timelogs</div>
         <table class="table">
           <thead>
             <tr>
@@ -38,9 +41,6 @@
               <td>{{timelog.issue.name}}</td>
               <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
               <td>
-                <button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
-                <button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
               </td>
             </tr>
           </tbody>

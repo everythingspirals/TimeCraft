@@ -4,97 +4,97 @@
  * Module dependencies.
  */
  var mongoose = require('mongoose'),
- Client = mongoose.model('Client'),
+ Sprint = mongoose.model('Sprint'),
  _ = require('lodash');
  
 
 /**
- * Find client by id
+ * Find sprint by id
  */
- exports.client = function(req, res, next, id) {
-    Client.load(id, function(err, client) {
+ exports.sprint = function(req, res, next, id) {
+    Sprint.load(id, function(err, sprint) {
         if (err) return next(err);
-        if (!client) return next(new Error('Failed to load client ' + id));
-        req.client = client;
+        if (!sprint) return next(new Error('Failed to load sprint ' + id));
+        req.sprint = sprint;
         next();
     });
 };
 
 
 /**
- * Create a client
+ * Create a sprint
  */
  exports.create = function(req, res) {
-    var client = new Client(req.body);
+    var sprint = new Sprint(req.body);
 
-    client.save(function(err) {
+    sprint.save(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                client: client
+                sprint: sprint
             });
         } else {
-            res.jsonp(client);
+            res.jsonp(sprint);
         }
     });
 };
 
 /**
- * Update an client
+ * Update an sprint
  */
  exports.update = function(req, res) {
-    var client = req.client;
+    var sprint = req.sprint;
 
-    client = _.extend(client, req.body);
+    sprint = _.extend(sprint, req.body);
 
-    client.save(function(err) {
+    sprint.save(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                client: client
+                sprint: sprint
             });
         } else {
-            res.jsonp(client);
+            res.jsonp(sprint);
         }
     });
 };
 
 /**
- * Delete an client
+ * Delete an sprint
  */
  exports.destroy = function(req, res) {
-    var client = req.client;
+    var sprint = req.sprint;
 
-    client.remove(function(err) {
+    sprint.remove(function(err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
-                client: client
+                sprint: sprint
             });
         } else {
-            res.jsonp(client);
+            res.jsonp(sprint);
         }
     });
 };
 
 /**
- * Show a client
+ * Show a sprint
  */
  exports.show = function(req, res) {
-    res.jsonp(req.client);
+    res.jsonp(req.sprint);
 };
 
 /**
- * List of clients
+ * List of sprints
  */
  exports.all = function(req, res) {
-    Client.find().sort('name').exec(function(err, clients) {
+    Sprint.find().sort('name').exec(function(err, sprints) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
-            res.jsonp(clients);
+            res.jsonp(sprints);
         }
     });
 };

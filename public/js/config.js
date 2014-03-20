@@ -26,6 +26,24 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'views/issues/list.html'
     })
 
+    //Sprints
+    .state('view sprint', {
+        url: '/sprints/:sprintId',
+        templateUrl: 'views/sprints/view.html'
+    })
+    .state('create sprint', {
+        url: '/sprints/create',
+        templateUrl: 'views/sprints/create.html'
+    })
+    .state('edit sprint', {
+        url: '/sprints/:sprintId/edit',
+        templateUrl: 'views/sprints/edit.html'
+    })
+    .state('sprint list', {
+        url: '/sprints',
+        templateUrl: 'views/sprints/list.html'
+    })
+
 
     //Timelogs
     .state('view timelog', {
