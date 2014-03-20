@@ -107,7 +107,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     $scope.$watch('date',function(){
         if($scope.date != $stateParams.date){
             console.log(moment($scope.date).format('MM-DD-YYYY'));
-            $location.path('/timelogs/' + moment($scope.date).format('MM-DD-YYYY'));
+            $location.path('/timelogs/day/' + moment($scope.date).format('MM-DD-YYYY'));
         }
     });
 }]);
