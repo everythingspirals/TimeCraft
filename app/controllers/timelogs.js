@@ -121,7 +121,7 @@
  */
  exports.issue = function(req, res) {
     Timelog.find({
-        issue: req.issueId
+        issue:mongoose.Types.ObjectId(req.query.issueId)
     }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
         if (err) {
             res.render('error', {
