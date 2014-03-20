@@ -71,9 +71,7 @@
               <table class="table">
         <thead>
           <tr>
-            <th width="20%">Time In</th>
-            <th width="20%">Time Out</th>
-            <th width="20%">Issue</th>
+            <th width="20%">Date</th>
             <th width="20%">Hours</th>
             <th width="20%">User</th>
             <th width="20%">Action</th>
@@ -82,12 +80,9 @@
         <tbody>
           <tr ng-repeat="timelog in timelogs">
             <td>{{timelog.startTime | date : 'hh:mm a' }}</td>
-            <td>{{timelog.stopTime | date : 'hh:mm a'}}</td>
-            <td>{{timelog.issue.name}}</td>
             <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
+            <td>{{timelog.assignedTo.name}}</td>
             <td>
-              <button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
-              <button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
               <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
             </td>
           </tr>
