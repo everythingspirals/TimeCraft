@@ -102,7 +102,10 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     };
 
     $scope.getByDay = function() {
-        Timelogs.getByDay({'date': new Date($stateParams.date).toISOString()}, function(timelogs){
+        var startOfDay = moment($stateParams.date).startOf('day').toISOString();
+        var endOfDay = moment($stateParams.date).endOf('day').toISOString();
+
+        Timelogs.getByDay({'startOfDay': startOfDay, 'endOfDay': endOfDay}, function(timelogs){
             $scope.timelogs = timelogs;
         });
     };
