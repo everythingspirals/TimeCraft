@@ -104,7 +104,7 @@
  */
  exports.day = function(req, res) {
     Timelog.find({
-        startTime: {$gte: req.date, $lte: req.date}
+        startTime: {$gte: req.date}
     }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
         if (err) {
             res.render('error', {
