@@ -39,7 +39,7 @@ Side Navigation
 -------------------------*/
 #nav {
   position:fixed;
-  top:51px;
+  top:52px;
   left:0px;
   width: 250px;
   float: left;
@@ -127,8 +127,8 @@ Chat
 -------------------------*/
 #chat{
   position:fixed;
-  bottom:51px;
-  right:15px;
+  bottom:52px;
+  right:0px;
   width:300px;
   height:436px;
   background:rgb(229,229,229);

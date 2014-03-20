@@ -1,28 +1,29 @@
-	<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside" tabindex="-1" role="dialog">
   <div class="aside-dialog">
     <div class="aside-content">
-      <div class="aside-header sprints">
+      <div class="aside-header">
         <button type="button" class="close" ng-click="$hide()">&times;</button>
         <h4 class="aside-title"><i class="fa fa-plus"></i> Create</h4>
       </div>
       <div class="aside-body">
        <form>
-       <div class="form-group" ng-controller="IssuesController" data-ng-init="find()">
-          <label>Issue</label>
-          <select id="issue" ng-model="$parent.issue" ng-options="issue._id as issue.name for issue in issues" class="form-control" required></select>
+               <div class="form-group">
+          <label>Title</label>
+          <input class="form-control" ng-model="title" id="title"/>
+        </div>
+       <div class="form-group" ng-controller="ProjectsController" data-ng-init="find()">
+          <label>Project</label>
+          <select id="project" ng-model="$parent.project" ng-options="project._id as project.name for project in projects" class="form-control" required></select>
         </div>
         <div class="form-group">
-          <label>Start Time</label>
-          <input type="text" class="form-control" ng-model="startTime" id="start" placeholder="Start Time" data-autoclose="1" placeholder="Time" bs-timepicker required />
+          <label>Start Date</label>
+          <input type="text" class="form-control" ng-model="startDate" id="startDate" placeholder="Start Time" data-autoclose="1" placeholder="Date" bs-datepicker required />
         </div>
         <div class="form-group">
-          <label>Stop Time</label>
-          <input type="text" class="form-control" ng-model="stopTime" id="stop" placeholder="Stop Time" placeholder="Time" bs-timepicker required />
+          <label>Stop Date</label>
+          <input type="text" class="form-control" ng-model="stopDate" id="stopDate" placeholder="Stop Time" placeholder="Date" bs-datepicker required />
         </div>
-        <div class="form-group">
-          <label>Description</label>
-          <div text-angular ng-model="description" id="timelog.description">
-        </div>
+
       </form>
     </div>
     <div class="aside-footer">
