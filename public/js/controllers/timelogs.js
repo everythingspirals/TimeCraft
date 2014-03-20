@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$stateParams', '$location', 'Global', 'Timelogs', function ($scope, $stateParams, $location, Global, Timelogs) {
-    
+
     //---------------------------------
     //Variables
     //---------------------------------
@@ -13,7 +13,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     //---------------------------------
     //Functions
     //---------------------------------
-     $scope.diff = function(start,stop){
+    $scope.diff = function(start,stop){
         stop = moment(stop);
         start = moment(start);
         if (stop < start){
@@ -59,19 +59,19 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
 
     $scope.remove = function(timelog) {
         if(confirm("Are you sure you want to delete?")){
-        if (timelog) {
-            timelog.$remove();
+            if (timelog) {
+                timelog.$remove();
 
-            for (var i in $scope.timelogs) {
-                if ($scope.timelogs[i] === timelog) {
-                    $scope.timelogs.splice(i, 1);
+                for (var i in $scope.timelogs) {
+                    if ($scope.timelogs[i] === timelog) {
+                        $scope.timelogs.splice(i, 1);
+                    }
                 }
             }
-        }
-        else {
-            $scope.timelog.$remove();
-            $location.path('timelogs');
-        }
+            else {
+                $scope.timelog.$remove();
+                $location.path('timelogs');
+            }
         }
     };
 
@@ -89,8 +89,8 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
 
     $scope.find = function() {
         Timelogs.query(function(timelogs) {
-            $scope.timelogs = timelogs;
-        });
+          $scope.timelogs = timelogs;
+      });
     };
 
     $scope.findOne = function() {
@@ -106,7 +106,8 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     //---------------------------------
     $scope.$watch('date',function(){
         if($scope.date != $stateParams.date){
-            $location.path( '#!/timelogs/' + moment($scope.date).format('L') );
+            console.log(moment($scope.date).format('MM-DD-YYYY'));
+            $location.path('/timelogs/' + moment($scope.date).format('MM-DD-YYYY'));
         }
     });
 }]);

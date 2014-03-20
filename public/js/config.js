@@ -28,6 +28,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
 
 
     //Timelogs
+    .state('view timelog', {
+        url: '/timelogs/:timelogId',
+        templateUrl: 'views/timelogs/view.html'
+    })
     .state('create timelog', {
         url: '/timelogs/create',
         templateUrl: 'views/timelogs/create.html'
@@ -36,8 +40,8 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         url: '/timelogs/:timelogId/edit',
         templateUrl: 'views/timelogs/edit.html'
     })
-      .state('timelog by date', {
-        url: '/timelogs/:date',
+      .state('timelogs by date', {
+        url: '/timelogs/day/:date',
         templateUrl: 'views/timelogs/list.html'
     })
 

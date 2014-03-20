@@ -5,7 +5,7 @@
         <form class="navbar-form navbar-right">
          <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
           <div class="input-group" style="width:300px">
-           <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
+           <input type="text" class="form-control" ng-model="date" data-date-format="MM-dd-yyyy" data-date-type="number" data-min-date="01-01-14" data-autoclose="1" name="date2" bs-datepicker>
            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
          </div>              
        </div>
@@ -20,7 +20,7 @@
      <div class="col-lg-12">
       <!--issues repeater -->
       <section class="panel panel-default">
-        <div class="panel-heading">Issues</div>
+        <div class="panel-heading">Timelogs</div>
         <table class="table">
           <thead>
             <tr>
@@ -32,16 +32,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="issue in issues">
-              <td>{{timelog.startTime | date : 'HH:mm a' }}</td>
-              <td>{{timelog.stopTime | date : 'HH:mm a'}}</td>
+            <tr ng-repeat="timelog in timelogs">
+              <td>{{timelog.startTime | date : 'hh:mm a' }}</td>
+              <td>{{timelog.stopTime | date : 'hh:mm a'}}</td>
               <td>{{timelog.issue.name}}</td>
               <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
-              <td>{{issue.createdBy.name}}</td>
               <td>
-                <button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
-                <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                <button ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="remove(timelog)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
               </td>
             </tr>
           </tbody>
