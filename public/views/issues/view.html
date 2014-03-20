@@ -14,15 +14,16 @@
                     <label>Name</label>
                     <div>{{issue.name}}</div>
                   </div>
-                  <div class="form-group">
-                    <label>Estimate</label>
-                    <div>{{issue.estimate}}</div>
+                  <div class="form-group" ng-init="getBudget()">
+                    <label>Budget</label>
+                    <div><div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="{{actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{budget}}%">
+    {{budget}}%
+  </div>
+</div></div>
                   </div>
-                  <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
-                    <label>Status</label>
-                    <div>{{issue.assignedTo.name}}</div>
-                  </div>
-                  <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
+                     
+                            <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
                     <label>Assigned To</label>
                     <div>{{issue.assignedTo.name}}</div>
                   </div>

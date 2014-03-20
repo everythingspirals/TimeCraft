@@ -1,6 +1,14 @@
 'use strict';
 
-angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateParams', '$location', 'Global', 'Issues', function ($scope, $stateParams, $location, Global, Issues) {
+angular.module('mean.issues').controller(
+    'IssuesController', 
+    ['$scope', 
+    '$stateParams', 
+    '$location', 
+    'Global', 
+    'Issues',
+    'Timelogs', 
+    function ($scope, $stateParams, $location, Global, Issues, Timelogs) {
     //---------------------------------
     //Variables
     //---------------------------------
@@ -8,7 +16,9 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
     $scope.issue = {};
     $scope.issues = [];
     $scope.picked = {};
-
+    $scope.actual = 0;
+    $scope.budget = 0;
+    $scope.progress = 0;
     //---------------------------------
     //Functions
     //---------------------------------
@@ -75,4 +85,21 @@ angular.module('mean.issues').controller('IssuesController', ['$scope', '$stateP
             $scope.issue = issue;
         });
     };
+
+    $scope.getBudget = function(){
+        $scope.actual = 0;
+        $scope.budget = 0;
+        
+        Timelogs.getByIssue({'issueId': $stateParams.issueId}, function(timelogs){
+
+            for(var x=0; x < timelogs.length; x++) { 
+                $scope.actual += parseFloat(diff(
+                    timelogs[x].startTime,
+                    timelogs[x].stopTime
+                ));
+            }
+
+            $scope.budget =  ($scope.actual / $scope.issue.estimate * 100).toFixed(2);
+        });
+    }
 }]);
