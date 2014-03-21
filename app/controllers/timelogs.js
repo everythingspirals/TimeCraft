@@ -104,8 +104,7 @@
  */
  exports.day = function(req, res) {
     Timelog.find({
-        startTime: {$gte: req.query.startOfDay, $lt: req.query.endOfDay},
-        user: mongoose.Types.ObjectId(req.user.id)
+        startTime: {$gte: req.query.startOfDay, $lt: req.query.endOfDay}
     }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
         if (err) {
             res.render('error', {

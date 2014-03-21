@@ -78,7 +78,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         // timelog.updated.push(new Date().getTime());
 
         timelog.$update(function() {
-            $location.path('timelogs/' + timelog._id);
+            $location.path('timelogs/day/' + timelog.startTime);
         });
     };
 

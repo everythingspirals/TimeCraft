@@ -17,7 +17,15 @@
         </div>
         <div class="form-group">
           <label>Estimate</label>
-          <input type="text" class="form-control" ng-model="estimate" id="estimate" placeholder="In increments of 0.25 hours" required>
+          <input type="text" class="form-control" ng-model="estimate" id="estimate" placeholder="In hours" required>
+        </div>
+               <div class="form-group" ng-controller="ProjectsController" data-ng-init="find()">
+          <label>Project</label>
+          <select id="project" ng-model="$parent.project" ng-options="project._id as project.name for project in projects" class="form-control" required></select>
+        </div>
+        <div class="form-group" ng-controller="SprintsController" data-ng-init="find()">
+          <label>Sprint</label>
+          <select id="sprint" ng-model="$parent.sprint" ng-options="sprint._id as sprint.name for sprint in sprintss" class="form-control" required></select>
         </div>
         <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
           <label>Assigned To</label>

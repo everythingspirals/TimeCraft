@@ -31,7 +31,10 @@ angular.module('mean.issues').controller(
             name: this.name,
             story: this.story,
             estimate: this.estimate,
-            assignedTo: this.assignedTo
+            assignedTo: this.assignedTo,
+            status: this.status,
+            project: this.project,
+            sprint: this.sprint
         });
         issue.$save(function(response) {
             $scope.issues.push(issue);
@@ -39,6 +42,9 @@ angular.module('mean.issues').controller(
         this.name = '';
         this.story = '';
         this.estimate = 0;
+        this.project = null;
+        this.sprint = null;
+        this.status = null;
         this.assignedTo = null;
     };
 
@@ -83,14 +89,14 @@ angular.module('mean.issues').controller(
             issueId: $stateParams.issueId
         }, function(issue) {
             $scope.issue = issue;
+            $scope.getBudget(issue);
         });
     };
 
-    $scope.getBudget = function(){
+    $scope.getBudget = function(issue){
         $scope.actual = 0;
         $scope.budget = 0;
-        
-        Timelogs.getByIssue({'issueId': $stateParams.issueId}, function(timelogs){
+        Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
 
             for(var x=0; x < timelogs.length; x++) { 
                 $scope.actual += parseFloat(diff(
@@ -99,7 +105,7 @@ angular.module('mean.issues').controller(
                 ));
             }
 
-            $scope.budget =  ($scope.actual / $scope.issue.estimate * 100).toFixed(2);
+            $scope.budget =  ($scope.actual / issue.estimate * 100).toFixed(2);
         });
     }
 }]);

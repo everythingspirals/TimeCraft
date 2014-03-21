@@ -36,6 +36,18 @@ var IssueSchema = new Schema({
     assignedTo: {
         type: Schema.ObjectId,
         ref: 'User'
+    },
+    sprint: {
+        type: Schema.ObjectId,
+        ref: 'Sprint'
+    },
+    project: {
+        type: Schema.ObjectId,
+        ref: 'Project'
+    },
+    status: {
+        type: Schema.ObjectId,
+        ref: 'Status'
     }
 });
 

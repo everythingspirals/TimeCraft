@@ -89,7 +89,34 @@ exports.show = function(req, res) {
  * List of Issues
  */
 exports.all = function(req, res) {
-    Issue.find().sort('created').populate('user', 'name username').exec(function(err, issues) {
+    Issue.find().sort('created')
+    .populate('user', 'name username')
+    .populate('status', 'name')
+    .populate('project', 'name')
+    .populate('sprint', 'name')
+    .exec(function(err, issues) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(issues);
+        }
+    });
+};
+
+/**
+ * List of Issues
+ */
+exports.sprint = function(req, res) {
+    Issue.find({
+        sprint:mongoose.Types.ObjectId(req.query.sprintId)
+    }).sort('created')
+    .populate('user', 'name username')
+    .populate('status', 'name')
+    .populate('project', 'name')
+    .populate('sprint', 'name')
+    .exec(function(err, issues) {
         if (err) {
             res.render('error', {
                 status: 500

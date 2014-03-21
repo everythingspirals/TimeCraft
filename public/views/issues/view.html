@@ -14,16 +14,18 @@
                     <label>Name</label>
                     <div>{{issue.name}}</div>
                   </div>
-                  <div class="form-group" ng-init="getBudget()">
+                  <div class="form-group">
                     <label>Budget</label>
-                    <div><div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="{{actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{budget}}%">
-    {{budget}}%
-  </div>
-</div></div>
+                    <div>
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{budget}}%">
+                          {{budget}}%
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                     
-                            <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
+
+                  <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
                     <label>Assigned To</label>
                     <div>{{issue.assignedTo.name}}</div>
                   </div>
@@ -69,32 +71,32 @@
         <!--issues repeater -->
         <section class="panel panel-default" ng-controller="TimelogsController" ng-init="getByIssue()">
           <div class="panel-heading">Timelogs</div>
-              <table class="table">
-        <thead>
-          <tr>
-            <th width="20%">Date</th>
-            <th width="20%">Hours</th>
-            <th width="20%">User</th>
-            <th width="20%">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="timelog in timelogs">
-            <td>{{timelog.startTime | date : 'MM-dd-yy' }}</td>
-            <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
-            <td>{{timelog.user.name}}</td>
-            <td>
-              <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-       </section>
-     </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="20%">Date</th>
+                <th width="20%">Hours</th>
+                <th width="20%">User</th>
+                <th width="20%">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="timelog in timelogs">
+                <td>{{timelog.startTime | date : 'MM-dd-yy' }}</td>
+                <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
+                <td>{{timelog.user.name}}</td>
+                <td>
+                  <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
 
-   </div>
+    </div>
 
- </div>
+  </div>
 </section>
 </section>
 

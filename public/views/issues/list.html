@@ -3,55 +3,59 @@
 
 
 
-  		<div class="row">
-  			<div class="col-lg-12">
+      <div class="row">
+       <div class="col-lg-12">
 
-  				<!--issues repeater -->
-  				<section class="panel panel-default">
-  				    <!--tooltip-->
-    <section class="navbar navbar-default navbar-static-top navbar-tooltip">
+        <!--issues repeater -->
+        <section class="panel panel-default">
+          <!--tooltip-->
+          <section class="navbar navbar-default navbar-static-top navbar-tooltip">
             <div class="navbar-brand">Issues</div>
-      <!--datepicker-->
-      <form class="navbar-form navbar-right">
-        <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-          <div class="input-group" style="width:300px">
-            <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          </div>              
-        </div>
-      </form>
+            <!--datepicker-->
+            <form class="navbar-form navbar-right">
+              <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+                <div class="input-group" style="width:300px">
+                  <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>              
+              </div>
+            </form>
 
-      <!-- aside button -->
-      <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/issues/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
-      </button>
-    </section>
-  					<table class="table">
-  						<thead>
-  							<tr>
-  								<th width="50%">Name</th>
-  								<th width="10%">Estimate</th>
-  								<th width="10%">Actual</th>
-                  <th width="30%">Action</th>
-   							</tr>
-  						</thead>
-  						<tbody>
-  							<tr ng-repeat="issue in issues">
-  								<td>{{issue.name}}</td>
-  								<td>{{issue.estimate}}</td>
-  								<td></td>
-  								<td>
-  									<button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
-  									<button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                    <a href="#!/issues/{{issue._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
-  								</td>
-  							</tr>
-  						</tbody>
-  					</table>
-  				</section>
-  			</div>
+            <!-- aside button -->
+            <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/issues/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
+            </button>
+          </section>
+          <table class="table">
+            <thead>
+             <tr>
+              <th width="50%">Name</th>
+              <th width="10%">Budget</th>
+              <th width="30%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr ng-repeat="issue in issues">
+            <td>{{issue.name}}</td>
+            <td>          
+              <div class="progress" ng-init="getBudget(issue)">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{budget}}%">
+                  {{budget}}%
+                </div>
+              </div>
+            </td>
+            <td>
+             <button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
+             <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+             <a href="#!/issues/{{issue._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </section>
+ </div>
 
-  		</div>
-  	</section>
+</div>
+</section>
 
 
 
