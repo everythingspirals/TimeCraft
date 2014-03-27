@@ -7,7 +7,8 @@ angular.module('mean.timelogs').factory('Timelogs', ['$resource', function($reso
 			{	
 				update: 	{	method: 'PUT'	},
 				getByDay: 	{	method: 'GET', params: { method: 'day' }, isArray: true	},
-				getByIssue:	{	method: 'GET', params: { method: 'issue' }, isArray: true	}
+				getByIssue:	{	method: 'GET', params: { method: 'issue' }, isArray: true },
+				getByUser:  {   method: 'GET', params: { method: 'getByUser'}, isArray: true }
 			}
 		);
 }]);

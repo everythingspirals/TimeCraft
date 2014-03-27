@@ -111,6 +111,16 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
         });
     };
 
+    $scope.getByUser = function() {
+        var startOfDay = moment($stateParams.date).startOf('day').toISOString();
+        var endOfDay = moment($stateParams.date).endOf('day').toISOString();
+
+        Timelogs.getByUser({'startOfDay': startOfDay, 'endOfDay': endOfDay, 'userId': Global.user._id}, function(timelogs){
+            $scope.timelogs = timelogs;
+        });
+    };
+
+
 
     //---------------------------------
     //Listeners
