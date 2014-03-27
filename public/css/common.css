@@ -26,6 +26,7 @@ Header
   color:#fff;
   margin-bottom:0;
   border-bottom:none;
+  min-height:52px;
 
 }
 #header .navbar-brand{
