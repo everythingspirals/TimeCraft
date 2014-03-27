@@ -16,8 +16,6 @@ angular.module('mean.issues').controller(
     $scope.issue = {};
     $scope.issues = [];
     $scope.picked = {};
-    $scope.actual = 0;
-    $scope.budget = 0;
     $scope.progress = 0;
     //---------------------------------
     //Functions
@@ -106,18 +104,17 @@ angular.module('mean.issues').controller(
     };
 
     $scope.getBudget = function(issue){
-        $scope.actual = 0;
-        $scope.budget = 0;
+        issue.actual = 0;
+        issue.budget = 0;
         Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
-
+            console.log(timelogs.length);
             for(var x=0; x < timelogs.length; x++) { 
-                $scope.actual += parseFloat(diff(
+                issue.actual += parseFloat(diff(
                     timelogs[x].startTime,
                     timelogs[x].stopTime
-                    ));
+                ));
             }
-
-            $scope.budget =  ($scope.actual / issue.estimate * 100).toFixed(2);
+            issue.budget =  (issue.actual / issue.estimate * 100).toFixed(2);
         });
     }
 }]);

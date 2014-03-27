@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stateParams', '$location', 'Global', 'Sprints', function ($scope, $stateParams, $location, Global, Sprints) {
-    
+angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stateParams', '$location', 'Global', 'Sprints', 'Issues', 'Timelogs',
+    function ($scope, $stateParams, $location, Global, Sprints, Issues, Timelogs) {
+
     //---------------------------------
     //Variables
     //---------------------------------
@@ -74,15 +75,40 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
             sprintId: $stateParams.sprintId
         }, function(sprint) {
             $scope.sprint = sprint;
+            $scope.initBudget(sprint);
         });
     };
 
-        $scope.findByProject = function(projectId) {
+    $scope.findByProject = function(projectId) {
         Sprints.getByProject({'projectId': projectId}, function(sprints){
             $scope.sprints = sprints;
         });
     };
 
+    $scope.initBudget = function(sprint){
+        sprint.actual = 0;
+        sprint.estimate = 0;
+        sprint.budget = 0;
+
+        Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
+            for(var x=0; x < issues.length; x++) { 
+               var issue = issues[x]
+               sprint.estimate += issue.estimate;
+               Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
+                    for(var i=0; i < timelogs.length; i++) { 
+                        sprint.actual  += parseFloat(diff(
+                            timelogs[i].startTime,
+                            timelogs[i].stopTime
+                            ));
+                    }
+                });
+           }
+       });
+    }
+
+    $scope.getBudget = function(){
+        return ($scope.sprint.actual / $scope.sprint.estimate * 100).toFixed(2);
+    }
     //---------------------------------
     //Listeners
     //---------------------------------

@@ -14,9 +14,15 @@
                     <label>Name</label>
                     <div>{{sprint.name}}</div>
                   </div>
-                  <div class="form-group">
-                    <label>Estimate</label>
-                    <div>{{sprint.estimate}}</div>
+                       <div class="form-group">
+                    <label>Overall Budget</label>
+                    <div>
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{sprint.actual}}" aria-valuemin="0" aria-valuemax="{{sprint.estimate}}" style="width:{{getBudget()}}%">
+                          {{getBudget()}}%
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
                     <label>Status</label>
@@ -56,9 +62,9 @@
 
                 <thead>
                  <tr>
-                  <th width="50%">Name</th>
-                  <th width="10%">Budget</th>
-                  <th width="30%">Action</th>
+                  <th width="40%">Name</th>
+                  <th width="30%">Budget</th>
+                  <th width="20%">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,13 +72,13 @@
                 <td>{{issue.name}}</td>
                 <td>          
                   <div class="progress" ng-init="getBudget(issue)">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="{{actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{budget}}%">
-                      {{budget}}%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
+                      {{issue.budget}}%
                     </div>
                   </div>
                 </td>
                 <td>
-                 <a href="#!/issues/{{issue._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
+                 <a href="#!/issues/{{issue._id}}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i> View</a>
                </td>
              </tr>
            </tbody>

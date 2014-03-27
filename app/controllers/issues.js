@@ -129,7 +129,7 @@
 
 exports.getByUser = function(req, res) {
     Issue.find({
-        $or: [{assignedTo:mongoose.Types.ObjectId(req.query.userId)},{createdBy:mongoose.Types.ObjectId(req.query.userId)}]
+        $or: [{"assignedTo":mongoose.Types.ObjectId(req.query.userId)},{"createdBy":mongoose.Types.ObjectId(req.query.userId)}]
     }).sort('created')
     .populate('user', 'name username')
     .populate('status', 'name')
