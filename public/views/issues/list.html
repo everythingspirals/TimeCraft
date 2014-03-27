@@ -1,4 +1,4 @@
-    <section data-ng-controller="IssuesController" data-ng-init="find()">
+    <section data-ng-controller="IssuesController" data-ng-init="getByUser()">
 
 
 
@@ -10,7 +10,7 @@
         <section class="panel panel-default">
           <!--tooltip-->
           <section class="navbar navbar-default navbar-static-top navbar-tooltip">
-            <div class="navbar-brand">Issues</div>
+            <div class="navbar-brand">Issues for {{global.user._id}}</div>
             <!--datepicker-->
             <form class="navbar-form navbar-right">
               <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">

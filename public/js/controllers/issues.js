@@ -84,6 +84,12 @@ angular.module('mean.issues').controller(
         });
     };
 
+    $scope.getByUser = function() {
+        Issues.getByUser({'userId': Global.user._id}, function(issues) {
+            $scope.issues = issues;
+        });
+    };
+
     $scope.findOne = function() {
         Issues.get({
             issueId: $stateParams.issueId
@@ -102,7 +108,7 @@ angular.module('mean.issues').controller(
                 $scope.actual += parseFloat(diff(
                     timelogs[x].startTime,
                     timelogs[x].stopTime
-                ));
+                    ));
             }
 
             $scope.budget =  ($scope.actual / issue.estimate * 100).toFixed(2);
