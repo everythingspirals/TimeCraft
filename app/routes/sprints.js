@@ -15,6 +15,7 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(app) {
 
     app.get('/sprints', sprints.all);
+    app.get('/sprints/project', sprints.projects);
     app.post('/sprints', authorization.requiresLogin, sprints.create);
     app.get('/sprints/:sprintId', sprints.show);
     app.put('/sprints/:sprintId', authorization.requiresLogin, hasAuthorization, sprints.update);

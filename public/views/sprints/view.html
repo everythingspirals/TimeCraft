@@ -52,16 +52,40 @@
             <div class="panel-heading">Issues</div>
             <div class="panel-body">   
              <div class="form-group">
+             <table class="table" ng-controller="IssuesController" ng-init="findBySprint()">
 
-             </div>
-           </div>
-         </section>
+                <thead>
+                 <tr>
+                  <th width="50%">Name</th>
+                  <th width="10%">Budget</th>
+                  <th width="30%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr ng-repeat="issue in issues">
+                <td>{{issue.name}}</td>
+                <td>          
+                  <div class="progress" ng-init="getBudget(issue)">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{budget}}%">
+                      {{budget}}%
+                    </div>
+                  </div>
+                </td>
+                <td>
+                 <a href="#!/issues/{{issue._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
+               </td>
+             </tr>
+           </tbody>
+         </table>
        </div>
-
      </div>
-
-   </div>
+   </section>
  </div>
+
+</div>
+
+</div>
+</div>
 </section>
 </section>
 

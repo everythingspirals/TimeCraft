@@ -77,6 +77,12 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
         });
     };
 
+        $scope.findByProject = function(projectId) {
+        Sprints.getByProject({'projectId': projectId}, function(sprints){
+            $scope.sprints = sprints;
+        });
+    };
+
     //---------------------------------
     //Listeners
     //---------------------------------

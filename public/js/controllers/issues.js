@@ -90,6 +90,12 @@ angular.module('mean.issues').controller(
         });
     };
 
+    $scope.findBySprint = function() {
+        Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
+            $scope.issues = issues;
+        });
+    };
+
     $scope.findOne = function() {
         Issues.get({
             issueId: $stateParams.issueId

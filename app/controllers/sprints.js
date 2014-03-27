@@ -98,3 +98,20 @@
         }
     });
 };
+
+/**
+ * List of Issues by Sprint
+ */
+ exports.projects = function(req, res) {
+    Sprint.find({
+        project:mongoose.Types.ObjectId(req.query.projectId)
+    }).sort('-startTime').populate('project', 'name').exec(function(err, sprints) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(sprints);
+        }
+    });
+};

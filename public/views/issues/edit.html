@@ -19,6 +19,17 @@
           <label>Estimate</label>
           <input type="text" class="form-control" ng-model="issue.estimate" id="estimate" placeholder="In increments of 0.25 hours" required>
         </div>
+                <div ng-controller="ProjectsController">
+               <div class="form-group"  data-ng-init="find()">
+          <label>Project</label>
+          <select id="project" ng-model="$parent.issue.project" ng-options="project._id as project.name for project in projects" class="form-control" required></select>
+        </div>
+
+        <div class="form-group" ng-controller="SprintsController" data-ng-init="find()">
+          <label>Sprint</label>
+          <select id="sprint" ng-model="$parent.issue.sprint" ng-options="sprint._id as sprint.name for sprint in sprints | filter : $parent.$parent.issue.project" class="form-control" required></select>
+        </div>
+        </div>
         <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
           <label>Assigned To</label>
           <select ng-model="$parent.issue.assignedTo" id="assignedTo" ng-options="u._id as u.name for u in users" class="form-control"></select>
