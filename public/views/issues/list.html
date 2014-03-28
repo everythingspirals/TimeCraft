@@ -15,8 +15,8 @@
             <form class="navbar-form navbar-right">
               <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
                 <div class="input-group" style="width:300px">
-                  <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  <input type="text" class="form-control" ng-model="globalFilter">
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>              
               </div>
             </form>
@@ -34,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-           <tr ng-repeat="issue in issues">
+           <tr ng-repeat="issue in issues | filter:globalFilter">
             <td>{{issue.name}}</td>
             <td>          
               <div class="progress" ng-init="getBudget(issue)">

@@ -25,16 +25,17 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     $scope.create = function() {
         var startTime = moment(this.startTime);
         var stopTime = moment(this.stopTime);
-        
+        var today = moment($scope.date);
+
         //set startTime date to today
-        stopTime.year(moment().year());
-        stopTime.month(moment().month());
-        stopTime.date(moment().date());
+        stopTime.year(today.year());
+        stopTime.month(today.month());
+        stopTime.date(today.date());
 
         //set stopTime date to today
-        startTime.year(moment().year());
-        startTime.month(moment().month());
-        startTime.date(moment().date());
+        startTime.year(today.year());
+        startTime.month(today.month());
+        startTime.date(today.date());
 
         var timelog = new Timelogs({
             startTime: startTime.format(),
@@ -42,6 +43,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
             description: this.description,
             issue: this.issue
         });
+        
         timelog.$save(function(response) {
             $scope.timelogs.push(timelog);
         });
