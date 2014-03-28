@@ -192,7 +192,8 @@ Main
 -------------------------*/
 #content{
   padding-top:75px;
-  min-height:400px;
+  padding-bottom:75px;
+  min-height:600px;
 }
 /*------------------------
 Panels

@@ -25,13 +25,15 @@
             <thead>
              <tr>
               <th width="40%">Name</th>
-              <th width="30%">Budget</th>
+              <th width="20%">Project</th>
+              <th width="20%">Budget</th>
               <th width="20%">Action</th>
             </tr>
           </thead>
           <tbody>
            <tr ng-repeat="issue in issues | filter:globalFilter">
             <td>{{issue.name}}</td>
+            <td>{{issue.project.name}}</td>
             <td>          
               <div class="progress" ng-init="getBudget(issue)">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
