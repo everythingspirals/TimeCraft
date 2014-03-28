@@ -17,5 +17,6 @@ angular.module('mean.system')
 	$rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){ 
 			$scope.navToggle = false;
+			$scope.page = toParams
 		});
 }]);

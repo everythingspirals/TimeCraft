@@ -33,7 +33,7 @@
 
     </ul>
      
-        <a ng-click='navToggle = !navToggle' class="btn btn-primary navbar-btn navbar-left"><i class="fa fa-list-alt"></i> &nbsp; Menu</a>
+     
 
         
 
@@ -41,7 +41,14 @@
 
 
  </section>
+<section id="subheader">
+<div id="current" ng-click='navToggle = !navToggle'>  <span class="icon"><i class="fa fa-list-alt"></i></span>
+                <span class="title">Menu</span>
+          
+                
+       </div>
 
+</section>
     <nav id="nav" ng-include="'views/nav.html'"></nav>
     
 
