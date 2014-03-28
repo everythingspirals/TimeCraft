@@ -12,7 +12,9 @@
             </div>
             <div class="form-group" ng-controller="IssuesController" data-ng-init="getByUser()">
               <label>Issue</label>
-              <select ng-model="$parent.timelog.issue" id="issue" ng-options="issue._id as issue.name for issue in issues" class="form-control" required></select>
+              <div>
+              <select chosen data-placeholder="Choose an issue" ng-model="$parent.timelog.issue" id="issue" ng-options="issue._id as issue.name for issue in issues" class="form-control" required></select>
+              </div>
             </div>
             <div class="form-group">
               <label>Start Time</label>

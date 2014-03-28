@@ -19,8 +19,9 @@ angular.module('mean', [
 	//Third-Party
 	'mgcrea.ngStrap',
 	'btford.socket-io',
-	'ui.bootstrap.datetimepicker',
-	'textAngular'
+	'textAngular',
+	'localytics.directives',
+	'angular-selectize'
 ]);
 
 angular.module('mean.system', []);

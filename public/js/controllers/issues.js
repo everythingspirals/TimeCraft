@@ -88,6 +88,12 @@ angular.module('mean.issues').controller(
         });
     };
 
+    $scope.getByRelated = function() {
+        Issues.getByRelated({'userId': Global.user._id}, function(issues) {
+            $scope.issues = issues;
+        });
+    };
+
     $scope.findBySprint = function() {
         Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
             $scope.issues = issues;

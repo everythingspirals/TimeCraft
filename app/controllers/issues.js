@@ -127,9 +127,31 @@
     });
 };
 
-exports.getByUser = function(req, res) {
+exports.user = function(req, res) {
     Issue.find({
-        $or: [{"assignedTo":mongoose.Types.ObjectId(req.query.userId)},{"createdBy":mongoose.Types.ObjectId(req.query.userId)}]
+        assignedTo:mongoose.Types.ObjectId(req.query.userId)
+    }).sort('created')
+    .populate('user', 'name username')
+    .populate('status', 'name')
+    .populate('project', 'name')
+    .populate('sprint', 'name')
+    .exec(function(err, issues) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(issues);
+        }
+    });
+};
+
+exports.related = function(req, res) {
+    Issue.find({
+        $or: [
+            {"assignedTo":mongoose.Types.ObjectId(req.query.userId)},
+            {"createdBy":mongoose.Types.ObjectId(req.query.userId)}
+        ]
     }).sort('created')
     .populate('user', 'name username')
     .populate('status', 'name')

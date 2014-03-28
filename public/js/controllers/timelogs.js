@@ -10,6 +10,7 @@ angular.module('mean.timelogs').controller('TimelogsController', ['$scope', '$st
     $scope.timelogs = [];
     $scope.date = $stateParams.date;
     $scope.picked = {};
+    
     //---------------------------------
     //Functions
     //---------------------------------

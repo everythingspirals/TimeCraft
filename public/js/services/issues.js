@@ -6,7 +6,8 @@ angular.module('mean.issues').factory('Issues', ['$resource', function($resource
 		{	issueId: '@_id'    },
 		{        
 			update: 	{    method: 'PUT'   },
-			getByUser:  {	 method: 'GET', params: {method:'getByUser'}, isArray: true},
+			getByUser:  {	 method: 'GET', params: {method:'user'}, isArray: true},
+			getByRelated:  {	method: 'GET', params: {method:'related'}, isArray: true},
 			getBySprint:  {	 method: 'GET', params: {method:'sprint'}, isArray: true}
 		}
 	);
