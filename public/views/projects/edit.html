@@ -16,7 +16,7 @@
           <div class="form-group" ng-controller="ClientsController" data-ng-init="find()">
             <label>Client</label>
             <div>
-              <select id="client" class="form-control" ng-model="$parent.project.client" ng-options="client._id as client.name for client in clients"></select>
+              <select id="client" class="form-control" ng-model="$parent.project.client._id" ng-options="client._id as client.name for client in clients"></select>
             </div>
           </div>
           <div class="form-group">

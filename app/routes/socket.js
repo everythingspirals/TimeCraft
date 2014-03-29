@@ -9,9 +9,4 @@ module.exports = function (socket) {
     socket.broadcast.emit('send:message', data.message);
   });
 
-  setInterval(function () {
-    socket.emit('send:time', {
-      time: (new Date()).toString()
-    });
-  }, 1000);
 };

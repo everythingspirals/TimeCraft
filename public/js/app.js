@@ -5,6 +5,8 @@ angular.module('mean', [
 	'ngCookies', 
 	'ngResource', 
 	'ui.router', 
+
+	//Libraries
 	'mean.system', 
 	'mean.socket',
 	'mean.chat',

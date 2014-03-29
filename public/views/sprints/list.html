@@ -8,18 +8,24 @@
                <!--tooltip-->
        <section class="navbar navbar-default navbar-static-top navbar-tooltip">
         <div class="navbar-brand">Sprints</div>
-        <form class="navbar-form navbar-right">
-         <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-          <div class="input-group" style="width:300px">
-           <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
-           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-         </div>              
-       </div>
-     </form>
-
-     <!-- aside button -->
+           <!-- aside button -->
      <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/sprints/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
      </button>
+               <!--datepicker-->
+            <form class="navbar-form navbar-right">
+             <div class="form-group" ng-controller="ProjectsController" ng-init="find()">
+              <select class="form-control" ng-model="$parent.projectFilter" ng-options="project.name as project.name for project in projects">
+              <option value="">Select Project...</option>
+             </select>
+           </div>
+           <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+            <div class="input-group" style="width:300px">
+              <input type="text" class="form-control" ng-model="globalFilter" Placeholder="Search">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>              
+          </div>
+        </form>
+  
    </section>
         <table class="table">
           <thead>
@@ -28,20 +34,16 @@
               <th >Start Date</th>
               <th >End Date</th>
               <th >Project</th>
-              <th >Estimate</th>
-              <th >Actual</th>
               <th >Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="sprint in sprints">
+            <tr ng-repeat="sprint in sprints | filter:globalFilter | filter:projectFilter">
               <td>{{sprint.name}}</td>
-              <td>{{sprint.startDate | date : 'HH:mm a' }}</td>
-              <td>{{sprint.stopDate | date : 'HH:mm a'}}</td>
+              <td>{{sprint.startDate | date}}</td>
+              <td>{{sprint.stopDate | date}}</td>
               <td>{{sprint.project.name}}</td>
-              <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
-              <td>{{sprint.createdBy.name}}</td>
-              <td>
+               <td>
                 <button ng-click="edit(sprint)" data-template="views/sprints/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
                 <button ng-click="remove(sprint)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
                 <a href="#!/sprints/{{sprint._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>

@@ -54,9 +54,9 @@ var IssueSchema = new Schema({
 /**
  * Validations
  */
-IssueSchema.path('name').validate(function(name) {
-    return name.length;
-}, 'Name cannot be blank');
+// IssueSchema.path('name').validate(function(name) {
+//     return name.length;
+// }, 'Name cannot be blank');
 
 /**
  * Statics
@@ -65,7 +65,11 @@ IssueSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
     })
+    .populate('assignedTo', 'name username')
+    .populate('project','name')
+    .populate('sprint','name')
     .exec(cb);
 };
+ 
 
 mongoose.model('Issue', IssueSchema);

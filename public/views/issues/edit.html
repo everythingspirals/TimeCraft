@@ -22,12 +22,12 @@
                 <div ng-controller="ProjectsController">
                <div class="form-group"  data-ng-init="find()">
           <label>Project</label>
-          <select id="project" ng-model="$parent.issue.project" ng-options="project._id as project.name for project in projects" class="form-control" required></select>
+          <select id="project" ng-model="$parent.issue.project._id" ng-options="project._id as project.name for project in projects" class="form-control" required></select>
         </div>
 
         <div class="form-group" ng-controller="SprintsController" data-ng-init="find()">
           <label>Sprint</label>
-          <select id="sprint" ng-model="$parent.issue.sprint" ng-options="sprint._id as sprint.name for sprint in sprints | filter : $parent.$parent.issue.project" class="form-control" required></select>
+          <select id="sprint" ng-model="$parent.$parent.issue.sprint._id" ng-options="sprint._id as sprint.name for sprint in sprints | filter : $parent.$parent.issue.project" class="form-control" required></select>
         </div>
         </div>
         <div class="form-group" ng-controller="UsersController" data-ng-init="find()">

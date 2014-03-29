@@ -31,7 +31,7 @@
     issue.save(function(err) {
         if (err) {
             return res.send('users/signup', {
-                errors: err.errors,
+                errors: err,
                 issue: issue
             });
         } else {
@@ -51,7 +51,7 @@
     issue.save(function(err) {
         if (err) {
             return res.send('users/signup', {
-                errors: err.errors,
+                errors: err,
                 issue: issue
             });
         } else {
@@ -69,7 +69,7 @@
     issue.remove(function(err) {
         if (err) {
             return res.send('users/signup', {
-                errors: err.errors,
+                errors: err,
                 issue: issue
             });
         } else {
@@ -131,10 +131,10 @@ exports.user = function(req, res) {
     Issue.find({
         assignedTo:mongoose.Types.ObjectId(req.query.userId)
     }).sort('created')
-    .populate('user', 'name username')
-    .populate('status', 'name')
-    .populate('project', 'name')
-    .populate('sprint', 'name')
+    .populate('user')
+    .populate('status')
+    .populate('project')
+    .populate('sprint')
     .exec(function(err, issues) {
         if (err) {
             res.render('error', {
