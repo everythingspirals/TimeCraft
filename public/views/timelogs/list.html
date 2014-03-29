@@ -42,11 +42,9 @@
             <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
             <td>
               <div class="btn-group">
-                <button type="button" class="btn btn-default">Action</button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
+                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Action <span class="caret"></span>
+  </button>
                 <ul class="dropdown-menu" role="menu">
                                  <li> <a href="#!/timelogs/{{timelog._id}}" ><i class="fa fa-eye"></i> View</a></li>
                   <li><a ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>

@@ -16,45 +16,53 @@
             <form class="navbar-form navbar-right">
              <div class="form-group" ng-controller="ProjectsController" ng-init="find()">
               <select class="form-control" ng-model="$parent.projectFilter" ng-options="project.name as project.name for project in projects">
-              <option value="">Select Project...</option>
-             </select>
-           </div>
-           <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-            <div class="input-group" style="width:300px">
-              <input type="text" class="form-control" ng-model="globalFilter" Placeholder="Search">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            </div>              
-          </div>
-        </form>
-
-        
-      </section>
-      <table class="table">
-        <thead>
-         <tr>
-          <th width="20%">Name</th>
-          <th width="20%">Project</th>
-          <th width="20%">Sprint</th>
-          <th width="20%">Budget</th>
-          <th width="20%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-       <tr ng-repeat="issue in issues | filter:globalFilter | filter:projectFilter">
-        <td>{{issue.name}}</td>
-        <td>{{issue.project.name}}</td>
-        <td>{{issue.sprint.name}}</td>
-        <td>          
-          <div class="progress" ng-init="getBudget(issue)">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
-              {{issue.budget}}%
+                <option value="">Select Project...</option>
+              </select>
             </div>
-          </div>
-        </td>
-        <td>
-         <button ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
-         <button ng-click="remove(issue)" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-         <a href="#!/issues/{{issue._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
+            <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+              <div class="input-group" style="width:300px">
+                <input type="text" class="form-control" ng-model="globalFilter" Placeholder="Search">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>              
+            </div>
+          </form>
+
+
+        </section>
+        <table class="table">
+          <thead>
+           <tr>
+            <th width="30%">Name</th>
+            <th width="20%">Project</th>
+            <th width="20%">Sprint</th>
+            <th width="20%">Budget</th>
+            <th width="10%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr ng-repeat="issue in issues | filter:globalFilter | filter:projectFilter">
+          <td>{{issue.name}}</td>
+          <td>{{issue.project.name}}</td>
+          <td>{{issue.sprint.name}}</td>
+          <td>          
+            <div class="progress" ng-init="getBudget(issue)">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
+                {{issue.budget}}%
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="btn-group">
+             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+             <li><a href="#!/issues/{{issue._id}}" ><i class="fa fa-eye"></i> View</a></li>
+             <li><a ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body"><i class="fa fa-pencil"></i> Edit</a></li>
+             <li class="divider"></li>
+             <li><a ng-click="remove(issue)" ><i class="fa fa-trash-o"></i> Delete</a></li>
+           </ul>
+         </div>
        </td>
      </tr>
    </tbody>
