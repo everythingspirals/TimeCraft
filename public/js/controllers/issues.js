@@ -8,7 +8,8 @@ angular.module('mean.issues').controller(
     'Global', 
     'Issues',
     'Timelogs', 
-    function ($scope, $stateParams, $location, Global, Issues, Timelogs) {
+    '$log',
+    function ($scope, $stateParams, $location, Global, Issues, Timelogs, $log) {
     //---------------------------------
     //Variables
     //---------------------------------
@@ -44,6 +45,7 @@ angular.module('mean.issues').controller(
         this.sprint = null;
         this.status = null;
         this.assignedTo = null;
+        $scope.getByRelated();
     };
 
     $scope.remove = function(issue) {
@@ -71,8 +73,10 @@ angular.module('mean.issues').controller(
         // }
         // issue.updated.push(new Date().getTime());
 
-        issue.$update(function() {
-            //$location.path('issues/' + issue._id);
+        issue.$update().then(function(response){
+            $log.info(response);
+
+            $scope.getByRelated();
         });
     };
 

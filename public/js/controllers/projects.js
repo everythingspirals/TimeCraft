@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', function ($scope, $stateParams, $location, Global, Projects) {
-    
+angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', '$log', function ($scope, $stateParams, $location, Global, Projects, $log) {
+
     //---------------------------------
     //Variables
     //---------------------------------
@@ -24,6 +24,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         });
         project.$save(function(response) {
             $scope.projects.push(project);
+            $scope.find();
         });
 
         this.name = '';
@@ -57,7 +58,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         // }
         // project.updated.push(new Date().getTime());
 
-        project.$update(function() {
+
+        project.$update().then(function(response){
+            $log.info(response);
         });
     };
 

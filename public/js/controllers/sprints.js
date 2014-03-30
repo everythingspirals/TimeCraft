@@ -26,6 +26,7 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
         });
         sprint.$save(function(response) {
             $scope.sprints.push(sprint);
+            $scope.find();
         });
 
         this.name = '';
@@ -59,12 +60,10 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
         // }
         // sprint.updated.push(new Date().getTime());
 
-        sprint.$update();
-        
-    };
+        sprint.$update().then(function(response){
+            $scope.find();
+        });
 
-    $scope.refresh - function(){
-        $location.path('sprints');
     };
 
     $scope.find = function() {
@@ -95,9 +94,9 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
 
         Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
             for(var x=0; x < issues.length; x++) { 
-             var issue = issues[x]
-             sprint.estimate += issue.estimate;
-             Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
+               var issue = issues[x]
+               sprint.estimate += issue.estimate;
+               Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
                 for(var i=0; i < timelogs.length; i++) { 
                     sprint.actual  += parseFloat(diff(
                         timelogs[i].startTime,
@@ -105,8 +104,8 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
                         ));
                 }
             });
-         }
-     });
+           }
+       });
     }
 
     $scope.getBudget = function(){
