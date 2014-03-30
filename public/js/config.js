@@ -91,11 +91,20 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'views/clients/list.html'
     })
     
+
+          //Blog
+      .state('blog', {
+        url: '/blog',
+        templateUrl: 'views/blog.html'
+    })
+
     //Default
       .state('home', {
         url: '/',
         templateUrl: 'views/index.html'
     });
+
+
 }
 ]);
 

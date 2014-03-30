@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.timelogs').controller('TimelogsController', 
-    ['$scope', '$stateParams', '$location', '$timeout', 'Global', 'Timelogs', 
-    function ($scope, $stateParams, $location, $timeout, Global, Timelogs) {
+    ['$scope', '$stateParams', '$location', '$timeout', '$aside', 'Global', 'Timelogs', 
+    function ($scope, $stateParams, $location, $timeout, $aside, Global, Timelogs) {
 
     //---------------------------------
     //Variables
@@ -13,7 +13,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.timelog = {};
     $scope.timelogs = [];
     $scope.date = $stateParams.date;
-
 
     //calendar
 
@@ -49,7 +48,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.view = $scope.views[$stateParams.view]
     
     $scope.config = {
-     calendar:{
+       calendar:{
         defaultView: $scope.view.value, 
         allDaySlot:false, 
         firstHour:0, 
@@ -59,6 +58,10 @@ angular.module('mean.timelogs').controller('TimelogsController',
         date:moment($scope.date).date(),
         viewRender : function(){
             $(window).scrollTop(0);
+        },
+        eventClick: function(event, jsEvent, view) {
+            $scope.edit(event.data.timelog)
+            $aside({scope: $scope, template: '/views/timelogs/edit.html'});
         }
     }
 
@@ -137,8 +140,10 @@ angular.module('mean.timelogs').controller('TimelogsController',
         // timelog.updated.push(new Date().getTime());
 
         timelog.$update(function(timelog) {
-            $location.path('timelogs/day/' + timelog.startTime);
-        });
+          $timeout(function(){
+            $location.path('timelogs/day/' + timelog.startTime + "/" + $scope.view.id)
+        },500);
+      });
     };
 
     $scope.find = function() {
@@ -172,19 +177,22 @@ angular.module('mean.timelogs').controller('TimelogsController',
     };
 
     $scope.getByUser = function() {
-        var startOfDay = moment($stateParams.date).startOf('day').toISOString();
-        var endOfDay = moment($stateParams.date).endOf('day').toISOString();
+        var startOfDay = moment($stateParams.date).startOf($scope.view.type.replace("s","")).toISOString();
+        var endOfDay = moment($stateParams.date).endOf($scope.view.type.replace("s","")).toISOString();
 
         Timelogs.getByUser({'startOfDay': startOfDay, 'endOfDay': endOfDay, 'userId': Global.user._id}, function(timelogs){
             $scope.timelogs = timelogs;
             angular.forEach(timelogs,function(timelog){
-               $scope.events.push({
-                   title:timelog.issue.name,
-                   start:new Date(timelog.startTime),
-                   end: new Date(timelog.stopTime),
-                   allDay: false
-               });
-           });
+             $scope.events.push({
+                 title:timelog.issue.name,
+                 start:new Date(timelog.startTime),
+                 end: new Date(timelog.stopTime),
+                 data:{
+                    timelog:timelog
+                },
+                allDay: false
+            });
+         });
         });
     };
 
@@ -230,19 +238,19 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //Listeners
     //---------------------------------
     $scope.$watch('date',function(){
-     if($scope.date != $stateParams.date){
+       if($scope.date != $stateParams.date){
           $location.path('timelogs/day/' + $scope.date + "/" + $scope.view.id)
       }
-    });
+  });
 
-       $scope.$watch('events.length',function(){
+    $scope.$watch('events.length',function(){
         $scope.eventSources = [$scope.events];
     });
 
-            $scope.$watch('view.value',function(){
-                $location.path('timelogs/day/' + $scope.date + "/" + $scope.view.id)
-            });
+    $scope.$watch('view.value',function(){
+        $location.path('timelogs/day/' + $scope.date + "/" + $scope.view.id)
+    });
 
 
 
-        }]);
+}]);
