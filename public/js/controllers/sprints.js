@@ -59,9 +59,12 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
         // }
         // sprint.updated.push(new Date().getTime());
 
-        sprint.$update(function() {
-            //$location.path('sprints/' + sprint._id);
-        });
+        sprint.$update();
+        
+    };
+
+    $scope.refresh - function(){
+        $location.path('sprints');
     };
 
     $scope.find = function() {
@@ -92,18 +95,18 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
 
         Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
             for(var x=0; x < issues.length; x++) { 
-               var issue = issues[x]
-               sprint.estimate += issue.estimate;
-               Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
-                    for(var i=0; i < timelogs.length; i++) { 
-                        sprint.actual  += parseFloat(diff(
-                            timelogs[i].startTime,
-                            timelogs[i].stopTime
-                            ));
-                    }
-                });
-           }
-       });
+             var issue = issues[x]
+             sprint.estimate += issue.estimate;
+             Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
+                for(var i=0; i < timelogs.length; i++) { 
+                    sprint.actual  += parseFloat(diff(
+                        timelogs[i].startTime,
+                        timelogs[i].stopTime
+                        ));
+                }
+            });
+         }
+     });
     }
 
     $scope.getBudget = function(){
