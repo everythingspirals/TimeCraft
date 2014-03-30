@@ -151,9 +151,7 @@ exports.getByUser = function(req, res) {
         user:mongoose.Types.ObjectId(req.query.userId)
     }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
         if (err) {
-            res.render('error', {
-                status: 500
-            });
+            res.jsonp(err);
         } else {
             res.jsonp(timelogs);
         }

@@ -1,18 +1,12 @@
  <section ng-controller="HeaderController">
- <section id="header" class="navbar navbar-inverse navbar-fixed-top" >
-   
+   <section id="header" class="navbar navbar-inverse navbar-fixed-top" >
     <div class="navbar-header">
         <a class="navbar-brand" >
             <img src="/img/icons/favicon.gif" style="height:30px; margin-top:-3px;"/> TimeCraft
         </a> 
     </div>
-
-
-        
     <a href="/auth/google" class="btn btn-danger navbar-btn navbar-right" data-ng-hide="global.authenticated"><i class="fa fa-google-plus"></i> &nbsp;Sign in</a>
- 
     <ul class="navbar-nav nav pull-right" data-ng-show="global.authenticated">
-
         <li class="dropdown">
             <a href="#" class="dropdown-toggle dropdown-avatar" data-toggle="dropdown">
                 <img class="avatar img-circle" src="{{global.user.google.picture}}"/>  <b class="caret"></b>
@@ -22,27 +16,8 @@
                 </li>
             </ul>
         </li>
-
-
     </ul>
-     
-     
-
-        
-
-        
-
-
- </section>
-<section id="subheader">
-<div id="current" ng-click='navToggle = !navToggle'>  <span class="icon"><i class="fa fa-list-alt"></i></span>
-                <span class="title">Menu</span>
-          
-                
-       </div>
-
 </section>
-    <nav id="nav" ng-include="'views/nav.html'"></nav>
-    
 
-    </section>
+<nav id="nav" ng-include="'views/nav.html'"></nav>
+</section>

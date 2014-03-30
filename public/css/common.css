@@ -9,7 +9,7 @@ body {
   background:#e5e5e5;
   font-family: 'Roboto', sans-serif;
   font-size:18px;
- width: auto !important;
+  width: auto !important;
   overflow-x: hidden !important;
 }
 textarea {
@@ -43,30 +43,31 @@ Subheader
   color:#333;
   margin-bottom:0;
   min-height:52px;
-        -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   -ms-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
   box-shadow: 0 1px 0 rgba(0,0,0,0.05);
 }
-#current{
+#subheader a{
   height:52px;
   width:250px;
   float:left;
   background:#444;
   color:white;
   cursor:pointer;
+  border-radius:0;
 }
-#current span{
+#subheader a span{
   display:inline-block;
   height:52px;
   padding:16px 16px 16px 16px;
 }
-#current .icon{
+#subheader a.icon{
   width:50px;
   float:left;
   color:#fff;
 }
-#current .title{
+#subheader a .title{
   width:140px;
   color:#fff;
 }
@@ -75,12 +76,12 @@ Side Navigation
 -------------------------*/
 #nav {
   position:fixed;
-  top:102px;
+  top:52px;
   left:0px;
   width: 250px;
   float: left;
   font-size: 18px;
-   font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   -moz-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
@@ -108,21 +109,33 @@ Side Navigation
   background-color: rgba(245, 245, 245, 0.90);
   color:#333;
 }
-#nav .title:hover{
+#nav .title:hover, #nav .title.active{
   background-color:inherit;
   color:#fff;
 }
 
+#current{
+  background-color:#333 !important;
+}
+#current .title{
+  background-color:inherit !important;
+  color:#fff;
+}
 /*------------------------
 Footer
 -------------------------*/
-.navbar-btn{
-  margin-left:15px;
-  margin-right:15px;
- }
 
 #footer .nav>li>a:hover, .nav>li>a:focus {
   background-color:inherit;
+}
+
+/*------------------------
+Side Navigation
+-------------------------*/
+.toolbar{
+  height:53px;
+  left:250px;
+  top:52px;
 }
 /*------------------------
 Chat
@@ -137,63 +150,64 @@ Chat
   border: 1px solid #ccc;
   border-bottom:none;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
- z-index:9999;
- }
- #chat .chat-header{
+  z-index:9999;
+}
+#chat .chat-header{
   position:absolute;
   top:0;
   left:-1px;
   height:36px;
   width:301px;
   background:#343131;
- }
- #chat .chat-output{
+}
+#chat .chat-output{
   position:absolute;
   top:36px;
 
   width:300px;
   height:353px;
-   padding:15px;
-     overflow-y:auto;
+  padding:15px;
+  overflow-y:auto;
   overflow-x:hidden;
- }
-  #chat .chat-input{
+}
+#chat .chat-input{
   position:absolute;
   width:301px;
   bottom:0;
-    left:-1px;
- }
- #chat .chat-input .form-control{
+  left:-1px;
+}
+#chat .chat-input .form-control{
   border-radius:0;
- }
- #chat .message{
+}
+#chat .message{
   font-family: arial, sans-serif;
   font-size: 13px;
   padding:5px;
- }
- #chat .message-body{
+}
+#chat .message-body{
   background:#fff;
   padding:8px;
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
- }
- #chat .message-author{
+}
+#chat .message-author{
   padding-top:5px;
   color:rgba(0, 0, 0, 0.298039);
   font-size:11px;
- }
- #chat .chat-header{
+}
+#chat .chat-header{
   padding:10px;
   color:#fff;
- }
-  #chat .chat-header i{
-    cursor:pointer;
-  }
+}
+#chat .chat-header i{
+  cursor:pointer;
+}
 /*------------------------
 Main
 -------------------------*/
 #content{
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top:50px;
+  margin-left:250px;
+  padding-bottom:50px;
   min-height:600px;
 }
 /*------------------------
@@ -201,7 +215,7 @@ Panels
 -------------------------*/
 .panel{
   margin:20px;
-    -moz-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
@@ -212,10 +226,21 @@ Panels
 }
 
 /*------------------------
-Navbar
+Bootstrap Overrides
 -------------------------*/
+.navbar-btn{
+  margin-left:15px;
+  margin-right:15px;
+}
 
+.navbar .btn-group{
+  padding-top:8px;
+}
 
+.navbar-form{
+  margin-left:0;
+  margin-right:0;
+}
 /*----------------------------
 MISC
 -----------------------------*/
@@ -230,16 +255,22 @@ MISC
   background-color: white;
   opacity: .6;
 }
-  #loader .spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -32px; /* -1 * image width / 2 */
-    margin-top: -82px; /* -1 * image height / 2 */
-    display: block;
-  }
+#loader .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -82px; /* -1 * image height / 2 */
+  display: block;
+}
 
-
+.avatar{
+  width:36px;
+  height:36px;
+}
+.dropdown-avatar{
+  padding:8px 15px 8px !important;
+}
 /*----------------------------
 Theme
 -----------------------------*/
@@ -253,12 +284,12 @@ Theme
  background:rgb(255, 187,27) !important;
 }
 .projects{
-background:rgb(251, 133, 33) !important;
+  background:rgb(251, 133, 33) !important;
 }
 .home{
   background:rgb(68, 68, 68) !important;
 }
-.pay-period{
+.period{
   background:rgb(126, 55, 148) !important;
 }
 .issues{
@@ -266,28 +297,27 @@ background:rgb(251, 133, 33) !important;
 }
 .paychecks{
   /*background:rgb(77, 184, 73) !important;*/
-     background:rgb(26, 135, 99) !important;
+  background:rgb(26, 135, 99) !important;
 }
 .documentation{
  background:rgb(101, 128, 146) !important;
 }
-
-
-
-.well-description{
-  margin-top:20px;
+.home{
+  background-color:#1aa1e1 !important;
 }
 
-.avatar{
-  width:36px;
-  height:36px;
-}
-.dropdown-avatar{
-  padding:8px 15px 8px !important;
-}
 
+
+/*----------------------------
+Plugins
+-----------------------------*/
 .ta-editor.form-control{
   height:auto !important;
   min-height:200px;
   margin-bottom:20px;
+}
+
+.fc-header{
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
 }

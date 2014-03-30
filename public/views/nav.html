@@ -1,59 +1,18 @@
+	 <div id="current">
+	 <a  ng-click='navToggle = !navToggle'>  <span class="icon"><i class="fa fa-list-alt"></i></span>
+        <span class="title">Menu</span>
+    </a>
+</div>
+<div  ng-show="navToggle">
+	<ul class="nav" >
 
-<div  ng-show="navToggle" ng-controller="SidenavController" >
-	<ul class="nav">
-		<li class="timelogs">
-			<a href="#!/timelogs/day/{{today}}"> 
-				<span class="icon"><i class="fa fa-home"></i></span>
-				<span class="title">Home</span>
-			</a>
-		</li>
-		<li class="timelogs">
-			<a href="#!/timelogs/day/{{today}}"> 
-				<span class="icon"><i class="fa fa-sun-o"></i></span>
-				<span class="title">Day</span>
-			</a>
-		</li>
-				<li class="sprints">
-			<a href="#!/sprints"> 
-				<span class="icon"><i class="fa fa-rocket"></i></span>
-				<span class="title">Sprints</span>
-			</a>
-		</li>
-				<li class="clients">
-			<a href="#!/clients"> 
-				<span class="icon"><i class="fa fa-users"></i></span>
-				<span class="title">Clients</span>
-			</a>
-		</li>
-		<li class="projects">
-			<a href="#!/projects"> 
-				<span class="icon"><i class="fa fa-crop"></i></span>
-				<span class="title">Projects</span>
-			</a>
-		</li>
-		<li class="issues">
-			<a href="#!/issues"> 
-				<span class="icon"><i class="fa fa-list"></i></span>
-				<span class="title">Issues</span>
-			</a>
-		</li>
-		<li class="pay-period">
-			<a href="#!/period"> 
-				<span class="icon"><i class="fa fa-calendar"></i></span>
-				<span class="title">Pay Period</span>
-			</a>
-		</li>
-		<li class="paychecks">
-			<a href="#!/paychecks"> 
-				<span class="icon"><i class="fa fa-money"></i></span>
-				<span class="title">Paychecks</span>
-			</a>
-		</li>
-		<li class="documentation">
-			<a href="#!/documentation"> 
-				<span class="icon"><i class="fa fa-file-text-o"></i></span>
-				<span class="title">Documentation</span>
-			</a>
+		<li ng-repeat="item in menuItems" >
+		<div class="{{item.title | lowercase}}">
+				<a href="#!/{{item.href}}" ng-click="setPage(item)"> 
+					<span class="icon"><i class="fa fa-{{item.icon}}"></i></span>
+					<span class="title" ng-class="{'active' : item.title == page.title}">{{item.title}}</span>
+				</a>
+			</div>
 		</li>
 	</ul>
 </div>

@@ -23,7 +23,8 @@ angular.module('mean', [
 	'btford.socket-io',
 	'textAngular',
 	'localytics.directives',
-	'angular-selectize'
+	'angular-selectize',
+	'ui.calendar'
 ]);
 
 angular.module('mean.system', []);
