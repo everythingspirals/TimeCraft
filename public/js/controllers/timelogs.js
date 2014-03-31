@@ -229,7 +229,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //---------------------------------
     $scope.$watch('date',function(){
      if($scope.date != $stateParams.date){
-      $location.path('timelogs/date/' + $scope.date + "/" + $scope.view.id)
+        $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
       /*$scope.getByUser();
       console.log("hey!");
       $scope.timelogsCalendar.fullCalendar('gotoDate', 
@@ -240,7 +240,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
 });
 
     $scope.$watch('view.value',function(){
-        $location.path('timelogs/date/' + $scope.date + "/" + $scope.view.id)
+        $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
          //$scope.timelogsCalendar.fullCalendar('changeView', $scope.view.value);
      });
 
