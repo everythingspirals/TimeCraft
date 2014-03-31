@@ -16,8 +16,8 @@ angular.module('mean.issues').controller(
     $scope.global = Global;
     $scope.issue = {};
     $scope.issues = [];
-    $scope.picked = {};
     $scope.progress = 0;
+
     //---------------------------------
     //Functions
     //---------------------------------
@@ -36,8 +36,9 @@ angular.module('mean.issues').controller(
             sprint: this.sprint
         });
         issue.$save(function(response) {
-            $scope.issues.push(issue);
+            $scope.getByRelated();
         });
+        
         this.name = '';
         this.story = '';
         this.estimate = 0;
@@ -45,7 +46,6 @@ angular.module('mean.issues').controller(
         this.sprint = null;
         this.status = null;
         this.assignedTo = null;
-        $scope.getByRelated();
     };
 
     $scope.remove = function(issue) {
@@ -68,14 +68,7 @@ angular.module('mean.issues').controller(
 
     $scope.update = function() {
         var issue = $scope.issue;
-        // if (!issue.updated) {
-        //     issue.updated = [];
-        // }
-        // issue.updated.push(new Date().getTime());
-
         issue.$update().then(function(response){
-            $log.info(response);
-
             $scope.getByRelated();
         });
     };

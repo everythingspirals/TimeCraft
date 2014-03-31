@@ -21,12 +21,12 @@ angular.module('mean.system')
 	{
 		title:"Timelogs",
 		icon:"sun-o",
-		href:"timelogs/day/" + $scope.today + "/0"
+		href:"timelogs/date/" + $scope.today + "/0"
 	},
 	{
 		title:"Sprints",
 		icon:"rocket",
-		href:"sprints"
+		href:"sprints/date/" + $scope.today + "/0"
 	},
 	{
 		title:"Clients",

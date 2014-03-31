@@ -10,7 +10,6 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size:18px;
   width: auto !important;
-  overflow-x: hidden !important;
 }
 textarea {
   resize: none;
@@ -86,7 +85,7 @@ Side Navigation
   -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  z-index:9999;
+  z-index:1000;
 }
 #nav a{
   padding:0;
@@ -136,6 +135,10 @@ Side Navigation
   height:53px;
   left:250px;
   top:52px;
+    -moz-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 /*------------------------
 Chat
@@ -240,6 +243,11 @@ Bootstrap Overrides
 .navbar-form{
   margin-left:0;
   margin-right:0;
+}
+
+.panel-table thead{
+  background-color: #f8f8f8;
+border-color: #e7e7e7;
 }
 /*----------------------------
 MISC

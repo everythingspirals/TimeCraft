@@ -13,8 +13,8 @@
        </div>
        <div class="form-group" ng-controller="ProjectsController" data-ng-init="find()">
           <label>Project</label>
-          <select id="project" ng-model="$parent.sprint.project._id" 
-                               ng-options="project._id as project.name for project in projects" 
+          <select id="project" ng-model="$parent.sprint.project" 
+                               ng-options="project._id as project.name for project in projects track by project._id" 
                                class="form-control" required></select>
         </div>
         <div class="form-group">

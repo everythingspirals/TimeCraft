@@ -48,7 +48,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.view = $scope.views[$stateParams.view]
     
     $scope.config = {
-       calendar:{
+     calendar:{
         defaultView: $scope.view.value, 
         allDaySlot:false, 
         firstHour:0, 
@@ -102,16 +102,13 @@ angular.module('mean.timelogs').controller('TimelogsController',
         });
         
         timelog.$save(function(timelog) {
-            // $scope.timelogs.push(timelog);
-            $timeout(function(){
-                $location.path('timelogs/day/' + timelog.startTime + "/" + $scope.view.id)
-            },500);
+            $scope.getByUser();
         });
 
-        // this.startTime = null;
-        // this.stopTime = null;
-        // this.description = '';
-        // this.issue = null;
+        this.startTime = null;
+        this.stopTime = null;
+        this.description = '';
+        this.issue = null;
     };
 
     $scope.remove = function(timelog) {
@@ -138,12 +135,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
         //     timelog.updated = [];
         // }
         // timelog.updated.push(new Date().getTime());
-
         timelog.$update(function(timelog) {
-          $timeout(function(){
-            $location.path('timelogs/day/' + timelog.startTime + "/" + $scope.view.id)
-        },500);
-      });
+            $scope.getByUser();
+        });
     };
 
     $scope.find = function() {
@@ -177,22 +171,32 @@ angular.module('mean.timelogs').controller('TimelogsController',
     };
 
     $scope.getByUser = function() {
-        var startOfDay = moment($stateParams.date).startOf($scope.view.type.replace("s","")).toISOString();
-        var endOfDay = moment($stateParams.date).endOf($scope.view.type.replace("s","")).toISOString();
+        var startOfDay = moment($scope.date).startOf($scope.view.type.replace("s","")).toISOString();
+        var endOfDay = moment($scope.date).endOf($scope.view.type.replace("s","")).toISOString();
+
 
         Timelogs.getByUser({'startOfDay': startOfDay, 'endOfDay': endOfDay, 'userId': Global.user._id}, function(timelogs){
+
             $scope.timelogs = timelogs;
+            
+            //remove current events
+            angular.forEach($scope.events,function(value, key){
+                $scope.events.splice(key, 1);
+            });
+            
+            //refetch from db
             angular.forEach(timelogs,function(timelog){
-             $scope.events.push({
-                 title:timelog.issue.name,
-                 start:new Date(timelog.startTime),
-                 end: new Date(timelog.stopTime),
-                 data:{
+               $scope.events.push({
+                   title:timelog.issue.name,
+                   start:new Date(timelog.startTime),
+                   end: new Date(timelog.stopTime),
+                   data:{
                     timelog:timelog
                 },
                 allDay: false
             });
-         });
+           });
+
         });
     };
 
@@ -211,24 +215,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.changeDate(+1);
 }
 
-// $scope.eventsF = function (start, end, callback) {
-//    //$scope.date = moment(start).format();
-//    Timelogs.getByUser({'startOfDay': moment(start).format(), 'endOfDay': moment(end).format(), 'userId': Global.user._id}, function(timelogs){
-//     $scope.timelogs = timelogs;
-//     var events = [];
-//     angular.forEach(timelogs,function(timelog){
-//        events.push({
-//         title:timelog.issue.name,
-//         start:new Date(timelog.startTime),
-//         end: new Date(timelog.stopTime),
-//         allDay: false
-//     });
-
-//    });
-//     callback(events);
-// });
-
-//};
     //---------------------------------
     //Main
     //---------------------------------
@@ -238,17 +224,20 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //Listeners
     //---------------------------------
     $scope.$watch('date',function(){
-       if($scope.date != $stateParams.date){
-          $location.path('timelogs/day/' + $scope.date + "/" + $scope.view.id)
-      }
-  });
-
-    $scope.$watch('events.length',function(){
-        $scope.eventSources = [$scope.events];
-    });
+     if($scope.date != $stateParams.date){
+      $location.path('timelogs/date/' + $scope.date + "/" + $scope.view.id)
+      /*$scope.getByUser();
+      console.log("hey!");
+      $scope.timelogsCalendar.fullCalendar('gotoDate', 
+        moment($scope.date).year(),
+        moment($scope.date).month(),
+        moment($scope.date).date());*/
+  }
+});
 
     $scope.$watch('view.value',function(){
-        $location.path('timelogs/day/' + $scope.date + "/" + $scope.view.id)
+        $location.path('timelogs/date/' + $scope.date + "/" + $scope.view.id)
+         //$scope.timelogsCalendar.fullCalendar('changeView', $scope.view.value);
     });
 
 

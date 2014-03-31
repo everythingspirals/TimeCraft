@@ -9,9 +9,52 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
     $scope.global = Global;
     $scope.sprint = {};
     $scope.sprints = [];
+    $scope.date = $stateParams.date;
+ //calendar
 
+ $scope.events = [];
+
+ $scope.views = [
+ {
+    id:0,
+    title:"Week View",
+    type:"weeks",
+    value:"basicWeek"
+},
+{
+    id:1,
+    title:"Month View",
+    type:"month",
+    value:"month"
+},
+{
+    id:2,
+    title:"List View",
+    type:"days",
+    value:"basicDay"
+}
+];
+
+$scope.view = $scope.views[$stateParams.view];
+
+$scope.config = {
+ calendar:{
+    defaultView: $scope.view.value, 
+    header:[],
+    year:moment($scope.date).year(),
+    month:moment($scope.date).month(),
+    date:moment($scope.date).date(),
+    viewRender : function(){
+        $(window).scrollTop(0);
+    },
+    eventClick: function(event, jsEvent, view) {
+        $scope.edit(event.data.timelog)
+        $aside({scope: $scope, template: '/views/issues/edit.html'});
+    }
+}
+};
     //---------------------------------
-    //Functions
+    //Issue Functions
     //---------------------------------
     $scope.edit = function(sprint){
         $scope.sprint = sprint;
@@ -69,6 +112,23 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
     $scope.find = function() {
         Sprints.query(function(sprints) {
             $scope.sprints = sprints;
+
+            //remove current events
+            angular.forEach($scope.events,function(value, key){
+                $scope.events.splice(key, 1);
+            });
+            
+            //refetch from db
+            angular.forEach(sprints,function(sprint){
+               $scope.events.push({
+                   title:sprint.name,
+                   start:new Date(sprint.startDate),
+                   end: new Date(sprint.stopDate),
+                   data:{
+                    sprint:sprint
+                }
+            });
+           });
         });
     };
 
@@ -111,7 +171,37 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
     $scope.getBudget = function(){
         return ($scope.sprint.actual / $scope.sprint.estimate * 100).toFixed(2);
     }
+
+
+    //---------------------------------
+    //Calendar Functions
+    //---------------------------------
+    $scope.changeDate = function(dir){
+        $scope.date = moment($scope.date).add($scope.view.type,dir).format();
+    }
+
+    $scope.prev = function(){
+      $scope.changeDate(-1);
+  }
+
+  $scope.next = function(){
+    $scope.changeDate(+1);
+}
+
+    //---------------------------------
+    //Main
+    //---------------------------------
+    $scope.eventSources = [$scope.events];
     //---------------------------------
     //Listeners
     //---------------------------------
+    $scope.$watch('date',function(){
+     if($scope.date != $stateParams.date){
+      $location.path('sprints/date/' + new Date($scope.date) + "/" + $scope.view.id)
+  }
+});
+
+    $scope.$watch('view.value',function(){
+        $location.path('sprints/date/' + new Date($scope.date) + "/" + $scope.view.id)
+    });
 }]);
