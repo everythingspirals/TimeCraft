@@ -9,13 +9,17 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
     $scope.global = Global;
     $scope.sprint = {};
     $scope.sprints = [];
-    $scope.date = $stateParams.date;
+
  //calendar
 
- $scope.events = [];
+ if(!!$stateParams.view){
 
- $scope.views = [
- {
+  $scope.date = $stateParams.date;
+
+  $scope.events = [];
+
+  $scope.views = [
+  {
     id:0,
     title:"Week View",
     type:"weeks",
@@ -53,6 +57,7 @@ $scope.config = {
     }
 }
 };
+}
     //---------------------------------
     //Issue Functions
     //---------------------------------
@@ -113,6 +118,7 @@ $scope.config = {
         Sprints.query(function(sprints) {
             $scope.sprints = sprints;
 
+            if(!!$stateParams.view){
             //remove current events
             angular.forEach($scope.events,function(value, key){
                 $scope.events.splice(key, 1);
@@ -129,7 +135,8 @@ $scope.config = {
                 }
             });
            });
-        });
+        }
+    });
     };
 
     $scope.findOne = function() {

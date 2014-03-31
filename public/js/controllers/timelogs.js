@@ -12,7 +12,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.global = Global;
     $scope.timelog = {};
     $scope.timelogs = [];
-    $scope.date = $stateParams.date;
+
+    if(!!$stateParams.view){
+        $scope.date = $stateParams.date;
 
     //calendar
 
@@ -66,6 +68,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     }
 
 };
+}
 
     //---------------------------------
     //Timelog Functions
@@ -178,7 +181,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
         Timelogs.getByUser({'startOfDay': startOfDay, 'endOfDay': endOfDay, 'userId': Global.user._id}, function(timelogs){
 
             $scope.timelogs = timelogs;
-            
+            if(!!$stateParams.view){
             //remove current events
             angular.forEach($scope.events,function(value, key){
                 $scope.events.splice(key, 1);
@@ -196,8 +199,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
                 allDay: false
             });
            });
+        }
 
-        });
+    });
     };
 
     //---------------------------------
@@ -232,13 +236,13 @@ angular.module('mean.timelogs').controller('TimelogsController',
         moment($scope.date).year(),
         moment($scope.date).month(),
         moment($scope.date).date());*/
-  }
+}
 });
 
     $scope.$watch('view.value',function(){
         $location.path('timelogs/date/' + $scope.date + "/" + $scope.view.id)
          //$scope.timelogsCalendar.fullCalendar('changeView', $scope.view.value);
-    });
+     });
 
 
 
