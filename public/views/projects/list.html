@@ -20,7 +20,7 @@
      </form>
 
      <!-- aside button -->
-     <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/projects/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">Add
+     <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/projects/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body">Add
      </button>
    </section>
        <table class="table">
@@ -42,7 +42,7 @@
         <td>{{project.status.name}}</td>
         <td></td>
         <td>
-         <button ng-click="edit(project)" data-template="views/projects/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
+         <button ng-click="edit(project)" data-template="views/projects/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
          <button ng-click="remove(project)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
        </td>
      </tr>

@@ -2,7 +2,8 @@
 
 angular.module('mean.system')
 
-.controller('HeaderController', ['$scope', '$rootScope', 'Global', 'socket', function ($scope, $rootScope, Global, socket) {
+.controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'socket', 
+	function ($scope, $rootScope, $location, Global, socket) {
 	
 	$scope.global = Global;
 	$scope.today = moment().format('MM-DD-YYYY');
@@ -72,4 +73,6 @@ angular.module('mean.system')
 		function(event, toState, toParams, fromState, fromParams){ 
 			//$scope.navToggle = false;
 		});
+
+
 }]);
