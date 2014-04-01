@@ -73,18 +73,18 @@ angular.module('mean.rates').controller('RatesController',
     };
 
     $scope.client = function() {
-        Rates.get({
-            rateId: $stateParams.rateId
+        Rates.client({
+            clientId: $stateParams.clientId
         }, function(rate) {
             $scope.rate = rate;
         });
     };
 
     $scope.current = function() {
-        Rates.get({
-            rateId: $stateParams.rateId
-        }, function(rate) {
-            $scope.rate = rate;
+        Rates.current({
+            clientId: $stateParams.clientId
+        }, function(rates) {
+            $scope.rate = rates[0];
         });
     };
 

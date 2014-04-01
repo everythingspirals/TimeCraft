@@ -145,15 +145,23 @@
     });
 }; */
 
+var Project = mongoose.model('Project');
+var Client = mongoose.model('Client');
+
 exports.getByUser = function(req, res) {
     Timelog.find({
         startTime: {$gte: req.query.startOfDay, $lt: req.query.endOfDay},
         user:mongoose.Types.ObjectId(req.query.userId)
-    }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
+    }).sort('-startTime').populate('user', 'name username').populate('issue').exec(function(err, timelogs) {
         if (err) {
             res.jsonp(err);
         } else {
-            res.jsonp(timelogs);
+            Project.populate(timelogs, [{path: 'issue.project'}], function(err, timelogs){
+                res.jsonp(timelogs);
+                // Client.populate(timelogs, [{path: 'issue.project.client'}], function(err, timelogs){
+                //     res.jsonp(timelogs);
+                // });
+            });
         }
     });
 };

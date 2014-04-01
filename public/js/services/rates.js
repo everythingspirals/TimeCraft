@@ -7,7 +7,7 @@ angular.module('mean.rates').factory('Rates', ['$resource', function($resource) 
 			{	
 				update: 	{	method: 'PUT'	},
 				current: 	{	method: 'GET', params: { method: 'current' }, isArray: true	},
-				client:		{	method: 'GET', params: { method: 'client' }, isArray: true },
+				client:		{	method: 'GET', params: { method: 'client' }, isArray: true }
 			}
 		);
 }]);

@@ -6,3 +6,7 @@ function diff(start,stop){
         }
     return (stop.diff(start,'minutes')/60).toFixed(2);
 }
+
+function earnings(hours,rate){
+	return hours * rate;
+}

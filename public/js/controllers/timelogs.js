@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.timelogs').controller('TimelogsController', 
-    ['$scope', '$stateParams', '$location', '$timeout', '$aside', 'Global', 'Timelogs', 
-    function ($scope, $stateParams, $location, $timeout, $aside, Global, Timelogs) {
+    ['$scope', '$stateParams', '$location', '$timeout', '$aside', 'Global', 'Timelogs', 'Rates', '$log',
+    function ($scope, $stateParams, $location, $timeout, $aside, Global, Timelogs, Rates, $log) {
 
     //---------------------------------
     //Variables
@@ -21,9 +21,10 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.events = [];
     
     $scope.totalHours = 0;
+    $scope.totalEarnings = 0;
 
     $scope.views = [
-        {
+    {
         id:0,
         title:"List View",
         type:"days",
@@ -79,6 +80,18 @@ angular.module('mean.timelogs').controller('TimelogsController',
         return diff(start,stop);
     };
     
+    $scope.earnings = function(timelog){
+        var r = 0;
+        var hours = parseFloat(diff(timelog.startTime,timelog.stopTime));
+
+        Rates.current({
+            clientId: timelog.issue.project.client
+        }, function(rates) {
+            r = rates[0].amount;
+            timelog.earnings = hours * r;
+            $scope.totalEarnings += timelog.earnings;
+        });
+    };
 
     $scope.edit= function(timelog){
         $scope.timelog = timelog
@@ -190,18 +203,21 @@ angular.module('mean.timelogs').controller('TimelogsController',
             
             //refetch from db
             angular.forEach(timelogs,function(timelog){
-               
+
                $scope.events.push({
                    title:timelog.issue.name,
                    start:new Date(timelog.startTime),
                    end: new Date(timelog.stopTime),
                    data:{
                     timelog:timelog
-                   },
-                   allDay: false
-                });
+                },
+                allDay: false
+
+            });
 
                $scope.totalHours += parseFloat(diff(timelog.startTime, timelog.stopTime));
+
+
            });
         }
 

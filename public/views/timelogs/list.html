@@ -53,10 +53,11 @@
          <table class="table panel-table" ng-show="view.title=='List View'" >
           <thead>
             <tr>
-              <th width="60%">Issue</th>
+              <th width="50%">Issue</th>
               <th width="10%">Time In</th>
               <th width="10%">Time Out</th>
-              <th width="10%">Hours</th>
+              <th width="10%" style="text-align:right;">Hours</th>
+              <th width="10%" style="text-align:right;">Earnings</th>
               <th width="10%">Action</th>
             </tr>
           </thead>
@@ -65,7 +66,8 @@
               <td>{{timelog.issue.name}}</td>
               <td>{{timelog.startTime | date : 'hh:mm a' }}</td>
               <td>{{timelog.stopTime | date : 'hh:mm a'}}</td>
-              <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
+              <td style="text-align:right;">{{diff(timelog.startTime, timelog.stopTime)}}</td>
+              <td style="text-align:right;" ng-init="earnings(timelog)">{{timelog.earnings | currency}}</td>
               <td>
                 <div class="btn-group">
                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -87,7 +89,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><b>{{totalHours}}</b></td>
+            <td style="text-align:right;"><b>{{totalHours}}</b></td>
+            <td style="text-align:right;"><b>{{totalEarnings | currency}}</b></td>
             <td></td>
          </tr>
        </tfoot>
