@@ -1,0 +1,49 @@
+<section data-ng-controller="RatesController" data-ng-init="find()">
+  <!--tooltip-->
+  <section class="navbar navbar-default navbar-fixed-top toolbar">
+    <!-- tooltip header -->
+    <div class="navbar-header">
+      <div class="navbar-brand">Rates</div>
+    </div>
+    <!--create button-->
+    <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/rates/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body"><i class="fa fa-plus"></i>&nbsp;Add
+    </button> 
+  </section> 
+
+  <div class="row">
+    <div class="col-lg-12">
+      <!--clients repeater -->
+      <section class="panel panel-default">
+        <table class="table panel-table">
+          <thead>
+            <tr>
+              <th width="25%">Rate</th>
+              <th width="35%">Client</th>
+              <th width="25%">Start Date</th>
+              <th width="15%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="rate in rates">
+              <td>{{rate.amount | currency}}</td>
+              <td>{{rate.client.name}}</td>
+              <td>{{rate.startDate | date}}</td>
+              <td>
+               <div class="btn-group">
+                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                 <li><a ng-click="edit(rate)" data-template="views/rates/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
+                 <li class="divider"></li>
+                 <li> <a ng-click="remove(rate)" ><i class="fa fa-trash-o"></i> Delete</a></li>
+               </ul>
+             </div>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </section>
+ </div>
+</div>
+</section>

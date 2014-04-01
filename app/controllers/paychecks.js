@@ -98,3 +98,20 @@
         }
     });
 };
+
+/**
+ * List of Paychecks by Date Range
+ */
+ exports.day = function(req, res) {
+    Paycheck.find({
+        checkDate: {$gte: req.query.startDate, $lt: req.query.endDate}
+    }).sort('-checkDate').populate('user', 'name username').populate('rate','rate').exec(function(err, paychecks) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(paychecks);
+        }
+    });
+};

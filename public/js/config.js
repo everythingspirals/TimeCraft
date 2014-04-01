@@ -8,7 +8,7 @@ angular.module('mean')
     // For unmatched routes:
     $urlRouterProvider.otherwise('/');
 
-     $stateProvider
+    $stateProvider
     
     //Issues
     .state('view issue', {
@@ -56,11 +56,11 @@ angular.module('mean')
         url: '/timelogs/create',
         templateUrl: 'views/timelogs/create.html'
     })
-      .state('edit timelog', {
+    .state('edit timelog', {
         url: '/timelogs/:timelogId/edit',
         templateUrl: 'views/timelogs/edit.html'
     })
-      .state('timelogs by date', {
+    .state('timelogs by date', {
         url: '/timelogs/date/:date/:view',
         templateUrl: 'views/timelogs/list.html'
     })
@@ -70,11 +70,11 @@ angular.module('mean')
         url: '/projects/create',
         templateUrl: 'views/projects/create.html'
     })
-      .state('edit project', {
+    .state('edit project', {
         url: '/projects/:projectId/edit',
         templateUrl: 'views/projects/edit.html'
     })
-      .state('project by date', {
+    .state('project by date', {
         url: '/projects',
         templateUrl: 'views/projects/list.html'
     })
@@ -84,24 +84,38 @@ angular.module('mean')
         url: '/clients/create',
         templateUrl: 'views/clients/create.html'
     })
-      .state('edit client', {
+    .state('edit client', {
         url: '/clients/:clientId/edit',
         templateUrl: 'views/clients/edit.html'
     })
-      .state('client by date', {
+    .state('client by date', {
         url: '/clients',
         templateUrl: 'views/clients/list.html'
     })
-    
+
+      //Rates
+      .state('create rate', {
+        url: '/rates/create',
+        templateUrl: 'views/rates/create.html'
+    })
+      .state('edit rate', {
+        url: '/rates/:rateId/edit',
+        templateUrl: 'views/rates/edit.html'
+    })
+      .state('rate list', {
+        url: '/rates',
+        templateUrl: 'views/rates/list.html'
+    })
+      
 
           //Blog
-      .state('blog', {
-        url: '/blog',
-        templateUrl: 'views/blog.html'
-    })
+          .state('blog', {
+            url: '/blog',
+            templateUrl: 'views/blog.html'
+        })
 
     //Default
-      .state('home', {
+    .state('home', {
         url: '/',
         templateUrl: 'views/index.html'
     });

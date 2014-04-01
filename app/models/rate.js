@@ -11,19 +11,20 @@
  * Rate Schema
  */
  var RateSchema = new Schema({
- 	rate: {
+ 	amount: {
  		type: Number
  	},
  	startDate: {
- 		type: Date
+ 		type: Date,
+ 		default: Date.now
  	},
  	user: {
  		type: Schema.ObjectId,
  		ref: 'User'
  	},
- 	project: {
+ 	client: {
         type: Schema.ObjectId,
-        ref: 'Project'
+        ref: 'Client'
     }
  });
 
@@ -35,7 +36,7 @@
  		_id: id
  	})
  	.populate('user', 'name username')
- 	.populate('project', 'name')
+ 	.populate('client', 'name')
  	.exec(cb)
  };
 

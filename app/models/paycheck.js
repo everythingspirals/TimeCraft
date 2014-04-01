@@ -19,7 +19,7 @@
         type: Schema.ObjectId,
         ref: 'User'
     },
- 	startDate: {
+    startDate: {
         type: Date,
         default: Date.now
     },
@@ -38,11 +38,10 @@
     	type: Schema.ObjectId,
     	ref: 'Rate'
     },
-    taxes: {
-    	type: Schema.ObjectId,
-    	ref: 'Tax'
+    taxesAndDeductions: {
+        type: Number
     }
- });
+});
 
  /**
  * Statics

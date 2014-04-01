@@ -1,0 +1,35 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title"><i class="fa fa-pencil"></i> Edit</h4>
+      </div>
+      <div class="aside-body">
+        <form>
+          <div class="form-group">
+            <label>Rate</label>
+          </div>
+          <div class="form-group">
+            <label>Rate</label>
+            <input type="text" class="form-control" id="amount" ng-model="rate.amount" placeholder="Rate" required>
+          </div>
+          <div ng-controller="ClientsController">
+           <div class="form-group"  data-ng-init="find()">
+            <label>Client</label>
+            <select id="client" ng-model="$parent.rate.client" 
+            ng-options="client as client.name for client in clients track by client._id" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" class="form-control" ng-model="rate.startDate" id="startDate" placeholder="Start Date" data-autoclose="1" bs-datepicker required />
+          </div>
+        </form>
+      </div>
+      <div class="aside-footer">
+        <button type="button" class="btn btn-default" ng-click="find(); $hide()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="update(); $hide()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,47 +1,46 @@
-    	<section data-ng-controller="ClientsController" data-ng-init="find()">
+<section data-ng-controller="ClientsController" data-ng-init="find()">
+  <!--tooltip-->
+  <section class="navbar navbar-default navbar-fixed-top toolbar">
+    <!-- tooltip header -->
+    <div class="navbar-header">
+      <div class="navbar-brand">Clients</div>
+    </div>
+    <!--create button-->
+    <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/clients/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body"><i class="fa fa-plus"></i>&nbsp;Add
+    </button> 
+  </section> 
 
-   <div class="row">
-     <div class="col-lg-12">
-
+  <div class="row">
+    <div class="col-lg-12">
       <!--clients repeater -->
       <section class="panel panel-default">
-             <!--tooltip-->
-       <section class="navbar navbar-default navbar-static-top navbar-tooltip">
-        <!--datepicker-->
-              <div class="navbar-brand">Clients</div>
-        <form class="navbar-form navbar-right">
-         <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-          <div class="input-group" style="width:300px">
-           <input type="text" class="form-control" ng-model="date" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="01/01/14" data-autoclose="1" name="date2" bs-datepicker>
-           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-         </div>              
-       </div>
-     </form>
-
-     <!-- aside button -->
-     <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/clients/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body">Add
-     </button>
-   </section>
- 
-       <table class="table">
-        <thead>
-         <tr>
-          <th width="40%">Name</th>
-          <th width="15%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-       <tr ng-repeat="client in clients">
-        <td>{{client.name}}</td>
-        <td>
-         <button ng-click="edit(client)" data-template="views/clients/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-         <button ng-click="remove(client)" class="btn btn-default"><i class="fa fa-trash-o"></i></button>
-       </td>
-     </tr>
-   </tbody>
- </table>
-</section>
-</div>
-
+        <table class="table panel-table">
+          <thead>
+            <tr>
+              <th width="40%">Name</th>
+              <th width="15%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="client in clients">
+              <td>{{client.name}}</td>
+              <td>
+                <div class="btn-group">
+                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li> <a href="#!/clients/{{client._id}}" ><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="edit(client)" data-template="views/clients/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
+                  <li class="divider"></li>
+                  <li> <a ng-click="remove(client)" ><i class="fa fa-trash-o"></i> Delete</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
 </div>
 </section>
