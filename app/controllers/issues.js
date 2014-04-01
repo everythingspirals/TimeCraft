@@ -153,7 +153,8 @@ exports.related = function(req, res) {
             {"createdBy":mongoose.Types.ObjectId(req.query.userId)}
         ]
     }).sort('created')
-    .populate('user', 'name username')
+    .populate('createdBy', 'name username')
+     .populate('assignedTo', 'name username')
     .populate('status', 'name')
     .populate('project', 'name')
     .populate('sprint', 'name')
@@ -167,3 +168,4 @@ exports.related = function(req, res) {
         }
     });
 };
+

@@ -28,6 +28,21 @@ angular.module('mean')
         templateUrl: 'views/issues/list.html'
     })
 
+    //Status
+    .state('create status', {
+        url: '/status/create',
+        templateUrl: 'views/clients/create.html'
+    })
+    .state('edit status', {
+        url: '/status/:statusId/edit',
+        templateUrl: 'views/clients/edit.html'
+    })
+        .state('list status', {
+        url: '/status',
+        templateUrl: 'views/status/list.html'
+    })
+
+
     //Sprints
     .state('view sprint', {
         url: '/sprints/:sprintId',

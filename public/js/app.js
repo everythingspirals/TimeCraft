@@ -18,6 +18,7 @@ angular.module('mean', [
 	'mean.users',
 	'mean.directives',
 	'mean.rates',
+	'mean.status',
 
 	//Third-Party
 	'mgcrea.ngStrap',
@@ -33,6 +34,7 @@ angular.module('mean.socket', []);
 angular.module('mean.chat', []);
 angular.module('mean.timelogs', []);
 angular.module('mean.sprints', []);
+angular.module('mean.status', []);
 angular.module('mean.issues', []);
 angular.module('mean.projects', []);
 angular.module('mean.clients', []);

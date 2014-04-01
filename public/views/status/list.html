@@ -1,9 +1,9 @@
-<section data-ng-controller="ClientsController" data-ng-init="find()">
+<section data-ng-controller="StatusController" data-ng-init="find()">
   <!--tooltip-->
   <section class="navbar navbar-default navbar-fixed-top toolbar">
     <!-- tooltip header -->
     <div class="navbar-header">
-      <div class="navbar-brand">Clients</div>
+      <div class="navbar-brand">Status</div>
     </div>
     <!--create button-->
     <button type="button" class="btn btn-primary navbar-btn navbar-right" data-template="views/status/create.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body"><i class="fa fa-plus"></i>&nbsp;Add
@@ -12,7 +12,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <!--clients repeater -->
+      <!--stati repeater -->
       <section class="panel panel-default">
         <table class="table panel-table">
           <thead>
@@ -22,18 +22,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="client in clients">
-              <td>{{client.name}}</td>
+            <tr ng-repeat="status in stati">
+              <td>{{status.name}}</td>
               <td>
                 <div class="btn-group">
                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                   Action <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a href="#!/clients/{{client._id}}" ><i class="fa fa-eye"></i> View</a></li>
-                  <li><a ng-click="edit(client)" data-template="views/clients/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
+                  <li> <a href="#!/status/{{status._id}}" ><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="edit(status)" data-template="views/status/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
                   <li class="divider"></li>
-                  <li> <a ng-click="remove(client)" ><i class="fa fa-trash-o"></i> Delete</a></li>
+                  <li> <a ng-click="remove(status)" ><i class="fa fa-trash-o"></i> Delete</a></li>
                 </ul>
               </div>
             </td>

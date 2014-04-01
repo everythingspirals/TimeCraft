@@ -26,7 +26,7 @@ var StatusSchema = new Schema({
 /**
  * Validations
  */
-StatusSchema.path('name').validate(function(description) {
+StatusSchema.path('name').validate(function(name) {
     return name.length;
 }, 'Name cannot be blank');
 

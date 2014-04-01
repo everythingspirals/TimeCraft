@@ -8,7 +8,8 @@ angular.module('mean.issues').factory('Issues', ['$resource', function($resource
 			update: 	{    method: 'PUT'   },
 			getByUser:  {	 method: 'GET', params: {method:'user'}, isArray: true},
 			getByRelated:  {	method: 'GET', params: {method:'related'}, isArray: true},
-			getBySprint:  {	 method: 'GET', params: {method:'sprint'}, isArray: true}
+			getBySprint:  {	 method: 'GET', params: {method:'sprint'}, isArray: true},
+			getByStatus:  {	 method: 'GET', params: {method:'status'}, isArray: true}
 		}
 	);
 }]);

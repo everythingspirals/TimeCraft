@@ -8,16 +8,36 @@ angular.module('mean.issues').controller(
     'Global', 
     'Issues',
     'Timelogs', 
+    'Status',
     '$log',
-    function ($scope, $stateParams, $location, Global, Issues, Timelogs, $log) {
+    function ($scope, $stateParams, $location, Global, Issues, Timelogs, Status, $log) {
     //---------------------------------
     //Variables
     //---------------------------------
     $scope.global = Global;
-    $scope.issue = {};
+    $scope.issue = {
+        name:null,
+        story:null,
+        estimate:null,
+        assignedTo:null,
+        status:null,
+        project:null,
+        sprint:null
+    };
     $scope.issues = [];
     $scope.progress = 0;
-
+    Status.query(function(stati){
+        $scope.status = stati[0]._id;            
+    });
+    $scope.views = [{
+        id:0,
+        title:"List View"
+    },
+    {
+        id:1,
+        title:"Workflow View"
+    }];
+    $scope.view = $scope.views[0];
     //---------------------------------
     //Functions
     //---------------------------------
@@ -68,6 +88,13 @@ angular.module('mean.issues').controller(
 
     $scope.update = function() {
         var issue = $scope.issue;
+        //status
+        issue.status = (!!issue.status ? issue.status._id : null);
+        //issue
+        issue.sprint = (!!issue.sprint ? issue.sprint._id : null);
+        //project
+        issue.project = (!!issue.project ? issue.project._id : null);
+
         issue.$update().then(function(response){
             $scope.getByRelated();
         });
@@ -87,6 +114,12 @@ angular.module('mean.issues').controller(
 
     $scope.getByRelated = function() {
         Issues.getByRelated({'userId': Global.user._id}, function(issues) {
+            $scope.issues = issues;
+        });
+    };
+    
+    $scope.getByStatus = function(statusId) {
+        Issues.getByStatus({'userId': Global.user._id, 'statusId': statusId}, function(issues) {
             $scope.issues = issues;
         });
     };
@@ -115,7 +148,7 @@ angular.module('mean.issues').controller(
                 issue.actual += parseFloat(diff(
                     timelogs[x].startTime,
                     timelogs[x].stopTime
-                ));
+                    ));
             }
             issue.budget =  (issue.actual / issue.estimate * 100).toFixed(2);
         });

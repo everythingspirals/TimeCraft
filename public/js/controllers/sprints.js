@@ -203,12 +203,14 @@ $scope.config = {
     //Listeners
     //---------------------------------
     $scope.$watch('date',function(){
-     if($scope.date != $stateParams.date){
+     if(!!$scope.date && $scope.date != $stateParams.date){
       $location.path('sprints/date/' + new Date($scope.date) + "/" + $scope.view.id)
   }
 });
 
     $scope.$watch('view.value',function(){
-        $location.path('sprints/date/' + new Date($scope.date) + "/" + $scope.view.id)
+        if(!!$scope.date){
+                    $location.path('sprints/date/' + new Date($scope.date) + "/" + $scope.view.id)
+        }
     });
 }]);
