@@ -16,7 +16,7 @@
  		type: Number
  	},
  	user: {
-        type: Schema.ObjectId,all
+        type: Schema.ObjectId,
         ref: 'User'
     },
  	startDate: {
