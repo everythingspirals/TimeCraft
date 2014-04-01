@@ -69,7 +69,7 @@
                   <div class="panel-body" ng-show="scope.toggle">
                      <div class="form-group">
                       <label>Project</label>
-                      <div>{{issue.project}}</div>
+                      <div>{{issue.project.name}}</div>
                     </div>
                                         <div class="form-group" ng-show="issue.sprint">
                       <label>Sprint</label>
@@ -98,7 +98,7 @@
       </tbody>
     </table>
     <!-- list -->
-    <table class="table panel-table" ng-show="view.title == 'List View'">
+    <table class="table table-condensed panel-table" ng-show="view.title == 'List View'">
       <thead>
        <tr> 
         <th width="20%">Name</th>
