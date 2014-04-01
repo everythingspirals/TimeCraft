@@ -6,14 +6,35 @@ angular.module('mean.system')
 	function ($scope, $rootScope, $location, Global, socket) {
 	
 	$scope.global = Global;
+	
 	$scope.today = moment().format('MM-DD-YYYY');
+	
 	$scope.navToggle = true;
-	$scope.page = 	{
-		title:"Home",
-		icon:"home",
-		href:""
-	};
-	$scope.menuItems = [
+	
+	$scope.settingsToggle = false;
+
+	$scope.menus = [
+		"nav",
+		"settings"
+	];
+
+	$scope.settingsItems = [
+	{
+		title:"Status",
+		icon:"sort-amount-asc",
+		href:"status"
+	},
+	{
+		title:"Rates",
+		icon:"dollar",
+		href:"rates"
+	},
+	{
+		title:"UI",
+		icon:"desktop",
+		href:"ui"
+	}];
+	$scope.navItems = [
 	{
 		title:"Home",
 		icon:"home",
@@ -60,7 +81,8 @@ angular.module('mean.system')
 		href:"documentation"
 	}
 	];
-
+	$scope.page = $scope.navItems[0];
+	$scope.menu = $scope.menus[0];
 	socket.on('send:time', function (data) {
 		$scope.time = moment(data.time).format('MMMM Do YYYY, h:mm:ss a');
 	});

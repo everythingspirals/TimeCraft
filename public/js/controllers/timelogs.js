@@ -19,31 +19,33 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //calendar
 
     $scope.events = [];
+    
+    $scope.totalHours = 0;
 
     $scope.views = [
-    {
+        {
         id:0,
+        title:"List View",
+        type:"days",
+        value:"basicDay"
+    },
+    {
+        id:1,
         title:"Day View",
         type:"days",
         value:"agendaDay"
     },
     {
-        id:1,
+        id:2,
         title:"Week View",
         type:"weeks",
         value:"agendaWeek"
     },
     {
-        id:2,
+        id:3,
         title:"Month View",
         type:"month",
         value:"month"
-    },
-    {
-        id:3,
-        title:"List View",
-        type:"days",
-        value:"basicDay"
     }
     ]
 
@@ -163,7 +165,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
         Timelogs.getByDay({'startOfDay': startOfDay, 'endOfDay': endOfDay}, function(timelogs){
             $scope.timelogs = timelogs;
-
         });
     };
 
@@ -189,15 +190,18 @@ angular.module('mean.timelogs').controller('TimelogsController',
             
             //refetch from db
             angular.forEach(timelogs,function(timelog){
+               
                $scope.events.push({
                    title:timelog.issue.name,
                    start:new Date(timelog.startTime),
                    end: new Date(timelog.stopTime),
                    data:{
                     timelog:timelog
-                },
-                allDay: false
-            });
+                   },
+                   allDay: false
+                });
+
+               $scope.totalHours += parseFloat(diff(timelog.startTime, timelog.stopTime));
            });
         }
 
