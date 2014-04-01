@@ -21,21 +21,21 @@ angular.module('mean.sprints').controller('SprintsController', ['$scope', '$stat
   $scope.views = [
   {
     id:0,
+    title:"List View",
+    type:"days",
+    value:"basicDay"
+},
+  {
+    id:1,
     title:"Week View",
     type:"weeks",
     value:"basicWeek"
 },
 {
-    id:1,
+    id:2,
     title:"Month View",
     type:"month",
     value:"month"
-},
-{
-    id:2,
-    title:"List View",
-    type:"days",
-    value:"basicDay"
 }
 ];
 
