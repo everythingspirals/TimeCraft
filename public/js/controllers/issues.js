@@ -88,69 +88,74 @@ angular.module('mean.issues').controller(
 
     $scope.update = function() {
         var issue = $scope.issue;
+        
         //status
         issue.status = (!!issue.status ? issue.status._id : null);
         //issue
         issue.sprint = (!!issue.sprint ? issue.sprint._id : null);
         //project
         issue.project = (!!issue.project ? issue.project._id : null);
+        //createdBy
+        issue.createdBy = (!!issue.createdBy ? issue.createdBy._id : null);
+        //assignedto
+        issue.assignedTo = (!!issue.assignedTo ? issue.assignedTo._id : null);
 
         issue.$update().then(function(response){
-            $scope.getByRelated();
-        });
-    };
+                $scope.getByRelated();
+            });
+         };
 
-    $scope.find = function() {
-        Issues.query(function(issues) {
-            $scope.issues = issues;
-        });
-    };
+         $scope.find = function() {
+            Issues.query(function(issues) {
+                $scope.issues = issues;
+            });
+        };
 
-    $scope.getByUser = function() {
-        Issues.getByUser({'userId': Global.user._id}, function(issues) {
-            $scope.issues = issues;
-        });
-    };
+        $scope.getByUser = function() {
+            Issues.getByUser({'userId': Global.user._id}, function(issues) {
+                $scope.issues = issues;
+            });
+        };
 
-    $scope.getByRelated = function() {
-        Issues.getByRelated({'userId': Global.user._id}, function(issues) {
-            $scope.issues = issues;
-        });
-    };
-    
-    $scope.getByStatus = function(statusId) {
-        Issues.getByStatus({'userId': Global.user._id, 'statusId': statusId}, function(issues) {
-            $scope.issues = issues;
-        });
-    };
+        $scope.getByRelated = function() {
+            Issues.getByRelated({'userId': Global.user._id}, function(issues) {
+                $scope.issues = issues;
+            });
+        };
 
-    $scope.findBySprint = function() {
-        Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
-            $scope.issues = issues;
-        });
-    };
+        $scope.getByStatus = function(statusId) {
+            Issues.getByStatus({'userId': Global.user._id, 'statusId': statusId}, function(issues) {
+                $scope.issues = issues;
+            });
+        };
 
-    $scope.findOne = function() {
-        Issues.get({
-            issueId: $stateParams.issueId
-        }, function(issue) {
-            $scope.issue = issue;
-            $scope.getBudget(issue);
-        });
-    };
+        $scope.findBySprint = function() {
+            Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
+                $scope.issues = issues;
+            });
+        };
 
-    $scope.getBudget = function(issue){
-        issue.actual = 0;
-        issue.budget = 0;
-        Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
-            console.log(timelogs.length);
-            for(var x=0; x < timelogs.length; x++) { 
-                issue.actual += parseFloat(diff(
-                    timelogs[x].startTime,
-                    timelogs[x].stopTime
-                    ));
-            }
-            issue.budget =  (issue.actual / issue.estimate * 100).toFixed(2);
-        });
-    }
-}]);
+        $scope.findOne = function() {
+            Issues.get({
+                issueId: $stateParams.issueId
+            }, function(issue) {
+                $scope.issue = issue;
+                $scope.getBudget(issue);
+            });
+        };
+
+        $scope.getBudget = function(issue){
+            issue.actual = 0;
+            issue.budget = 0;
+            Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
+                console.log(timelogs.length);
+                for(var x=0; x < timelogs.length; x++) { 
+                    issue.actual += parseFloat(diff(
+                        timelogs[x].startTime,
+                        timelogs[x].stopTime
+                        ));
+                }
+                issue.budget =  (issue.actual / issue.estimate * 100).toFixed(2);
+            });
+        }
+    }]);

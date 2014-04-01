@@ -24,13 +24,13 @@
              <div class="form-group"  data-ng-init="find()">
               <label>Project</label>
               <select id="project" ng-model="$parent.issue.project" 
-              ng-options="project._id as project.name for project in projects track by project._id" class="form-control" required></select>
+              ng-options="project as project.name for project in projects track by project._id" class="form-control" required></select>
             </div>
 
             <div class="form-group" ng-controller="SprintsController" data-ng-init="find()">
               <label>Sprint</label>
               <select id="sprint" ng-model="$parent.$parent.issue.sprint" 
-              ng-options="sprint._id as sprint.name for sprint in sprints track by sprint._id| filter : $parent.$parent.issue.project._id" 
+              ng-options="sprint as sprint.name for sprint in sprints track by sprint._id| filter : $parent.$parent.issue.project._id" 
               class="form-control" required></select>
             </div>
 
@@ -44,7 +44,7 @@
 
           <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
             <label>Assigned To</label>
-            <select ng-model="$parent.issue.assignedTo" id="assignedTo" ng-options="u._id as u.name for u in users" class="form-control"></select>
+            <select ng-model="$parent.issue.assignedTo" id="assignedTo" ng-options="u as u.name for u in users" class="form-control"></select>
           </div>
         </form>
       </div>
