@@ -89,7 +89,9 @@
  * List of rates
  */
  exports.all = function(req, res) {
-    Rate.find().sort('startDate').populate('user', 'name username').populate('client', 'name').exec(function(err, rates) {
+    Rate.find({
+            user:mongoose.Types.ObjectId(req.query.userId)
+    }).sort('startDate').populate('user', 'name username').populate('client', 'name').exec(function(err, rates) {
         if (err) {
             res.render('error', {
                 status: 500
