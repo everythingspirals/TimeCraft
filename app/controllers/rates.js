@@ -107,7 +107,8 @@
  */
  exports.current = function(req, res) {
     Rate.find({
-        client: mongoose.Types.ObjectId(req.query.clientId)
+        client: mongoose.Types.ObjectId(req.query.clientId),
+        user:mongoose.Types.ObjectId(req.query.userId)
     }).sort('-startDate').populate('user', 'name username').populate('client','name').limit(1).exec(function(err, rates) {
         if (err) {
             res.render('error', {
@@ -124,7 +125,8 @@
  */
  exports.client = function(req, res) {
     Rate.find({
-        client: mongoose.Types.ObjectId(req.query.clientId)
+        client: mongoose.Types.ObjectId(req.query.clientId),
+        user:mongoose.Types.ObjectId(req.query.userId)
     }).sort('-startDate').populate('user', 'name username').populate('client','name').exec(function(err, rates) {
         if (err) {
             res.render('error', {
