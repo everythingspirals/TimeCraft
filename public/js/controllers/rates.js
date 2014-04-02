@@ -59,7 +59,8 @@ angular.module('mean.rates').controller('RatesController',
     };
 
     $scope.find = function() {
-        Rates.query(function(rates) {
+        Rates.query({'userId': Global.user._id},
+            function(rates) {
             $scope.rates = rates;
         });
     };
