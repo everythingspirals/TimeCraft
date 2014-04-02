@@ -85,7 +85,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
         var hours = parseFloat(diff(timelog.startTime,timelog.stopTime));
 
         Rates.current({
-            clientId: timelog.issue.project.client
+            clientId: timelog.issue.project.client,
+            'userId': Global.user._id
         }, function(rates) {
             r = rates[0].amount;
             timelog.earnings = hours * r;
