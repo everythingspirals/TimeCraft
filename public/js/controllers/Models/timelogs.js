@@ -110,13 +110,18 @@ angular.module('mean.timelogs').controller('TimelogsController',
         });
     };
 
-    $scope.getByUser = function() {
-        var startOfDay = moment($scope.date).startOf($scope.view.type.replace("s","")).toISOString();
-        var endOfDay = moment($scope.date).endOf($scope.view.type.replace("s","")).toISOString();
-        Timelogs.getByUser({'startOfDay': startOfDay, 'endOfDay': endOfDay, 'userId': Global.user._id}, function(timelogs){
-            $scope.timelogs = timelogs;
-            $scope.getEvents(timelogs);
-        });
+    $scope.getByRange = function(start,end) {
+        //var startOfDay = moment($scope.date).startOf($scope.view.type.replace("s","")).toISOString();
+        //var endOfDay = moment($scope.date).endOf($scope.view.type.replace("s","")).toISOString();
+        Timelogs.getByUser(
+            {
+                'startOfDay': moment(start), 
+                'endOfDay': moment(end);, 
+                'userId': Global.user._id}, 
+                function(timelogs){
+                    $scope.timelogs = timelogs;
+                    $scope.getEvents(timelogs);
+            });
     };
     //---------------------------------
     //Rate/Time Functions
