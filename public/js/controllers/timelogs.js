@@ -184,7 +184,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
     $scope.hours = function(timelog){
         timelog.hours = diff(timelog.startTime, timelog.stopTime);
-        $scope.totalHours += timelog.hours;
     }
     
     $scope.hoursByIssue = function(timelog){
@@ -192,6 +191,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
         angular.forEach($scope.timelogs, function(t){
             if(timelog.issue.name === t.issue.name){
                 timelog.issueHours += diff(t.startTime, t.stopTime);
+                $scope.totalHours += timelog.issueHours;
             }
         });
     }
@@ -202,7 +202,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
             clientId: timelog.issue.project.client,
             'userId': Global.user._id
         }, function(rates) {
-            timelog.rate = timelog.hours * rates[0].amount;
+            timelog.rate = timelog.issueHours * rates[0].amount;
             $scope.totalRate += timelog.rate;
         });
     };
