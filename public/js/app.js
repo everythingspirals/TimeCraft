@@ -19,6 +19,7 @@ angular.module('mean', [
 	'mean.directives',
 	'mean.rates',
 	'mean.status',
+	'mean.paychecks',
 
 	//Third-Party
 	'mgcrea.ngStrap',
@@ -42,3 +43,4 @@ angular.module('mean.clients', []);
 angular.module('mean.users', []);
 angular.module('mean.directives', []);
 angular.module('mean.rates', []);
+angular.module('mean.paychecks', []);

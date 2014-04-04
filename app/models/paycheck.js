@@ -38,6 +38,9 @@
     	type: Schema.ObjectId,
     	ref: 'Rate'
     },
+    gross: {
+        type: Number
+    }
     taxesAndDeductions: {
         type: Number
     }

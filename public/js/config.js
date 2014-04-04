@@ -37,7 +37,7 @@ angular.module('mean')
         url: '/status/:statusId/edit',
         templateUrl: 'views/clients/edit.html'
     })
-        .state('list status', {
+    .state('list status', {
         url: '/status',
         templateUrl: 'views/status/list.html'
     })
@@ -120,6 +120,20 @@ angular.module('mean')
       .state('rate list', {
         url: '/rates',
         templateUrl: 'views/rates/list.html'
+    })
+
+      //Paychecks
+      .state('create paycheck', {
+        url: '/paychecks/create',
+        templateUrl: 'views/paychecks/create.html'
+    })
+      .state('edit paycheck', {
+        url: '/paychecks/:paycheckId/edit',
+        templateUrl: 'views/paychecks/edit.html'
+    })
+      .state('paycheck list', {
+        url: '/paychecks',
+        templateUrl: 'views/paychecks/list.html'
     })
       
 
