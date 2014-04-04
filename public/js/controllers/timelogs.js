@@ -173,38 +173,10 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.getByUser = function() {
         var startOfDay = moment($scope.date).startOf($scope.view.type.replace("s","")).toISOString();
         var endOfDay = moment($scope.date).endOf($scope.view.type.replace("s","")).toISOString();
-
-
         Timelogs.getByUser({'startOfDay': startOfDay, 'endOfDay': endOfDay, 'userId': Global.user._id}, function(timelogs){
-
             $scope.timelogs = timelogs;
-            if(!!$stateParams.view){
-            //remove current events
-            angular.forEach($scope.events,function(value, key){
-                $scope.events.splice(key, 1);
-            });
-            
-            //refetch from db
-            angular.forEach(timelogs,function(timelog){
-
-               $scope.events.push({
-                   title:timelog.issue.name,
-                   start:new Date(timelog.startTime),
-                   end: new Date(timelog.stopTime),
-                   data:{
-                    timelog:timelog
-                },
-                allDay: false
-
-            });
-
-               $scope.totalHours += parseFloat(diff(timelog.startTime, timelog.stopTime));
-
-
-           });
-        }
-
-    });
+            $scope.getEvents(timelogs);
+        });
     };
     //---------------------------------
     //Rate/Time Functions
@@ -212,14 +184,14 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
     $scope.hours = function(timelog){
         timelog.hours = diff(timelog.startTime, timelog.stopTime);
+        $scope.totalHours += timelog.hours;
     }
     
     $scope.hoursByIssue = function(timelog){
-        console.log(timelog.issue);
-        timelog.hours = 0;
+        timelog.issueHours = 0;
         angular.forEach($scope.timelogs, function(t){
             if(timelog.issue.name === t.issue.name){
-                timelog.hours += diff(t.startTime, t.stopTime);
+                timelog.issueHours += diff(t.startTime, t.stopTime);
             }
         });
     }
@@ -237,6 +209,27 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //---------------------------------
     //Calendar Functions
     //---------------------------------
+    $scope.getEvents = function(timelogs){
+            //remove current events
+            angular.forEach($scope.events,function(value, key){
+                $scope.events.splice(key, 1);
+            });
+            
+            //refetch from db
+            angular.forEach($scope.timelogs,function(timelog){
+
+               $scope.events.push({
+                   title:timelog.issue.name,
+                   start:new Date(timelog.startTime),
+                   end: new Date(timelog.stopTime),
+                   data:{
+                    timelog:timelog
+                },
+                allDay: false
+
+            });
+           });
+    }
     $scope.changeDate = function(dir){
         $scope.date = moment($scope.date).add($scope.view.type,dir).format();
     }
