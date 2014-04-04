@@ -40,7 +40,7 @@
     },
     gross: {
         type: Number
-    }
+    },
     taxesAndDeductions: {
         type: Number
     }

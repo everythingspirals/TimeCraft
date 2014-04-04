@@ -11,7 +11,9 @@
           <div class="form-group" ng-controller="IssuesController" data-ng-init="getByUser()">
            <label>Issue</label>
            <div>
-             <select chosen data-placeholder="Choose an issue" id="issue" type="text" class="form-control" ng-model="$parent.issue" ng-options="issue._id as issue.name for issue in issues" ></select required>
+             <select chosen data-placeholder="Choose an issue" id="issue" type="text" class="form-control" ng-model="$parent.issue" ng-options="issue._id as issue.name for issue in issues" >
+<option><option>
+             </select required>
            </div>
          </div>
 
