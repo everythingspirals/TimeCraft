@@ -15,9 +15,8 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(app) {
 
     app.get('/timelogs', timelogs.all);
-    app.get('/timelogs/day', timelogs.day);
-    app.get('/timelogs/issue', timelogs.issue);
-    app.get('/timelogs/getByUser', timelogs.getByUser);
+    app.get('/timelogs/byissue', timelogs.getByIssue);
+    app.get('/timelogs/byrange', timelogs.getByRange);
     app.post('/timelogs', authorization.requiresLogin, timelogs.create);
     app.get('/timelogs/:timelogId', timelogs.show);
     app.put('/timelogs/:timelogId', authorization.requiresLogin, hasAuthorization, timelogs.update);

@@ -10,12 +10,6 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
 
     //timelog
     $scope.global = Global;
-    $scope.date = $stateParams.date;
-
-    //calendar
-    $scope.events = [];
-    $scope.totalHours = 0;
-    $scope.totalRate = 0;
 
     $scope.views = [
     {
@@ -46,6 +40,13 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
 
     $scope.view = $scope.views[$stateParams.view]
     
+    //date
+    $scope.date = $stateParams.date;
+    $scope.startDate = moment($scope.date).startOf($scope.view.type.replace("s",""));
+    $scope.endDate = moment($scope.date).endOf($scope.view.type.replace("s",""));
+
+    //calendar
+    $scope.events = [];
     $scope.config = {
      calendar:{
         defaultView: $scope.view.value, 
@@ -70,27 +71,28 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     //---------------------------------
     //Calendar Functions
     //---------------------------------
-    $scope.getEvents = function(timelogs){
-            //remove current events
+     $scope.getEvents = function(timelogs){
+              //remove current events
             angular.forEach($scope.events,function(value, key){
                 $scope.events.splice(key, 1);
             });
             
             //refetch from db
-            angular.forEach($scope.timelogs,function(timelog){
+            angular.forEach(timelogs,function(timelog){
 
-               $scope.events.push({
-                   title:timelog.issue.name,
-                   start:new Date(timelog.startTime),
-                   end: new Date(timelog.stopTime),
-                   data:{
+             $scope.events.push({
+                 title:timelog.issue.name,
+                 start:new Date(timelog.startTime),
+                 end: new Date(timelog.stopTime),
+                 data:{
                     timelog:timelog
                 },
                 allDay: false
 
             });
-           });
+         });
     }
+
     $scope.changeDate = function(dir){
         $scope.date = moment($scope.date).add($scope.view.type,dir).format();
     }
@@ -115,10 +117,11 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
      if($scope.date != $stateParams.date){
         $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
 
-}
+    }
 });
 
     $scope.$watch('view.value',function(){
+        console.log("view changed");
         $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
          //$scope.timelogsCalendar.fullCalendar('changeView', $scope.view.value);
      });

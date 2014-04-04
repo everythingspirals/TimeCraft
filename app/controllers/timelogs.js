@@ -4,7 +4,9 @@
  * Module dependencies.
  */
  var mongoose = require('mongoose'),
- Timelog = mongoose.model('Timelog'),
+Timelog = mongoose.model('Timelog'),
+Project = mongoose.model('Project'),
+Client = mongoose.model('Client'),
  _ = require('lodash');
 
 
@@ -100,26 +102,9 @@
 };
 
 /**
- * List of Timelogs by Date
+ * List of Issues by Issue
  */
- exports.day = function(req, res) {
-    Timelog.find({
-        startTime: {$gte: req.query.startOfDay, $lt: req.query.endOfDay}
-    }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-            res.jsonp(timelogs);
-        }
-    });
-};
-
-/**
- * List of Issues by Sprint
- */
- exports.issue = function(req, res) {
+ exports.getByIssue = function(req, res) {
     Timelog.find({
         issue:mongoose.Types.ObjectId(req.query.issueId)
     }).sort('-startTime').populate('user', 'name username').populate('issue','name').exec(function(err, timelogs) {
@@ -133,24 +118,12 @@
     });
 };
 
-/**
- * Find timelog by date
 
- exports.byDay = function(req, res, next, day) {
-    Timelog.load(id, function(err, timelog) {
-        if (err) return next(err);
-        if (!timelog) return next(new Error('Failed to load timelog ' + id));
-        req.timelog = timelog;
-        next();
-    });
-}; */
 
-var Project = mongoose.model('Project');
-var Client = mongoose.model('Client');
 
-exports.getByUser = function(req, res) {
+exports.getByRange= function(req, res) {
     Timelog.find({
-        startTime: {$gte: req.query.startOfDay, $lt: req.query.endOfDay},
+        startTime: {$gte: req.query.startDate, $lt: req.query.endDate},
         user:mongoose.Types.ObjectId(req.query.userId)
     }).sort('-startTime').populate('user', 'name username').populate('issue').exec(function(err, timelogs) {
         if (err) {

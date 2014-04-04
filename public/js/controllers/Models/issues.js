@@ -140,22 +140,10 @@ angular.module('mean.issues').controller(
                 issueId: $stateParams.issueId
             }, function(issue) {
                 $scope.issue = issue;
-                $scope.getBudget(issue);
             });
         };
 
-        $scope.getBudget = function(issue){
-            issue.actual = 0;
-            issue.budget = 0;
-            Timelogs.getByIssue({'issueId': issue._id}, function(timelogs){
-                console.log(timelogs.length);
-                for(var x=0; x < timelogs.length; x++) { 
-                    issue.actual += parseFloat(diff(
-                        timelogs[x].startTime,
-                        timelogs[x].stopTime
-                        ));
-                }
-                issue.budget =  (issue.actual / issue.estimate * 100).toFixed(2);
-            });
+        $scope.getBudget = function(issue, actual){
+            issue.budget =  (actual / issue.estimate * 100).toFixed(2);
         }
     }]);

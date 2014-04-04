@@ -1,6 +1,6 @@
 	    <section data-ng-controller="IssuesController" data-ng-init="findOne()">
 
-        <section class="row">
+        <section class="row" ng-controller="TimelogsController" ng-init="getByIssue()">
           <div class="col-lg-6">
 
 
@@ -17,8 +17,8 @@
                   <div class="form-group">
                     <label>Budget</label>
                     <div>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
+                      <div class="progress" ng-init="getBudget(issue,totalHours)" ng-if="totalHours">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{totalHours}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
                           {{issue.budget}}%
                         </div>
                       </div>
@@ -69,8 +69,9 @@
      <div class="row" >
        <div class="col-lg-12">
         <!--issues repeater -->
-        <section class="panel panel-default" ng-controller="TimelogsController" ng-init="getByIssue()">
-          <div class="panel-heading">Timelogs</div>
+        <section class="panel panel-default" >
+          <div class="panel-heading">Timelogs  {{totalHours}}</div>
+
           <table class="table">
             <thead>
               <tr>
@@ -83,7 +84,7 @@
             <tbody>
               <tr ng-repeat="timelog in timelogs">
                 <td>{{timelog.startTime | date : 'MM-dd-yy' }}</td>
-                <td>{{diff(timelog.startTime, timelog.stopTime)}}</td>
+                <td ng-init="hours(timelog)">{{timelog.hours}}</td>
                 <td>{{timelog.user.name}}</td>
                 <td>
                   <a href="#!/timelogs/{{timelog._id}}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>

@@ -12,6 +12,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.global = Global;
     $scope.timelog = {};
     $scope.timelogs = [];
+    $scope.totalHours = 0;
+    $scope.totalRate = 0;
 
     //---------------------------------
     //Timelog Functions
@@ -110,25 +112,25 @@ angular.module('mean.timelogs').controller('TimelogsController',
         });
     };
 
-    $scope.getByRange = function(start,end) {
-        //var startOfDay = moment($scope.date).startOf($scope.view.type.replace("s","")).toISOString();
-        //var endOfDay = moment($scope.date).endOf($scope.view.type.replace("s","")).toISOString();
-        Timelogs.getByUser(
+    $scope.getByRange = function(startDate,endDate) {
+        Timelogs.getByRange(
             {
-                'startOfDay': moment(start), 
-                'endOfDay': moment(end);, 
+                'startDate': moment(startDate).toISOString(), 
+                'endDate': moment(endDate).toISOString(), 
                 'userId': Global.user._id}, 
                 function(timelogs){
                     $scope.timelogs = timelogs;
-                    $scope.getEvents(timelogs);
             });
     };
+
+   
     //---------------------------------
     //Rate/Time Functions
     //---------------------------------
 
     $scope.hours = function(timelog){
         timelog.hours = diff(timelog.startTime, timelog.stopTime);
+        $scope.totalHours += timelog.hours;
     }
     
     $scope.hoursByIssue = function(timelog){
@@ -138,7 +140,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
                 timelog.issueHours += diff(t.startTime, t.stopTime);
             }
         });
-        $scope.totalHours += timelog.issueHours;
     }
 
 
