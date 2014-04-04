@@ -45,7 +45,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
         });
         
         timelog.$save(function(timelog) {
-            $scope.getByUser();
+            $scope.timelogs.push(timelog);
+            //$scope.getByRange();
         });
 
         this.startTime = null;
