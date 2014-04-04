@@ -198,11 +198,12 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
 
     $scope.rate = function(timelog){
+        timelog.rate = 0;
         Rates.current({
             clientId: timelog.issue.project.client,
             'userId': Global.user._id
         }, function(rates) {
-            timelog.rate = timelog.issueHours * rates[0].amount;
+            timelog.rate += timelog.issueHours * rates[0].amount;
             $scope.totalRate += timelog.rate;
         });
     };
