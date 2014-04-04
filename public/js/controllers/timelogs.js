@@ -191,9 +191,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
         angular.forEach($scope.timelogs, function(t){
             if(timelog.issue.name === t.issue.name){
                 timelog.issueHours += diff(t.startTime, t.stopTime);
-                $scope.totalHours += timelog.issueHours;
             }
         });
+        $scope.totalHours += timelog.issueHours;
     }
 
 
