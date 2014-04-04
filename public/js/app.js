@@ -26,7 +26,8 @@ angular.module('mean', [
 	'textAngular',
 	'localytics.directives',
 	'angular-selectize',
-	'ui.calendar'
+	'ui.calendar',
+	'ui.utils'
 ]);
 
 angular.module('mean.system', []);

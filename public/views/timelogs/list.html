@@ -13,89 +13,120 @@
           </button> 
 
           <!--view dropdown-->
-            <form class="navbar-form navbar-right">
- 
-          <select ng-model="view" ng-options="view as view.title for view in views"
-          class="form-control navbar-right" style="width:150px">
-          </select>
-          </form>
-
-          <!-- left button -->
-          <button class="btn btn-default navbar-btn navbar-right" ng-click="next()" style="margin-left:-10px"><i class="fa fa-chevron-right"></i></button>
-
-          <!--datepicker-->
           <form class="navbar-form navbar-right">
-           <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
-            <div class="input-group" style="width:300px">
-             <input type="text" class="form-control" ng-model="date" data-date-format="MM-dd-yyyy" data-date-type="number" data-min-date="01-01-14" data-autoclose="1" name="date2" bs-datepicker>
-             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-           </div>              
-         </div>
-       </form>
 
-       <!--right button-->
-       <button class="btn btn-default navbar-btn navbar-right" ng-click="prev()" style="margin-right:-10px"><i class="fa fa-chevron-left"></i></button>
-     </section> 
+            <select ng-model="view" ng-options="view as view.title for view in views"
+            class="form-control navbar-right" style="width:150px">
+          </select>
+        </form>
 
+        <!-- left button -->
+        <button class="btn btn-default navbar-btn navbar-right" ng-click="next()" style="margin-left:-10px"><i class="fa fa-chevron-right"></i></button>
 
-     <div class="row" >
-       <div class="col-lg-12">
+        <!--datepicker-->
+        <form class="navbar-form navbar-right">
+         <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+          <div class="input-group" style="width:300px">
+           <input type="text" class="form-control" ng-model="date" data-date-format="MM-dd-yyyy" data-date-type="number" data-min-date="01-01-14" data-autoclose="1" name="date2" bs-datepicker>
+           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+         </div>              
+       </div>
+     </form>
 
-        <section class="panel panel-default">
-
-         <!-- calendar -->
-         <div id="timelogsCalendar" 
-         ng-show="view.title!='List View'"
-         calendar="timelogsCalendar"
-         ui-calendar="config.calendar" ng-model="eventSources"></div>
-         
-         <!-- list -->
-         <table class="table panel-table" ng-show="view.title=='List View'" >
-          <thead>
-            <tr>
-              <th width="50%">Issue</th>
-              <th width="10%">Time In</th>
-              <th width="10%">Time Out</th>
-              <th width="10%" style="text-align:right;">Hours</th>
-              <th width="10%" style="text-align:right;">Earnings</th>
-              <th width="10%">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="timelog in timelogs">
-              <td>{{timelog.issue.name}}</td>
-              <td>{{timelog.startTime | date : 'hh:mm a' }}</td>
-              <td>{{timelog.stopTime | date : 'hh:mm a'}}</td>
-              <td style="text-align:right;">{{diff(timelog.startTime, timelog.stopTime)}}</td>
-              <td style="text-align:right;" ng-init="earnings(timelog)">{{timelog.earnings | currency}}</td>
-              <td>
-                <div class="btn-group">
-                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                  Action <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                 <li><a href="#!/timelogs/{{timelog._id}}" ><i class="fa fa-eye"></i>View</a></li>
-                 <li><a ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
-                 <li class="divider"></li>
-                 <li><a ng-click="remove(timelog)"><i class="fa fa-trash-o"></i> Delete</a></li>
-               </ul>
-             </div>
-           </td>
-         </tr>
-       </tbody>
-
-       <tfoot>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="text-align:right;"><b>{{totalHours}}</b></td>
-            <td style="text-align:right;"><b>{{totalEarnings | currency}}</b></td>
-            <td></td>
-         </tr>
-       </tfoot>
-     </table>
+     <!--right button-->
+     <button class="btn btn-default navbar-btn navbar-right" ng-click="prev()" style="margin-right:-10px"><i class="fa fa-chevron-left"></i></button>
    </section> 
- </div>
+
+<div class="row"    ng-show="view.title!='List View'" >
+    <div class="col-lg-12">
+        <!-- calendar -->
+
+      <section class="panel panel-default">
+
+       <div class="panel-heading"> {{view.title}}
+    </div>   
+       <div id="timelogsCalendar" 
+   
+       calendar="timelogsCalendar"
+       ui-calendar="config.calendar" ng-model="eventSources"></div>
+     </div>
+     </div>
+   </div>
+   <div class="row" ng-show="view.title=='List View'">
+
+ <div class="col-lg-4">
+
+      <section class="panel panel-default">
+
+       <div class="panel-heading">  Breakdown
+    </div>       
+       <!-- list -->
+       <table class="table panel-table"  >
+          <thead>
+          <tr>
+            <th >Issue</th>
+            <th  >Hours</th>
+            <th  >Earnings</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr ng-repeat="timelog in timelogs | unique:'issue'">
+            <td>{{timelog.issue.name}}</td>
+            <td ng-init="hours(timelog)">{{timelog.hours}}</td>
+            <td  ng-init="rate(timelog)">{{timelog.rate| currency}}</td>
+       </tr>
+     </tbody>
+
+     <tfoot>
+       <tr>
+        <td></td>
+        <td ><b>{{totalHours}}</b></td>
+        <td ><b>{{totalRate | currency}}</b></td>
+      </tr>
+    </tfoot>
+  </table>
+</section> 
+</div>
+
+
+ <div class="col-lg-8">
+
+      <section class="panel panel-default">
+   <div class="panel-heading">  Issues
+    </div> 
+   
+       <!-- list -->
+       <table class="table panel-table" ng-show="view.title=='List View'" >
+        <thead>
+          <tr>
+            <th width="50%">Issue</th>
+            <th width="30%">Time</th>
+            <th width="10%">Hours</th>
+            <th width="10%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="timelog in timelogs">
+            <td>{{timelog.issue.name}}</td>
+            <td>{{timelog.startTime | date : 'hh:mm a' }} - {{timelog.stopTime | date : 'hh:mm a'}} </td>
+            <td ng-init="hours(timelog)">{{timelog.hours}}</td>
+            <td>
+              <div class="btn-group">
+               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Action <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+               <li><a href="#!/timelogs/{{timelog._id}}" ><i class="fa fa-eye"></i>View</a></li>
+               <li><a ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
+               <li class="divider"></li>
+               <li><a ng-click="remove(timelog)"><i class="fa fa-trash-o"></i> Delete</a></li>
+             </ul>
+           </div>
+         </td>
+       </tr>
+     </tbody>
+  </table>
+</section> 
+</div>
 </div>
 </section>

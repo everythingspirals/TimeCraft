@@ -4,7 +4,7 @@ function diff(start,stop){
         if (stop < start){
             stop = stop.add('days',1);
         }
-    return (stop.diff(start,'minutes')/60).toFixed(2);
+    return parseFloat((stop.diff(start,'minutes')/60).toFixed(2));
 }
 
 function earnings(hours,rate){

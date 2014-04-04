@@ -21,7 +21,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.events = [];
     
     $scope.totalHours = 0;
-    $scope.totalEarnings = 0;
+    $scope.totalRate = 0;
 
     $scope.views = [
     {
@@ -76,24 +76,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //---------------------------------
     //Timelog Functions
     //---------------------------------
-    $scope.diff = function(start,stop){
-        return diff(start,stop);
-    };
-    
-    $scope.earnings = function(timelog){
-        var r = 0;
-        var hours = parseFloat(diff(timelog.startTime,timelog.stopTime));
-
-        Rates.current({
-            clientId: timelog.issue.project.client,
-            'userId': Global.user._id
-        }, function(rates) {
-            r = rates[0].amount;
-            timelog.earnings = hours * r;
-            $scope.totalEarnings += timelog.earnings;
-        });
-    };
-
     $scope.edit= function(timelog){
         $scope.timelog = timelog
     };
@@ -224,7 +206,34 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
     });
     };
+    //---------------------------------
+    //Rate/Time Functions
+    //---------------------------------
 
+    $scope.hours = function(timelog){
+        timelog.hours = diff(timelog.startTime, timelog.stopTime);
+    }
+    
+    $scope.hoursByIssue = function(timelog){
+        console.log(timelog.issue);
+        timelog.hours = 0;
+        angular.forEach($scope.timelogs, function(t){
+            if(timelog.issue.name === t.issue.name){
+                timelog.hours += diff(t.startTime, t.stopTime);
+            }
+        });
+    }
+
+
+    $scope.rate = function(timelog){
+        Rates.current({
+            clientId: timelog.issue.project.client,
+            'userId': Global.user._id
+        }, function(rates) {
+            timelog.rate = timelog.hours * rates[0].amount;
+            $scope.totalRate += timelog.rate;
+        });
+    };
     //---------------------------------
     //Calendar Functions
     //---------------------------------
