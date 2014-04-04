@@ -1,4 +1,5 @@
-      <section data-ng-controller="TimelogsController" ng-init="getByUser()">
+      <section data-ng-controller="TimelogsViewController" >
+        <section ng-controller="TimelogsController">
 
         <!--tooltip-->
         <section class="navbar navbar-default navbar-fixed-top toolbar">
@@ -37,47 +38,47 @@
      <button class="btn btn-default navbar-btn navbar-right" ng-click="prev()" style="margin-right:-10px"><i class="fa fa-chevron-left"></i></button>
    </section> 
 
-<div class="row" ng-show="view.title!='List View'" >
+   <div class="row" ng-show="view.title!='List View'" >
     <div class="col-lg-12">
-        <!-- calendar -->
+      <!-- calendar -->
 
       <section class="panel panel-default">
 
        <div class="panel-heading"> {{view.title}}
-    </div>   
+       </div>   
        <div id="timelogsCalendar" 
-   
+
        calendar="timelogsCalendar"
        ui-calendar="config.calendar" ng-model="eventSources" ></div>
      </div>
-     </div>
    </div>
-   <div class="row" ng-show="view.title=='List View'">
+ </div>
+ <div class="row" ng-show="view.title=='List View'">
 
- <div class="col-lg-4">
+   <div class="col-lg-4">
 
-      <section class="panel panel-default">
+    <section class="panel panel-default">
 
-       <div class="panel-heading">  Breakdown
-    </div>       
-       <!-- list -->
-       <table class="table panel-table"  >
-          <thead>
-          <tr>
-            <th >Issue</th>
-            <th  >Hours</th>
-            <th  >Earnings</th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr ng-repeat="timelog in timelogs | unique:'issue'">
-            <td>{{timelog.issue.name}}</td>
-            <td ng-init="hoursByIssue(timelog)">{{timelog.issueHours}}</td>
-            <td  ng-init="rate(timelog)">{{timelog.rate| currency}}</td>
-       </tr>
-     </tbody>
+     <div class="panel-heading">  Breakdown
+     </div>       
+     <!-- list -->
+     <table class="table panel-table"  >
+      <thead>
+        <tr>
+          <th >Issue</th>
+          <th  >Hours</th>
+          <th  >Earnings</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr ng-repeat="timelog in timelogs | unique:'issue'">
+          <td>{{timelog.issue.name}}</td>
+          <td ng-init="hoursByIssue(timelog)">{{timelog.issueHours}}</td>
+          <td  ng-init="rate(timelog)">{{timelog.rate| currency}}</td>
+        </tr>
+      </tbody>
 
-     <tfoot>
+      <tfoot>
        <tr>
         <td></td>
         <td ><b>{{totalHours}}</b></td>
@@ -89,44 +90,45 @@
 </div>
 
 
- <div class="col-lg-8">
+<div class="col-lg-8">
 
-      <section class="panel panel-default">
+  <section class="panel panel-default">
    <div class="panel-heading">  Issues
-    </div> 
+   </div> 
    
-       <!-- list -->
-       <table class="table panel-table" ng-show="view.title=='List View'" >
-        <thead>
-          <tr>
-            <th width="50%">Issue</th>
-            <th width="30%">Time</th>
-            <th width="10%">Hours</th>
-            <th width="10%">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="timelog in timelogs">
-            <td>{{timelog.issue.name}}</td>
-            <td>{{timelog.startTime | date : 'hh:mm a' }} - {{timelog.stopTime | date : 'hh:mm a'}} </td>
-            <td ng-init="hours(timelog)">{{timelog.hours}}</td>
-            <td>
-              <div class="btn-group">
-               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                Action <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-               <li><a href="#!/timelogs/{{timelog._id}}" ><i class="fa fa-eye"></i>View</a></li>
-               <li><a ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
-               <li class="divider"></li>
-               <li><a ng-click="remove(timelog)"><i class="fa fa-trash-o"></i> Delete</a></li>
-             </ul>
-           </div>
-         </td>
-       </tr>
-     </tbody>
-  </table>
+   <!-- list -->
+   <table class="table panel-table" ng-show="view.title=='List View'" >
+    <thead>
+      <tr>
+        <th width="50%">Issue</th>
+        <th width="30%">Time</th>
+        <th width="10%">Hours</th>
+        <th width="10%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="timelog in timelogs">
+        <td>{{timelog.issue.name}}</td>
+        <td>{{timelog.startTime | date : 'hh:mm a' }} - {{timelog.stopTime | date : 'hh:mm a'}} </td>
+        <td ng-init="hours(timelog)">{{timelog.hours}}</td>
+        <td>
+          <div class="btn-group">
+           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+           <li><a href="#!/timelogs/{{timelog._id}}" ><i class="fa fa-eye"></i>View</a></li>
+           <li><a ng-click="edit(timelog)" data-template="views/timelogs/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-backdrop="static" data-container="body" ><i class="fa fa-pencil"></i> Edit</a></li>
+           <li class="divider"></li>
+           <li><a ng-click="remove(timelog)"><i class="fa fa-trash-o"></i> Delete</a></li>
+         </ul>
+       </div>
+     </td>
+   </tr>
+ </tbody>
+</table>
 </section> 
 </div>
 </div>
+</section>
 </section>
