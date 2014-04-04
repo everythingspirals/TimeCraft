@@ -65,7 +65,7 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     }
 
 };
-}
+
 
     //---------------------------------
     //Calendar Functions
@@ -112,10 +112,11 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     //Listeners
     //---------------------------------
     $scope.$watch('date',function(){
-        if($scope.date != $stateParams.date){
-            $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
-        }
-    });
+     if($scope.date != $stateParams.date){
+        $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
+
+}
+});
 
     $scope.$watch('view.value',function(){
         $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)

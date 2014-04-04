@@ -1,5 +1,5 @@
-      <section data-ng-controller="TimelogsViewController" >
-        <section ng-controller="TimelogsController">
+      <section ng-controller="TimelogsViewController" >
+
 
         <!--tooltip-->
         <section class="navbar navbar-default navbar-fixed-top toolbar">
@@ -40,21 +40,25 @@
 
    <div class="row" ng-show="view.title!='List View'" >
     <div class="col-lg-12">
-      <!-- calendar -->
 
+      <!-- calendar -->
       <section class="panel panel-default">
 
-       <div class="panel-heading"> {{view.title}}
-       </div>   
-       <div id="timelogsCalendar" 
+       <div class="panel-heading"> 
+        {{view.title}}
+      </div> 
 
-       calendar="timelogsCalendar"
-       ui-calendar="config.calendar" ng-model="eventSources" ></div>
-     </div>
-   </div>
- </div>
- <div class="row" ng-show="view.title=='List View'">
+      <div id="timelogsCalendar" 
+      calendar="timelogsCalendar"
+      ui-calendar="config.calendar" ng-model="eventSources" >
+    </div>
 
+  </section>
+</div>
+</div>
+
+<div class="row" ng-show="view.title=='List View'">
+  <section ng-controller="TimelogsController">
    <div class="col-lg-4">
 
     <section class="panel panel-default">
@@ -65,9 +69,9 @@
      <table class="table panel-table"  >
       <thead>
         <tr>
-          <th >Issue</th>
-          <th  >Hours</th>
-          <th  >Earnings</th>
+          <th>Issue</th>
+          <th>Hours</th>
+          <th>Earnings</th>
         </tr>
       </thead>
       <tbody >
@@ -91,7 +95,6 @@
 
 
 <div class="col-lg-8">
-
   <section class="panel panel-default">
    <div class="panel-heading">  Issues
    </div> 
@@ -129,6 +132,6 @@
 </table>
 </section> 
 </div>
-</div>
 </section>
+</div>
 </section>
