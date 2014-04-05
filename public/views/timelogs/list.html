@@ -1,5 +1,3 @@
-      <section ng-controller="TimelogsViewController" >
-
       <section ng-controller="TimelogsController" ng-init="getByRange(startDate,endDate)">
      
           <!--tooltip-->
@@ -80,17 +78,17 @@
     </thead>
     <tbody >
       <tr ng-repeat="timelog in timelogs | unique:'issue'">
-        <td>{{timelog.issue.name}}</td>
+        <td style="width:100px">{{timelog.issue.name}}</td>
         <td ng-init="hoursByIssue(timelog)">{{timelog.issueHours}}</td>
-        <td  ng-init="rate(timelog)">{{timelog.rate| currency}}</td>
+        <td ng-init="rate(timelog)">{{timelog.rate| currency}}</td>
       </tr>
     </tbody>
 
     <tfoot>
      <tr>
       <td></td>
-      <td ><b>{{totalHours}}</b></td>
-      <td ><b>{{totalRate | currency}}</b></td>
+      <td><b>{{totalHours}}</b></td>
+      <td><b>{{totalRate | currency}}</b></td>
     </tr>
   </tfoot>
 </table>
@@ -139,4 +137,3 @@
 </section>
 </div>
 </section> 
-</section>

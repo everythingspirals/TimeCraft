@@ -8,9 +8,17 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     //Variables
     //---------------------------------
 
-    //timelog
+    //global
     $scope.global = Global;
 
+    //timelog
+    $scope.global = Global;
+    $scope.timelog = {};
+    $scope.timelogs = [];
+    $scope.totalHours = 0;
+    $scope.totalRate = 0;
+
+    //views
     $scope.views = [
     {
         id:0,
@@ -48,24 +56,23 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     //calendar
     $scope.events = [];
     $scope.config = {
-     calendar:{
-        defaultView: $scope.view.value, 
-        allDaySlot:false, 
-        firstHour:0, 
-        header:[],
-        year:moment($scope.date).year(),
-        month:moment($scope.date).month(),
-        date:moment($scope.date).date(),
-        viewRender : function(){
-            $(window).scrollTop(0);
-        },
-        eventClick: function(event, jsEvent, view) {
-            $scope.edit(event.data.timelog)
-            $aside({scope: $scope, template: '/views/timelogs/edit.html'});
+         calendar:{
+            defaultView: $scope.view.value, 
+            allDaySlot:false, 
+            firstHour:0, 
+            header:[],
+            year:moment($scope.date).year(),
+            month:moment($scope.date).month(),
+            date:moment($scope.date).date(),
+            viewRender : function(){
+                $(window).scrollTop(0);
+            },
+            eventClick: function(event, jsEvent, view) {
+                $scope.edit(event.data.timelog)
+                $aside({scope: $scope, template: '/views/timelogs/edit.html'});
+            }
         }
-    }
-
-};
+    };
 
 
     //---------------------------------

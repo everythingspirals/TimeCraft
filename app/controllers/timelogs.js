@@ -4,6 +4,7 @@
  * Module dependencies.
  */
  var mongoose = require('mongoose'),
+Issue = mongoose.model('Issue'),
 Timelog = mongoose.model('Timelog'),
 Project = mongoose.model('Project'),
 Client = mongoose.model('Client'),
@@ -36,7 +37,9 @@ Client = mongoose.model('Client'),
                 timelog: timelog
             });
         } else {
-            res.jsonp(timelog);
+           Issue.populate(timelog, {path:"issue"}, function(err, timelog){
+                res.jsonp(timelog);
+           })
         }
     });
 };
@@ -56,7 +59,9 @@ Client = mongoose.model('Client'),
                 timelog: timelog
             });
         } else {
-            res.jsonp(timelog);
+            Issue.populate(timelog, {path:"issue"}, function(err, timelog){
+                res.jsonp(timelog);
+            })
         }
     });
 };
