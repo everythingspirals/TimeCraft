@@ -18,12 +18,12 @@ angular.module('mean.rates').controller('RatesController',
     }
 
     $scope.create = function() {
-        var rate = new Rates({
+        var rate = {
             amount: this.amount,
             startDate: this.startDate,
             client: this.client
-        });
-        rate.$save(function(response) {
+        };
+        Rates.save(rate, function(rate) {
             $scope.rates.push(rate);
         });
     };
@@ -31,7 +31,7 @@ angular.module('mean.rates').controller('RatesController',
     $scope.remove = function(rate) {
         if(confirm("Are you sure you want to delete?")){
             if (rate) {
-                rate.$remove();
+                Rates.remove(rate);
 
                 for (var i in $scope.rates) {
                     if ($scope.rates[i] === rate) {
@@ -40,46 +40,43 @@ angular.module('mean.rates').controller('RatesController',
                 }
             }
             else {
-                $scope.rate.$remove();
+                Rates.remove(rate);
                 $location.path('rates');
             }
         }
     };
 
     $scope.update = function() {
-        var rate = $scope.rate;
-        // if (!rate.updated) {
-        //     rate.updated = [];
-        // }
-        // rate.updated.push(new Date().getTime());
-
-        rate.$update(function() {
-            //$location.path('rates/' + rate._id);
+     Rates.update($scope.rate, function(rate) {
+            $scope.rate = rate;
+            $scope.getByRange($scope.startDate, $scope.endDate);
         });
     };
 
     $scope.find = function() {
-        Rates.query({'userId': Global.user._id},
-            function(rates) {
+        Rates.get(function(rates) {
+          $scope.rates = rates;
+      });
+    };
+
+    $scope.findOne = function() {
+        Rates.getById($stateParams.rateId,
+        function(rate) {
+            $scope.rate = rate;
+        });
+    };
+
+    $scope.findByUser = function() {
+        Rates.getByUser(Global.user._id,
+        function(rates) {
             $scope.rates = rates;
         });
     };
 
-    $scope.findOne = function() {
-        Rates.get({
-            rateId: $stateParams.rateId
-        }, function(rate) {
+    $scope.client = function(client) {
+        Rates.rate(client, function(rate){
             $scope.rate = rate;
-        });
-    };
-
-    $scope.client = function() {
-        Rates.client({
-            clientId: $stateParams.clientId,
-            'userId': Global.user._id
-        }, function(rate) {
-            $scope.rate = rate;
-        });
+        })
     };
 
     $scope.current = function() {

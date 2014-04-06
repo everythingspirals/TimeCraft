@@ -15,7 +15,7 @@
             <!--view dropdown-->
             <form class="navbar-form navbar-right">
 
-              <select ng-model="$parent.view" ng-options="view as view.title for view in views"
+              <select ng-model="view" ng-options="view as view.title for view in views"
               class="form-control navbar-right" style="width:150px">
             </select>
           </form>
@@ -65,15 +65,15 @@
 
   <section class="panel panel-default">
 
-   <div class="panel-heading">  Breakdown
+   <div class="panel-heading">  Breakdown 
    </div>       
    <!-- list -->
    <table class="table panel-table"  >
     <thead>
       <tr>
-        <th>Issue</th>
-        <th>Hours</th>
-        <th>Earnings</th>
+        <th width="60%">Issue</th>
+        <th width="20%">Hours</th>
+        <th width="20%">Earnings</th>
       </tr>
     </thead>
     <tbody >

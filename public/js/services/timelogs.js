@@ -53,21 +53,21 @@ angular.module('mean.timelogs')
 	    	});
 	    },
 	    update: function(timelog, callback){
-	    	resource.update(timelog, function(){
+	    	resource.update({id:timelog._id}, timelog, function(timelog){
 	    		if (typeof (callback) == 'function') {
 	    			callback(timelog);
 	    		}
 	    	});
 	    },
 	    save: function(timelog, callback){
-	    	resource.save(timelog, function(){
+	    	resource.save(timelog, function(timelog){
 	    		if (typeof (callback) == 'function') {
 	    			callback(timelog);
 	    		}
 	    	});
 	    },
 	    remove: function(timelog, callback){
-	    	resource.remove(timelog, function(){
+	    	resource.remove(timelog, function(timelog){
 	    		if (typeof (callback) == 'function') {
 	    			callback(timelog);
 	    		}
@@ -89,10 +89,10 @@ angular.module('mean.timelogs')
 	    	return issueHours;
 	    },
 	    rate : function(timelog, callback){
-	    	Rates.current({
-	    		clientId: timelog.issue.project.client,
-	    		'userId': timelog.user._id
-	    	}, function(rates) {
+	    	Rates.getByClient(
+	    		timelog.issue.project.client,
+	    		timelog.user._id
+	    	, function(rates) {
 	    		var rate = timelog.issueHours * rates[0].amount;
 	    		if (typeof (callback) == 'function') {
 	    			callback(rate);

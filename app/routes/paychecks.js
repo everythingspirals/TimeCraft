@@ -17,11 +17,11 @@ module.exports = function(app) {
     app.get('/paychecks', paychecks.all);
     app.get('/paychecks/current', authorization.requiresLogin, hasAuthorization, paychecks.findByRange);
     app.post('/paychecks', authorization.requiresLogin, paychecks.create);
-    app.get('/paychecks/:rateId', paychecks.show);
-    app.put('/paychecks/:rateId', authorization.requiresLogin, hasAuthorization, paychecks.update);
-    app.del('/paychecks/:rateId', authorization.requiresLogin, hasAuthorization, paychecks.destroy);
+    app.get('/paychecks/:paycheckId', paychecks.show);
+    app.put('/paychecks/:paycheckId', authorization.requiresLogin, hasAuthorization, paychecks.update);
+    app.del('/paychecks/:paycheckId', authorization.requiresLogin, hasAuthorization, paychecks.destroy);
 
     // Finish with setting up the rateId param
-    app.param('rateId', paychecks.paycheck);
+    app.param('paycheckId', paychecks.paycheck);
 
 };

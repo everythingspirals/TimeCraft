@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.timelogs').controller('TimelogsViewController', 
+angular.module('mean.timelogs').controller('TimelogsController', 
     ['$scope', '$stateParams', '$location', '$timeout', '$aside', 'Global', 'Timelogs', 'Rates', '$log',
     function ($scope, $stateParams, $location, $timeout, $aside, Global, Timelogs, Rates, $log) {
 
@@ -78,7 +78,7 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     //---------------------------------
     //Calendar Functions
     //---------------------------------
-     $scope.getEvents = function(timelogs){
+    $scope.getEvents = function(timelogs){
               //remove current events
             angular.forEach($scope.events,function(value, key){
                 $scope.events.splice(key, 1);
@@ -105,12 +105,122 @@ angular.module('mean.timelogs').controller('TimelogsViewController',
     }
 
     $scope.prev = function(){
-      $scope.changeDate(-1);
-  }
+        $scope.changeDate(-1);
+    }
 
-  $scope.next = function(){
-    $scope.changeDate(+1);
-}
+    $scope.next = function(){
+        $scope.changeDate(+1);
+    }
+
+    //---------------------------------
+    //Timelog Functions
+    //---------------------------------
+    $scope.edit= function(timelog){
+        $scope.timelog = timelog
+    };
+
+    $scope.create = function() {
+        var startTime = moment(this.startTime);
+        var stopTime = moment(this.stopTime);
+        var today = moment($scope.date);
+
+        //set startTime date to today
+        stopTime.year(today.year());
+        stopTime.month(today.month());
+        stopTime.date(today.date());
+
+        //set stopTime date to today
+        startTime.year(today.year());
+        startTime.month(today.month());
+        startTime.date(today.date());
+
+        var timelog = new Timelogs({
+            startTime: startTime.format(),
+            stopTime: stopTime.format(),
+            description: this.description,
+            issue: this.issue
+        });
+        
+        Timelogs.save(timelog, function(timelog) {
+            $scope.timelogs.push(timelog);
+            $scope.getByRange($scope.startDate, $scope.endDate);
+        });
+
+        this.startTime = null;
+        this.stopTime = null;
+        this.description = '';
+        this.issue = null;
+    };
+
+    $scope.remove = function(timelog) {
+        if(confirm("Are you sure you want to delete?")){
+            if (timelog) {
+                Timelogs.remove(timelog);
+
+                for (var i in $scope.timelogs) {
+                    if ($scope.timelogs[i] === timelog) {
+                        $scope.timelogs.splice(i, 1);
+                    }
+                }
+            }
+            else {
+                Timelogs.remove(timelog);
+                $location.path('timelogs');
+            }
+        }
+    };
+
+    $scope.update = function() {
+        Timelogs.update($scope.timelog, function(timelog) {
+            $scope.timelog = timelog;
+            $scope.getByRange($scope.startDate, $scope.endDate);
+        });
+    };
+
+    $scope.find = function() {
+        Timelogs.get(function(timelogs) {
+          $scope.timelogs = timelogs;
+      });
+    };
+
+    $scope.findOne = function() {
+        Timelogs.getById($stateParams.timelogId,
+        function(timelog) {
+            $scope.timelog = timelog;
+        });
+    };
+
+    $scope.getByRange = function(startDate,endDate) {
+        Timelogs.getByRange(
+            Global.user._id,
+            startDate, 
+            endDate, 
+            function(timelogs){
+                $scope.timelogs = timelogs;
+            });
+    };
+
+   
+    //---------------------------------
+    //Rate/Time Functions
+    //---------------------------------
+
+    $scope.hours = function(timelog){
+        timelog.hours = Timelogs.hours(timelog);
+        $scope.totalHours += timelog.hours;
+    }
+    
+    $scope.hoursByIssue = function(timelog){
+        timelog.issueHours = Timelogs.hoursByIssue(timelog, $scope.timelogs);
+    }
+
+
+    $scope.rate = function(timelog){
+        Timelogs.rate(timelog, function(rate){
+            timelog.rate = rate;
+             $scope.totalRate += timelog.rate;
+        });
+    };
 
     //---------------------------------
     //Main

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.paychecks').controller('RatesController', 
+angular.module('mean.paychecks').controller('PaycheckController', 
     ['$scope', '$stateParams', '$location', 'Global', 'Paychecks', function ($scope, $stateParams, $location, Global, Paychecks) {
     
     //---------------------------------

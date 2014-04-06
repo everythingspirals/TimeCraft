@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', '$log', function ($scope, $stateParams, $location, Global, Projects, $log) {
-
+angular.module('mean.projects').controller('ProjectsController', 
+    ['$scope', '$stateParams', '$location', 'Global', 'Projects', function ($scope, $stateParams, $location, Global, Projects) {
+    
     //---------------------------------
     //Variables
     //---------------------------------
     $scope.global = Global;
+    $scope.project = {};
     $scope.projects = [];
 
     //---------------------------------
@@ -16,17 +18,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     }
 
     $scope.create = function() {
-        var project = new Projects({
+        var project = {
             name: this.name,
             url: this.url,
             status: this.status,
             client: this.client
-        });
-        project.$save(function(response) {
+        };
+        Projects.save(project, function(project) {
             $scope.projects.push(project);
             $scope.find();
         });
-
         this.name = '';
         this.url = '';
         this.status = null;
@@ -36,7 +37,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     $scope.remove = function(project) {
         if(confirm("Are you sure you want to delete?")){
             if (project) {
-                project.$remove();
+                Projects.remove(project);
 
                 for (var i in $scope.projects) {
                     if ($scope.projects[i] === project) {
@@ -45,35 +46,29 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 }
             }
             else {
-                $scope.project.$remove();
+                Projects.remove(project);
                 $location.path('projects');
             }
         }
     };
 
     $scope.update = function() {
-        var project = $scope.project;
-        // if (!project.updated) {
-        //     project.updated = [];
-        // }
-        // project.updated.push(new Date().getTime());
-
-
-        project.$update().then(function(response){
-            $log.info(response);
+    $scope.project.client = $scope.project.client._id;
+     Projects.update($scope.project, function(project) {
+            $scope.project = project;
+            $scope.find();
         });
     };
 
     $scope.find = function() {
-        Projects.query(function(projects) {
-            $scope.projects = projects;
-        });
+        Projects.get(function(projects) {
+          $scope.projects = projects;
+      });
     };
 
     $scope.findOne = function() {
-        Projects.get({
-            projectId: $stateParams.projectId
-        }, function(project) {
+        Projects.getById($stateParams.projectId,
+        function(project) {
             $scope.project = project;
         });
     };
