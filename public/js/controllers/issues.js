@@ -25,10 +25,6 @@ angular.module('mean.issues').controller(
         sprint:null
     };
     $scope.issues = [];
-    $scope.progress = 0;
-    Status.query(function(stati){
-        $scope.status = stati[0]._id;            
-    });
     $scope.views = [{
         id:0,
         title:"List View"
@@ -46,7 +42,7 @@ angular.module('mean.issues').controller(
     }
 
     $scope.create = function() {
-        var issue = new Issues({
+        var issue = {
             name: this.name,
             story: this.story,
             estimate: this.estimate,
@@ -54,8 +50,10 @@ angular.module('mean.issues').controller(
             status: this.status,
             project: this.project,
             sprint: this.sprint
-        });
-        issue.$save(function(response) {
+        };
+
+        Issues.save($scope.issue, function(issue) {
+            $scope.issue = issue;
             $scope.getByRelated();
         });
         
@@ -71,7 +69,7 @@ angular.module('mean.issues').controller(
     $scope.remove = function(issue) {
         if(confirm("Are you sure you want to delete?")){
             if (issue) {
-                issue.$remove();
+                Issues.remove(issue);
 
                 for (var i in $scope.issues) {
                     if ($scope.issues[i] === issue) {
@@ -100,50 +98,46 @@ angular.module('mean.issues').controller(
         //assignedto
         issue.assignedTo = (!!issue.assignedTo ? issue.assignedTo._id : null);
 
-        issue.$update().then(function(response){
-                $scope.getByRelated();
-            });
-         };
+        Issues.update(issue, function(response){
+            $scope.getByRelated();
+        });
+    };
 
-         $scope.find = function() {
-            Issues.query(function(issues) {
-                $scope.issues = issues;
-            });
-        };
+    $scope.find = function() {
+        Issues.get(function(issues) {
+            $scope.issues = issues;
+        });
+    };
 
-        $scope.getByUser = function() {
-            Issues.getByUser({'userId': Global.user._id}, function(issues) {
-                $scope.issues = issues;
-            });
-        };
+    $scope.getByUser = function() {
+        Issues.getByUser(Global.user._id, 
+        function(issues) {
+            $scope.issues = issues;
+        });
+    };
 
-        $scope.getByRelated = function() {
-            Issues.getByRelated({'userId': Global.user._id}, function(issues) {
-                $scope.issues = issues;
-            });
-        };
+    $scope.getByRelated = function() {
+        Issues.getByRelated(Global.user._id, 
+        function(issues) {
+            $scope.issues = issues;
+        });
+    };
 
-        $scope.getByStatus = function(statusId) {
-            Issues.getByStatus({'userId': Global.user._id, 'statusId': statusId}, function(issues) {
-                $scope.issues = issues;
-            });
-        };
+    $scope.findBySprint = function() {
+        Issues.getBySprint($stateParams.sprintId, 
+        function(issues) {
+            $scope.issues = issues;
+        });
+    };
 
-        $scope.findBySprint = function() {
-            Issues.getBySprint({'sprintId': $stateParams.sprintId}, function(issues) {
-                $scope.issues = issues;
-            });
-        };
+    $scope.findOne = function() {
+        Issues.getById($stateParams.issueId,
+        function(issue) {
+            $scope.issue = issue;
+        });
+    };
 
-        $scope.findOne = function() {
-            Issues.get({
-                issueId: $stateParams.issueId
-            }, function(issue) {
-                $scope.issue = issue;
-            });
-        };
-
-        $scope.getBudget = function(issue, actual){
-            issue.budget =  (actual / issue.estimate * 100).toFixed(2);
-        }
-    }]);
+    $scope.getBudget = function(issue, actual){
+        issue.budget =  Issues.getBudget(issue.estimate, actual);
+    }
+}]);
