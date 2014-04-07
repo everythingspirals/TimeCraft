@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.timelogs').controller('TimelogsController', 
-    ['$scope', '$stateParams', '$location', '$timeout', '$aside', 'Global', 'Timelogs', 'Rates', '$log',
-    function ($scope, $stateParams, $location, $timeout, $aside, Global, Timelogs, Rates, $log) {
+    ['$scope', '$stateParams', '$location', '$timeout', '$aside', 'Global', 'Timelogs', 'Rates', 'Issues', '$log',
+    function ($scope, $stateParams, $location, $timeout, $aside, Global, Timelogs, Rates, Issues, $log) {
 
     //---------------------------------
     //Variables
@@ -74,6 +74,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
         }
     };
 
+    //issues
+    $scope.issues = [];
 
     //---------------------------------
     //Calendar Functions
@@ -133,7 +135,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
         startTime.year(today.year());
         startTime.month(today.month());
         startTime.date(today.date());
-
+        
         var timelog = {
             startTime: startTime.format(),
             stopTime: stopTime.format(),
@@ -223,6 +225,17 @@ angular.module('mean.timelogs').controller('TimelogsController',
     };
 
     //---------------------------------
+    //Issues Functions
+    //---------------------------------
+    $scope.getIssuesByUser = function() {
+        Issues.getByUser(Global.user._id, 
+        function(issues) {
+            $scope.issues = issues;
+        });
+    };
+
+
+    //---------------------------------
     //Main
     //---------------------------------
     $scope.eventSources = [$scope.events];
@@ -238,8 +251,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
 });
 
     $scope.$watch('view.value',function(){
-        console.log("view changed");
-        $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
+        //console.log("view changed");
+        //$location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
          //$scope.timelogsCalendar.fullCalendar('changeView', $scope.view.value);
      });
 

@@ -110,6 +110,7 @@ angular.module('mean.issues').controller(
     };
 
     $scope.getByUser = function() {
+        console.log("test");
         Issues.getByUser(Global.user._id, 
         function(issues) {
             $scope.issues = issues;

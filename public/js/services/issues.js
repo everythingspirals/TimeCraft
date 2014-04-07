@@ -37,7 +37,7 @@ angular.module('mean.issues')
 	    		{userId: userId}, 
 	    		function(issues) {
 	    			if (typeof (callback) == 'function') {
-	    				callback(issue);
+	    				callback(issues);
 	    			}
 	    		});
 	    },
