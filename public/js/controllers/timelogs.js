@@ -134,12 +134,12 @@ angular.module('mean.timelogs').controller('TimelogsController',
         startTime.month(today.month());
         startTime.date(today.date());
 
-        var timelog = new Timelogs({
+        var timelog = {
             startTime: startTime.format(),
             stopTime: stopTime.format(),
             description: this.description,
             issue: this.issue
-        });
+        };
         
         Timelogs.save(timelog, function(timelog) {
             $scope.timelogs.push(timelog);
