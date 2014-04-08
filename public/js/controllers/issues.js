@@ -52,7 +52,7 @@ angular.module('mean.issues').controller(
             sprint: this.sprint
         };
 
-        Issues.save($scope.issue, function(issue) {
+        Issues.save(issue, function(issue) {
             $scope.issue = issue;
             $scope.getByRelated();
         });
@@ -96,7 +96,7 @@ angular.module('mean.issues').controller(
         //createdBy
         issue.createdBy = (!!issue.createdBy ? issue.createdBy._id : null);
         //assignedto
-        issue.assignedTo = (!!issue.assignedTo ? issue.assignedTo._id : null);
+        //issue.assignedTo = (!!issue.assignedTo ? issue.assignedTo._id : null);
 
         Issues.update(issue, function(response){
             $scope.getByRelated();

@@ -44,7 +44,7 @@
 
           <div class="form-group" ng-controller="UsersController" data-ng-init="find()">
             <label>Assigned To</label>
-            <select ng-model="$parent.issue.assignedTo" id="assignedTo" ng-options="u as u.name for u in users track by u.name" class="form-control"></select>
+            <select ng-model="$parent.issue.assignedTo" id="assignedTo" ng-options="u._id as u.name for u in users" class="form-control"></select>
           </div>
         </form>
       </div>
