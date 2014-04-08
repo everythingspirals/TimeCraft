@@ -73,6 +73,19 @@ angular.module('mean.paychecks').controller('PaycheckController',
         });
     };
 
+    $scope.getByRange = function(startDate, endDate){
+        Paychecks.getByRange(
+            Global.user._id,
+            startDate,
+            endDate,
+            function(paychecks){
+                $scope.paychecks = paychecks;
+            });
+    };
+
+    $scope.loggedHours = function(timelog){
+        paycheck.loggedHours = Paychecks.loggedHours(timelog, $scope.paychecks);
+    }
     //---------------------------------
     //Listeners
     //---------------------------------
