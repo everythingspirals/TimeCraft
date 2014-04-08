@@ -67,7 +67,7 @@ angular.module('mean.timelogs')
 	    	});
 	    },
 	    remove: function(timelog, callback){
-	    	resource.remove(timelog, function(timelog){
+	    	resource.remove({id:timelog._id},timelog, function(timelog){
 	    		if (typeof (callback) == 'function') {
 	    			callback(timelog);
 	    		}
