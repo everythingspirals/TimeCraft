@@ -137,22 +137,24 @@ angular.module('mean.timelogs').controller('TimelogsController',
         var startTime = moment();
         var stopTime = moment();
         var today = moment($scope.date);
-        var stopHours = parseInt(this.stopHours) + (this.stopMeridiem * 12);
-        var startHours = parseInt(this.startHours) + (this.startMeridiem * 12);
 
+        var stopHours = $scope.toMilitary(this.stopHours, this.stopMeridiem);
+        var startHours = $scope.toMilitary(this.startHours, this.startMeridiem);
+    console.log(startHours);
+        console.log(stopHours);
         //set startTime date to today
         stopTime.year(today.year());
         stopTime.month(today.month());
         stopTime.date(today.date());
         stopTime.hour(stopHours);
-        stopTime.minute($scope.stopMinutes);
+        stopTime.minute(this.stopMinutes);
 
         //set stopTime date to today
         startTime.year(today.year());
         startTime.month(today.month());
         startTime.date(today.date());
         startTime.hour(startHours);
-        startTime.minute($scope.startMinutes);
+        startTime.minute(this.startMinutes);
 
         var timelog = {
             startTime: startTime.format(),
@@ -199,8 +201,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.update = function() {
         $scope.timelog.issue = $scope.timelog.issue._id;
 
-        var stopHours = parseInt($scope.timelog.stopHours) + ($scope.timelog.stopMeridiem * 12);
-        var startHours = parseInt($scope.timelog.startHours) + ($scope.timelog.startMeridiem * 12);
+        var stopHours = $scope.toMilitary($scope.timelog.stopHours, $scope.timelog.stopMeridiem);
+        var startHours = $scope.toMilitary($scope.timelog.startHours, $scope.timelog.startMeridiem);
 
         //set startTime date to today'
         $scope.timelog.stopTime = moment($scope.timelog.stopTime);
@@ -278,6 +280,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
         });
     };
 
+    $scope.toMilitary = function(hours, meridiem){
+        return (parseInt(hours) % 12) + (meridiem * 12);
+    };
     //---------------------------------
     //Issues Functions
     //---------------------------------
