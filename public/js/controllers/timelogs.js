@@ -166,13 +166,13 @@ angular.module('mean.timelogs').controller('TimelogsController',
             $scope.getByRange($scope.startDate, $scope.endDate);
         });
 
-        $scope.startHours = moment().format("hh");
-        $scope.startMinutes = moment().format("mm");
-        $scope.startMeridiem = $scope.meridiems[moment().format("A")]
+        this.startHours = moment().format("hh");
+        this.startMinutes = moment().format("mm");
+        this.startMeridiem = $scope.meridiems[moment().format("A")]
 
-        $scope.stopHours = moment().format("hh");
-        $scope.stopMinutes = moment().format("mm");
-        $scope.stopMeridiem = $scope.meridiems[moment().format("A")]
+        this.stopHours = moment().format("hh");
+        this.stopMinutes = moment().format("mm");
+        this.stopMeridiem = $scope.meridiems[moment().format("A")]
 
         this.description = '';
         this.issue = null;
@@ -234,7 +234,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.getByRange = function(startDate,endDate) {
         $scope.totalHours = 0;
         $scope.totalRate = 0;
-        
         Timelogs.getByRange(
             Global.user._id,
             startDate, 
