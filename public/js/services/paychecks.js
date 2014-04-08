@@ -2,7 +2,7 @@
 
 //Paychecks service used for paychecks REST endpoint
 angular.module('mean.paychecks')
-.service('Paychecks', ['$resource', 'Rates', 'Timelogs' function($resource, Rates, Timelogs) {
+.service('Paychecks', ['$resource', 'Rates', 'Timelogs', function($resource, Rates, Timelogs) {
 	var resource = $resource('paychecks/:paycheckId/:method',
 	{
 		paycheckId: '@_id'
@@ -38,7 +38,7 @@ angular.module('mean.paychecks')
 					callback(paychecks);
 				}
 			})
-		}.
+		},
 		update: function(paycheck, callback){
 			resource.update({id:paycheck._id}, paycheck, function(paycheck){
 				if (typeof (callback) == 'function'){

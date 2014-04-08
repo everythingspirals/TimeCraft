@@ -18,17 +18,18 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.totalHours = 0;
     $scope.totalRate = 0;
 
-    $scope.startTime = {
-        hh:moment().format("hh"),
-        mm:moment().format("mm"),
-        tt:moment().format("A")
-    };
+    $scope.meridiems = {
+        "AM" : 0,
+        "PM" : 1
+    }
 
-    $scope.stopTime = {
-       hh:moment().format("hh"),
-        mm:moment().format("mm"),
-        tt:moment().format("A")
-    };
+    $scope.startHours = moment().format("hh");
+    $scope.startMinutes = moment().format("mm");
+    $scope.startMeridiem = $scope.meridiems[moment().format("A")]
+
+    $scope.stopHours = moment().format("hh");
+    $scope.stopMinutes = moment().format("mm");
+    $scope.stopMeridiem = $scope.meridiems[moment().format("A")]
     //views
     $scope.views = [
     {
@@ -67,23 +68,23 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //calendar
     $scope.events = [];
     $scope.config = {
-         calendar:{
-            defaultView: $scope.view.value, 
-            allDaySlot:false, 
-            firstHour:0, 
-            header:[],
-            year:moment($scope.date).year(),
-            month:moment($scope.date).month(),
-            date:moment($scope.date).date(),
-            viewRender : function(){
-                $(window).scrollTop(0);
-            },
-            eventClick: function(event, jsEvent, view) {
-                $scope.edit(event.data.timelog)
-                $aside({scope: $scope, template: '/views/timelogs/edit.html'});
-            }
+       calendar:{
+        defaultView: $scope.view.value, 
+        allDaySlot:false, 
+        firstHour:0, 
+        header:[],
+        year:moment($scope.date).year(),
+        month:moment($scope.date).month(),
+        date:moment($scope.date).date(),
+        viewRender : function(){
+            $(window).scrollTop(0);
+        },
+        eventClick: function(event, jsEvent, view) {
+            $scope.edit(event.data.timelog)
+            $aside({scope: $scope, template: '/views/timelogs/edit.html'});
         }
-    };
+    }
+};
 
     //issues
     $scope.issues = [];
@@ -93,57 +94,42 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //---------------------------------
     $scope.getEvents = function(timelogs){
               //remove current events
-            angular.forEach($scope.events,function(value, key){
+              angular.forEach($scope.events,function(value, key){
                 $scope.events.splice(key, 1);
             });
-            
+
             //refetch from db
             angular.forEach(timelogs,function(timelog){
 
-             $scope.events.push({
-                 title:timelog.issue.name,
-                 start:new Date(timelog.startTime),
-                 end: new Date(timelog.stopTime),
-                 data:{
+               $scope.events.push({
+                   title:timelog.issue.name,
+                   start:new Date(timelog.startTime),
+                   end: new Date(timelog.stopTime),
+                   data:{
                     timelog:timelog
                 },
                 allDay: false
 
             });
-         });
-    }
+           });
+        }
 
-    $scope.changeDate = function(dir){
-        $scope.date = moment($scope.date).add($scope.view.type,dir).format();
-    }
+        $scope.changeDate = function(dir){
+            $scope.date = moment($scope.date).add($scope.view.type,dir).format();
+        }
 
-    $scope.prev = function(){
-        $scope.changeDate(-1);
-    }
+        $scope.prev = function(){
+            $scope.changeDate(-1);
+        }
 
-    $scope.next = function(){
-        $scope.changeDate(+1);
-    }
+        $scope.next = function(){
+            $scope.changeDate(+1);
+        }
 
     //---------------------------------
     //Timelog Functions
     //---------------------------------
-    $scope.edit= function(timelog){
-        var startTime = $scope.timelog.startTime;
-        var stopTime = $scope.timelog.stopTime;
-
-        $scope.timelog.startTime = {
-            hh:moment(startTime).format("hh"),
-            mm:moment(startTime).format("mm"),
-            tt:moment(startTime).format("A")
-        };
-        
-        $scope.timelog.stopTime = {
-            hh:moment(stopTime).format("hh"),
-            mm:moment(stopTime).format("mm"),
-            tt:moment(stopTime).format("A")
-        };
-        
+    $scope.edit= function(timelog){       
         $scope.timelog = timelog
     };
 
@@ -151,22 +137,22 @@ angular.module('mean.timelogs').controller('TimelogsController',
         var startTime = moment();
         var stopTime = moment();
         var today = moment($scope.date);
-        var stopHours = ($scope.stopTime.tt == "AM" ? $scope.stopTime.hh : parseInt($scope.stopTime.hh) + 12);
-        var startHours = ($scope.startTime.tt == "AM" ? $scope.startTime.hh : parseInt($scope.startTime.hh) + 12);
+        var stopHours = parseInt(this.stopHours) + (this.stopMeridiem * 12);
+        var startHours = parseInt(this.startHours) + (this.startMeridiem * 12);
 
         //set startTime date to today
         stopTime.year(today.year());
         stopTime.month(today.month());
         stopTime.date(today.date());
         stopTime.hour(stopHours);
-        stopTime.minute($scope.stopTime.mm);
+        stopTime.minute($scope.stopMinutes);
 
         //set stopTime date to today
         startTime.year(today.year());
         startTime.month(today.month());
         startTime.date(today.date());
         startTime.hour(startHours);
-        startTime.minute($scope.startTime.mm);
+        startTime.minute($scope.startMinutes);
 
         var timelog = {
             startTime: startTime.format(),
@@ -180,16 +166,14 @@ angular.module('mean.timelogs').controller('TimelogsController',
             $scope.getByRange($scope.startDate, $scope.endDate);
         });
 
-    $scope.startTime = {
-        hh:moment().format("hh"),
-        mm:moment().format("mm"),
-        tt:moment().format("A")
-    };
-    $scope.stopTime = {
-        hh:moment().format("hh"),
-        mm:moment().format("mm"),
-        tt:moment().format("A")
-    };
+        $scope.startHours = moment().format("hh");
+        $scope.startMinutes = moment().format("mm");
+        $scope.startMeridiem = $scope.meridiems[moment().format("A")]
+
+        $scope.stopHours = moment().format("hh");
+        $scope.stopMinutes = moment().format("mm");
+        $scope.stopMeridiem = $scope.meridiems[moment().format("A")]
+
         this.description = '';
         this.issue = null;
     };
@@ -213,15 +197,20 @@ angular.module('mean.timelogs').controller('TimelogsController',
     };
 
     $scope.update = function() {
+        $scope.timelog.issue = $scope.timelog.issue._id;
 
-        var stopHours = ($scope.stopTime.tt == "AM" ? $scope.stopTime.hh : parseInt($scope.stopTime.hh) + 12);
-        var startHours = ($scope.startTime.tt == "AM" ? $scope.startTime.hh : parseInt($scope.startTime.hh) + 12);
-        //startTime
-        $scope.timelog.startTime.hour(startHours);
-        $scope.timelog.startTime.minute($scope.timelog.startTime.mm);
-        //stopTime
+        var stopHours = parseInt($scope.timelog.stopHours) + ($scope.timelog.stopMeridiem * 12);
+        var startHours = parseInt($scope.timelog.startHours) + ($scope.timelog.startMeridiem * 12);
+
+        //set startTime date to today'
+        $scope.timelog.stopTime = moment($scope.timelog.stopTime);
         $scope.timelog.stopTime.hour(stopHours);
-        $scope.timelog.stopTime.minute($scope.timelog.stopTime.mm);
+        $scope.timelog.stopTime.minute($scope.timelog.stopMinutes);
+
+        //set stopTime date to today
+        $scope.timelog.startTime = moment($scope.timelog.startTime);
+        $scope.timelog.startTime.hour(startHours);
+        $scope.timelog.startTime.minute($scope.timelog.startMinutes);
 
         Timelogs.update($scope.timelog, function(timelog) {
             $scope.timelog = timelog;
@@ -237,22 +226,38 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
     $scope.findOne = function() {
         Timelogs.getById($stateParams.timelogId,
-        function(timelog) {
-            $scope.timelog = timelog;
-        });
+            function(timelog) {
+                $scope.timelog = timelog;
+            });
     };
 
     $scope.getByRange = function(startDate,endDate) {
+        $scope.totalHours = 0;
+        $scope.totalRate = 0;
+        
         Timelogs.getByRange(
             Global.user._id,
             startDate, 
             endDate, 
             function(timelogs){
+                angular.forEach(timelogs, function(timelog){
+                    var startTime = timelog.startTime;
+                    var stopTime = timelog.stopTime;
+
+                    timelog.startHours = moment(startTime).format("hh");
+                    timelog.startMinutes = moment(startTime).format("mm");
+                    timelog.startMeridiem = $scope.meridiems[moment(startTime).format("A")]
+
+                    timelog.stopHours = moment(stopTime).format("hh");
+                    timelog.stopMinutes = moment(stopTime).format("mm");
+                    timelog.stopMeridiem = $scope.meridiems[moment(stopTime).format("A")]
+                });
+
                 $scope.timelogs = timelogs;
             });
     };
 
-   
+
     //---------------------------------
     //Rate/Time Functions
     //---------------------------------
@@ -270,7 +275,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.rate = function(timelog){
         Timelogs.rate(timelog, function(rate){
             timelog.rate = rate;
-             $scope.totalRate += timelog.rate;
+            $scope.totalRate += timelog.rate;
         });
     };
 
@@ -279,9 +284,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //---------------------------------
     $scope.getIssuesByUser = function() {
         Issues.getByUser(Global.user._id, 
-        function(issues) {
-            $scope.issues = issues;
-        });
+            function(issues) {
+                $scope.issues = issues;
+            });
     };
 
 
@@ -294,7 +299,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //Listeners
     //---------------------------------
     $scope.$watch('date',function(){
-     if($scope.date != $stateParams.date){
+       if($scope.date != $stateParams.date){
         $location.path('timelogs/date/' + new Date($scope.date) + "/" + $scope.view.id)
 
     }
