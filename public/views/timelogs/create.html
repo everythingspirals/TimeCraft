@@ -5,37 +5,67 @@
           <button type="button" class="close" ng-click="$hide()">&times;</button>
           <h4 class="aside-title"><i class="fa fa-plus"></i> Create</h4>
         </div>
-            <form>
-        <div class="aside-body">
-     
-          <div class="form-group" ng-controller="IssuesController" data-ng-init="getByUser()">
-           <label>Issue</label>
-           <div>
-             <select chosen data-placeholder="Choose an issue" id="issue" type="text" class="form-control" ng-model="$parent.issue" ng-options="issue._id as issue.name for issue in issues" >
-<option><option>
-             </select required>
-           </div>
-         </div>
+        <form>
+          <div class="aside-body">
 
-         <div class="form-group">
-          <label>Start Time</label>
-          <input type="text" class="form-control" ng-model="startTime" id="start" placeholder="Start Time" bs-timepicker required />
-        </div>
-        <div class="form-group">
-          <label>Stop Time</label>
-          <input type="text" class="form-control" ng-model="stopTime" id="stop" placeholder="Stop Time" placeholder="Time" bs-timepicker required />
+            <div class="form-group" ng-controller="IssuesController" data-ng-init="getByUser()">
+             <label>Issue</label>
+             <div>
+               <select chosen data-placeholder="Choose an issue" id="issue" type="text" class="form-control" ng-model="$parent.issue" ng-options="issue._id as issue.name for issue in issues" >
+                <option><option>
+                </select required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Start Time</label>
+              <table cellpadding="10">
+                <tr>
+                  <td>
+                    <input type="text" type="number" max="12" min="1" class="form-control" ng-model="startTime.hh" maxlength="2" placeholder="hh" style="width:70px" required />
+                  </td>
+                  <td>
+                   <input type="text" type="number" max="59" min="0" class="form-control" ng-model="startTime.mm" maxlength="2"  placeholder="mm" style="width:70px" required />
+                 </td>
+                 <td>
+                  <select class="form-control" ng-model="startTime.tt" style="width:70px" required>
+                    <option>AM</option>
+                    <option>PM</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="form-group">
+            <label>Stop Time</label>
+            <table cellpadding="10">
+              <tr>
+                <td>
+                <input type="text" type="number" max="12" min="1" class="form-control" ng-model="stopTime.hh" maxlength="2" placeholder="hh" style="width:70px" required />
+                </td>
+                <td>
+                 <input type="text" type="number" max="59" min="0" class="form-control" ng-model="stopTime.mm" maxlength="2"  placeholder="mm" style="width:70px" required />
+               </td>
+               <td>
+                <select class="form-control" ng-model="stopTime.tt" style="width:70px" required>
+                  <option>AM</option>
+                  <option>PM</option>
+                </select>
+              </td>
+            </tr>
+          </table>
         </div>
         <div class="form-group">
           <label>Description</label>
           <div text-angular ng-model="description" id="timelog.description" required>
           </div>
-      
-      </div>
-      <div class="aside-footer">
-        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
-        <button type="submit" class="btn btn-primary" ng-click="create(); $hide()">Save changes</button>
-      </div>
-        </form>
+
+        </div>
+        <div class="aside-footer">
+          <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+          <button type="submit" class="btn btn-primary" ng-click="create(); $hide()">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

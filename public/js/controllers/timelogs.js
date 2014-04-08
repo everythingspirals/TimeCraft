@@ -18,6 +18,17 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.totalHours = 0;
     $scope.totalRate = 0;
 
+    $scope.startTime = {
+        hh:moment().format("hh"),
+        mm:moment().format("mm"),
+        tt:moment().format("A")
+    };
+
+    $scope.stopTime = {
+       hh:moment().format("hh"),
+        mm:moment().format("mm"),
+        tt:moment().format("A")
+    };
     //views
     $scope.views = [
     {
@@ -118,24 +129,45 @@ angular.module('mean.timelogs').controller('TimelogsController',
     //Timelog Functions
     //---------------------------------
     $scope.edit= function(timelog){
+        var startTime = $scope.timelog.startTime;
+        var stopTime = $scope.timelog.stopTime;
+
+        $scope.timelog.startTime = {
+            hh:moment(startTime).format("hh"),
+            mm:moment(startTime).format("mm"),
+            tt:moment(startTime).format("A")
+        };
+        
+        $scope.timelog.stopTime = {
+            hh:moment(stopTime).format("hh"),
+            mm:moment(stopTime).format("mm"),
+            tt:moment(stopTime).format("A")
+        };
+        
         $scope.timelog = timelog
     };
 
     $scope.create = function() {
-        var startTime = moment(this.startTime);
-        var stopTime = moment(this.stopTime);
+        var startTime = moment();
+        var stopTime = moment();
         var today = moment($scope.date);
+        var stopHours = ($scope.stopTime.tt == "AM" ? $scope.stopTime.hh : parseInt($scope.stopTime.hh) + 12);
+        var startHours = ($scope.startTime.tt == "AM" ? $scope.startTime.hh : parseInt($scope.startTime.hh) + 12);
 
         //set startTime date to today
         stopTime.year(today.year());
         stopTime.month(today.month());
         stopTime.date(today.date());
+        stopTime.hour(stopHours);
+        stopTime.minute($scope.stopTime.mm);
 
         //set stopTime date to today
         startTime.year(today.year());
         startTime.month(today.month());
         startTime.date(today.date());
-        
+        startTime.hour(startHours);
+        startTime.minute($scope.startTime.mm);
+
         var timelog = {
             startTime: startTime.format(),
             stopTime: stopTime.format(),
@@ -148,8 +180,16 @@ angular.module('mean.timelogs').controller('TimelogsController',
             $scope.getByRange($scope.startDate, $scope.endDate);
         });
 
-        this.startTime = null;
-        this.stopTime = null;
+    $scope.startTime = {
+        hh:moment().format("hh"),
+        mm:moment().format("mm"),
+        tt:moment().format("A")
+    };
+    $scope.stopTime = {
+        hh:moment().format("hh"),
+        mm:moment().format("mm"),
+        tt:moment().format("A")
+    };
         this.description = '';
         this.issue = null;
     };
@@ -173,6 +213,16 @@ angular.module('mean.timelogs').controller('TimelogsController',
     };
 
     $scope.update = function() {
+
+        var stopHours = ($scope.stopTime.tt == "AM" ? $scope.stopTime.hh : parseInt($scope.stopTime.hh) + 12);
+        var startHours = ($scope.startTime.tt == "AM" ? $scope.startTime.hh : parseInt($scope.startTime.hh) + 12);
+        //startTime
+        $scope.timelog.startTime.hour(startHours);
+        $scope.timelog.startTime.minute($scope.timelog.startTime.mm);
+        //stopTime
+        $scope.timelog.stopTime.hour(stopHours);
+        $scope.timelog.stopTime.minute($scope.timelog.stopTime.mm);
+
         Timelogs.update($scope.timelog, function(timelog) {
             $scope.timelog = timelog;
             $scope.getByRange($scope.startDate, $scope.endDate);
