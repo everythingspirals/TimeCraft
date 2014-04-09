@@ -6,13 +6,13 @@ angular.module('mean.issues')
 	var resource = $resource('issues/:issueId/:method',  
 		{	issueId: '@_id'    },
 		{        
-			update: 	{    method: 'PUT'   },
-			getByUser:  {	 method: 'GET', params: {method:'user'}, isArray: true},
-			getByRelated:  {	method: 'GET', params: {method:'related'}, isArray: true},
-			getBySprint:  {	 method: 'GET', params: {method:'sprint'}, isArray: true},
-			getByStatus:  {	 method: 'GET', params: {method:'status'}, isArray: true}
+			update: {method: 'PUT'},
+			getByUser: {method: 'GET', params: {method:'user'}, isArray: true},
+			getByRelated:  {method: 'GET', params: {method:'related'}, isArray: true},
+			getBySprint:  {method: 'GET', params: {method:'sprint'}, isArray: true},
+			getByStatus:  {method: 'GET', params: {method:'status'}, isArray: true}
 		}
-		);
+	);
 
 	return  {
 		//---------------------------------
@@ -25,8 +25,8 @@ angular.module('mean.issues')
 	    		}
 	    	})
 	    },
-	    getById: function(id, callback){
-	    	resource.get({id:id}, function(issue){
+	    getById: function(issueId, callback){
+	    	resource.get({issueId:issueId}, function(issue){
 	    		if (typeof (callback) == 'function') {
 	    			callback(issue);
 	    		}
@@ -65,7 +65,7 @@ angular.module('mean.issues')
 	    	});
 	    },
 	    update: function(issue, callback){
-	    	resource.update({id:issue._id}, issue, function(issue){
+	    	resource.update({issueId:issue._id}, issue, function(issue){
 	    		if (typeof (callback) == 'function') {
 	    			callback(issue);
 	    		}

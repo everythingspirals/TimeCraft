@@ -45,8 +45,8 @@ angular.module('mean.timelogs')
 	    			}
 	    		});
 	    },
-	    getByIssue: function() {
-	    	resource.getByIssue({'issueId': $stateParams.issueId}, function(timelogs){
+	    getByIssue: function(issueId, callback) {
+	    	resource.getByIssue({'issueId': issueId}, function(timelogs){
 	    		if (typeof (callback) == 'function') {
 	    			callback(timelogs);
 	    		}

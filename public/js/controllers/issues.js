@@ -24,6 +24,7 @@ angular.module('mean.issues').controller(
         project:null,
         sprint:null
     };
+    $scope.timelogs = [];
     $scope.issues = [];
     $scope.views = [{
         id:0,
@@ -110,12 +111,18 @@ angular.module('mean.issues').controller(
     };
 
     $scope.getByUser = function() {
-        console.log("test");
         Issues.getByUser(Global.user._id, 
         function(issues) {
             $scope.issues = issues;
         });
     };
+
+    $scope.getTimelogs = function(){
+        Timelogs.getByIssue($stateParams.issueId, 
+            function(timelogs){
+                $scope.timelogs = timelogs;
+            }); 
+    }
 
     $scope.getByRelated = function() {
         Issues.getByRelated(Global.user._id, 
