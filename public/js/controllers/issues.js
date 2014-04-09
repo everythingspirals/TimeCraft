@@ -25,6 +25,7 @@ angular.module('mean.issues').controller(
         sprint:null
     };
     $scope.timelogs = [];
+    $scope.totalHours = 0;
     $scope.issues = [];
     $scope.views = [{
         id:0,
@@ -122,6 +123,11 @@ angular.module('mean.issues').controller(
             function(timelogs){
                 $scope.timelogs = timelogs;
             }); 
+    }
+
+    $scope.hours = function(timelog){
+        timelog.hours = Timelogs.hours(timelog);
+        $scope.totalHours += timelog.hours;
     }
 
     $scope.getByRelated = function() {
