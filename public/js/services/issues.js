@@ -42,7 +42,7 @@ angular.module('mean.issues')
 	    		});
 	    },
 	    getByRelated: function(userId, callback){
-	    	resource.getByUser(
+	    	resource.getByRelated(
 	    	{
 	    		userId: userId,
 	    		createdBy: userId
