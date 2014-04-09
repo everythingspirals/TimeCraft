@@ -89,7 +89,7 @@
  * List of Issues
  */
  exports.all = function(req, res) {
-    Issue.find().sort('created')
+    Issue.find().sort('-created')
     .populate('user', 'name username')
     .populate('status', 'name')
     .populate('project', 'name')
@@ -130,7 +130,7 @@
 exports.user = function(req, res) {
     Issue.find({
         assignedTo:mongoose.Types.ObjectId(req.query.userId)
-    }).sort('created')
+    }).sort('-created')
     .populate('user')
     .populate('status')
     .populate('project')
@@ -152,7 +152,7 @@ exports.related = function(req, res) {
             {"assignedTo":mongoose.Types.ObjectId(req.query.userId)},
             {"createdBy":mongoose.Types.ObjectId(req.query.userId)}
         ]
-    }).sort('created')
+    }).sort('-created')
     .populate('createdBy', 'name username')
      .populate('assignedTo', 'name username')
     .populate('status', 'name')
