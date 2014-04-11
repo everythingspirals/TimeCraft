@@ -127,7 +127,6 @@ angular.module('mean.issues').controller(
 
     $scope.hours = function(timelog){
         timelog.hours = Timelogs.hours(timelog);
-        $scope.totalHours += timelog.hours;
     }
 
     $scope.getByRelated = function() {
@@ -151,7 +150,15 @@ angular.module('mean.issues').controller(
         });
     };
 
-    $scope.getBudget = function(issue, actual){
-        issue.budget =  Issues.getBudget(issue.estimate, actual);
+    $scope.getBudget = function(issue){
+        Timelogs.getByIssue(issue._id, 
+            function(timelogs){
+                issue.actual = 0;
+                angular.forEach(timelogs, function(timelog){
+                    issue.actual += Timelogs.hours(timelog);
+             });
+             issue.budget = Issues.getBudget(issue.estimate, issue.actual);
+        }); 
+       
     }
 }]);

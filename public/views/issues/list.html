@@ -49,94 +49,94 @@
   <!--issues repeater -->
   <section class="panel panel-default">
 
-  <table class="table table-bordered panel-table" ng-show="view.title == 'Workflow View'"
-  ng-controller="StatusController" ng-init="find()">
-     <thead>
-       <tr > 
-        <th ng-repeat="status in stati">{{status.name}}</th>
-      </tr>
-    </thead>
-    <tbody > 
-      <tr >
-        <td ng-repeat="status in stati">
-          <div >
-            <div class="row" ng-repeat="issue in issues | filter:globalFilter | filter:projectFilter | filter:status._id">
-              <div class="col-lg-12">
-                <div class="panel panel-default" ng-init="scope.toggle = false">
-                  <div class="panel-heading" ng-click="scope.toggle = !scope.toggle">
-                    {{issue.name}}
-                  </div>
-                  <div class="panel-body" ng-show="scope.toggle">
-                     <div class="form-group">
-                      <label>Project</label>
-                      <div>{{issue.project.name}}</div>
-                    </div>
-                                        <div class="form-group" ng-show="issue.sprint">
-                      <label>Sprint</label>
-                      <div>{{issue.sprint.name}}</div>
-                    </div>
-                                        <div class="form-group">
-                      <label>Assigned To</label>
-                      <div>{{issue.assignedTo.name}}</div>
-                    </div>
-                                       <div class="form-group">
-                      <label>Budget</label>
-                      <div>
-                        <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
-                            {{issue.budget}}%
-                          </div>
-                        </div>
+    <table class="table table-bordered panel-table" ng-show="view.title == 'Workflow View'"
+    ng-controller="StatusController" ng-init="find()">
+    <thead>
+     <tr > 
+      <th ng-repeat="status in stati">{{status.name}}</th>
+    </tr>
+  </thead>
+  <tbody > 
+    <tr >
+      <td ng-repeat="status in stati">
+        <div >
+          <div class="row" ng-repeat="issue in issues | filter:globalFilter | filter:projectFilter | filter:status._id">
+            <div class="col-lg-12">
+              <div class="panel panel-default" ng-init="scope.toggle = false">
+                <div class="panel-heading" ng-click="scope.toggle = !scope.toggle">
+                  {{issue.name}}
+                </div>
+                <div class="panel-body" ng-show="scope.toggle">
+                 <div class="form-group">
+                  <label>Project</label>
+                  <div>{{issue.project.name}}</div>
+                </div>
+                <div class="form-group" ng-show="issue.sprint">
+                  <label>Sprint</label>
+                  <div>{{issue.sprint.name}}</div>
+                </div>
+                <div class="form-group">
+                  <label>Assigned To</label>
+                  <div>{{issue.assignedTo.name}}</div>
+                </div>
+                <div class="form-group">
+                  <label>Budget</label>
+                  <div>
+                    <div class="progress" ng-init="getBudget(issue,totalHours)">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
+                        {{issue.budget}}%
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- list -->
-    <table class="table table-condensed panel-table" ng-show="view.title == 'List View'">
-      <thead>
-       <tr> 
-        <th width="20%">Name</th>
-        <th width="20%">Project</th>
-        <th width="20%">Sprint</th>
-        <th width="20%">Status</th>
-        <th width="10%">Budget</th>
-        <th width="10%">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-     <tr ng-repeat="issue in issues | filter:globalFilter | filter:projectFilter">
-      <td><a href="#!/issues/{{issue._id}}" >{{issue.name}}</a></td>
-      <td>{{issue.project.name}}</td>
-      <td>{{issue.sprint.name}}</td>
-      <td>{{issue.status.name}}</td>
-      <td>          
-        <div class="progress" ng-init="getBudget(issue)">
-          <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
-            {{issue.budget}}%
           </div>
         </div>
       </td>
+    </tr>
+  </tbody>
+</table>
+<!-- list -->
+<table class="table table-condensed panel-table" ng-show="view.title == 'List View'">
+  <thead>
+   <tr> 
+    <th width="20%">Name</th>
+    <th width="20%">Project</th>
+    <th width="20%">Sprint</th>
+    <th width="20%">Status</th>
+    <th width="10%">Budget</th>
+    <th width="10%">Action</th>
+  </tr>
+</thead>
+<tbody>
+ <tr ng-repeat="issue in issues | filter:globalFilter | filter:projectFilter">
+  <td><a href="#!/issues/{{issue._id}}" >{{issue.name}}</a></td>
+  <td>{{issue.project.name}}</td>
+  <td>{{issue.sprint.name}}</td>
+  <td>{{issue.status.name}}</td>
+  <td>          
+    <div class="progress" ng-init="getBudget(issue)">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{issue.actual}}" aria-valuemin="0" aria-valuemax="{{issue.estimate}}" style="width:{{issue.budget}}%">
+        {{issue.budget}}%
+      </div>
+    </div>
+  </td>
 
-      <td>
-        <div class="btn-group">
-         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          Action <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="#!/issues/{{issue._id}}" ><i class="fa fa-eye"></i> View</a></li>
-         <li><a ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body"><i class="fa fa-pencil"></i> Edit</a></li>
-         <li class="divider"></li>
-         <li><a ng-click="remove(issue)" ><i class="fa fa-trash-o"></i> Delete</a></li>
-       </ul>
-     </div>
-   </td>
- </tr>
+  <td>
+    <div class="btn-group">
+     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      Action <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+     <li><a href="#!/issues/{{issue._id}}" ><i class="fa fa-eye"></i> View</a></li>
+     <li><a ng-click="edit(issue)" data-template="views/issues/edit.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body"><i class="fa fa-pencil"></i> Edit</a></li>
+     <li class="divider"></li>
+     <li><a ng-click="remove(issue)" ><i class="fa fa-trash-o"></i> Delete</a></li>
+   </ul>
+ </div>
+</td>
+</tr>
 </tbody>
 </table> 
 </section>

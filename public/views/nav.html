@@ -1,33 +1,33 @@
 <div>
 	<div id="current">
-	 <a  ng-click='navToggle = !navToggle'>  <span class="icon">
-	 	<i class="fa fa-list-alt"></i></span>
-        <span class="title">Menu</span>
-    </a>
-</div>
-	<ul class="nav" ng-show="navToggle">
+		<a  ng-click='navToggle = !navToggle'>  <span class="icon">
+			<i class="fa fa-list-alt"></i></span>
+			<span class="title">Menu</span>
+		</a>
+	</div>
+	<div ng-show="navToggle">
+		<ul class="nav" >
 
-		<li ng-repeat="item in navItems" >
-		<div class="{{item.title | lowercase}}">
-				<a href="#!/{{item.href}}" ng-click="setPage(item)"> 
-					<span class="icon"><i class="fa fa-{{item.icon}}"></i></span>
-					<span class="title" ng-class="{'active' : item.title == page.title}">{{item.title}}</span>
-				</a>
-			</div>
-		</li>
-	</ul>
-</div>
-<div  >
+			<li ng-repeat="item in navItems" >
+				<div class="{{item.title | lowercase}}">
+					<a href="#!/{{item.href}}" ng-click="setPage(item)"> 
+						<span class="icon"><i class="fa fa-{{item.icon}}"></i></span>
+						<span class="title" ng-class="{'active' : item.title == page.title}">{{item.title}}</span>
+					</a>
+				</div>
+			</li>
+		</ul>
+
 	<div id="current">
-	 <a  ng-click='settingsToggle = !settingsToggle'>  <span class="icon"
-	 	><i class="fa fa-gear"></i></span>
-        <span class="title">Setting</span>
-    </a>
-</div>
+		<a  ng-click='settingsToggle = !settingsToggle'>  <span class="icon"
+			><i class="fa fa-gear"></i></span>
+			<span class="title">Setting</span>
+		</a>
+	</div>
 	<ul class="nav" ng-show="settingsToggle">
 
 		<li ng-repeat="item in settingsItems" >
-		<div class="{{item.title | lowercase}}">
+			<div class="{{item.title | lowercase}}">
 				<a href="#!/{{item.href}}" ng-click="setPage(item)"> 
 					<span class="icon"><i class="fa fa-{{item.icon}}"></i></span>
 					<span class="title" ng-class="{'active' : item.title == page.title}">{{item.title}}</span>
@@ -35,4 +35,5 @@
 			</div>
 		</li>
 	</ul>
+		</div>
 </div>
