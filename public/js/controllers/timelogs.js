@@ -140,8 +140,7 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
         var stopHours = $scope.toMilitary(this.stopHours, this.stopMeridiem);
         var startHours = $scope.toMilitary(this.startHours, this.startMeridiem);
-    console.log(startHours);
-        console.log(stopHours);
+
         //set startTime date to today
         stopTime.year(today.year());
         stopTime.month(today.month());
@@ -164,7 +163,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
         };
         
         Timelogs.save(timelog, function(timelog) {
-            $scope.timelogs.push(timelog);
             $scope.getByRange($scope.startDate, $scope.endDate);
         });
 
@@ -236,6 +234,8 @@ angular.module('mean.timelogs').controller('TimelogsController',
     $scope.getByRange = function(startDate,endDate) {
         $scope.totalHours = 0;
         $scope.totalRate = 0;
+        $scope.timelogs = [];
+
         Timelogs.getByRange(
             Global.user._id,
             startDate, 
@@ -252,6 +252,9 @@ angular.module('mean.timelogs').controller('TimelogsController',
                     timelog.stopHours = moment(stopTime).format("hh");
                     timelog.stopMinutes = moment(stopTime).format("mm");
                     timelog.stopMeridiem = $scope.meridiems[moment(stopTime).format("A")]
+                    
+                    $scope.hours(timelog);
+                    $scope.totalHours += timelog.hours;
                 });
 
                 $scope.timelogs = timelogs;
@@ -265,7 +268,6 @@ angular.module('mean.timelogs').controller('TimelogsController',
 
     $scope.hours = function(timelog){
         timelog.hours = Timelogs.hours(timelog);
-        $scope.totalHours += timelog.hours;
     }
     
     $scope.hoursByIssue = function(timelog){

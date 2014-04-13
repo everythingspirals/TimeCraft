@@ -115,7 +115,7 @@
       <tr ng-repeat="timelog in timelogs">
         <td>{{timelog.issue.name}}</td>
         <td>{{timelog.startTime | date : 'hh:mm a' }} - {{timelog.stopTime | date : 'hh:mm a'}} </td>
-        <td ng-init="hours(timelog)">{{timelog.hours}}</td>
+        <td>{{timelog.hours}}</td>
         <td>
           <div class="btn-group">
            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
