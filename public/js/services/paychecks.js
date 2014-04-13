@@ -13,7 +13,7 @@ angular.module('mean.paychecks')
 	});
 
 	return {
-		get: function(){
+		get: function(callback){
 			resource.query(function(paychecks){
 				if (typeof (callback) == 'function'){
 					callback(paychecks);
@@ -58,7 +58,7 @@ angular.module('mean.paychecks')
 				if (typeof (callback) == 'function'){
 					callback(paycheck);
 				}
-			})
+			});
 		},
 		loggedHours: function(timelogs){
 			var loggedHours = 0;

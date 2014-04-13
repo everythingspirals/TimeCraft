@@ -12,7 +12,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <!--clients repeater -->
+      <!--repeater -->
       <section class="panel panel-default">
         <table class="table panel-table">
           <thead>
@@ -37,7 +37,11 @@
               <td>{{paycheck.endDate | date}}</td>
               <td>{{paycheck.checkDate | date}}</td>
               <td>{{paycheck.hours}}</td>
+               <td>{{paycheck.rate}}</td>
+              <td>{{paycheck.estimate}}</td>
               <td>{{paycheck.gross}}</td>
+              <td>{{paycheck.variance}}</td>
+              <td>{{paycheck.deductions}}</td>
               <td>
                <div class="btn-group">
                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

@@ -26,6 +26,7 @@
  */
  exports.create = function(req, res) {
     var paycheck = new Paycheck(req.body);
+    paycheck.user = req.user;
 
     paycheck.save(function(err) {
         if (err) {
@@ -88,7 +89,7 @@
  * List of paychecks
  */
  exports.all = function(req, res) {
-    Paycheck.find().sort('name').populate('project', 'name').exec(function(err, paychecks) {
+    Paycheck.find().exec(function(err, paychecks) {
         if (err) {
             res.render('error', {
                 status: 500

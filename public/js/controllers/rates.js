@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.rates').controller('RatesController', 
-    ['$scope', '$stateParams', '$location', 'Global', 'Rates', function ($scope, $stateParams, $location, Global, Rates) {
+    ['$scope', '$stateParams', '$location', 'Global', 'Rates', '$log', function ($scope, $stateParams, $location, Global, Rates, $log) {
     
     //---------------------------------
     //Variables
@@ -91,4 +91,5 @@ angular.module('mean.rates').controller('RatesController',
     //---------------------------------
     //Listeners
     //---------------------------------
+
 }]);
