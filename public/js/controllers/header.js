@@ -10,7 +10,7 @@ angular.module('mean.system')
 
 		$scope.today = moment().format('MM-DD-YYYY');
 
-		$scope.layout = "condensed"
+		$scope.layout = "standard"
 
 		$scope.navToggle = true;
 		
