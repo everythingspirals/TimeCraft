@@ -18,6 +18,11 @@ ul{
   list-style:none;
 }
 /*------------------------
+Layout
+-------------------------*/
+
+
+/*------------------------
 Header
 -------------------------*/
 #header {
@@ -86,6 +91,14 @@ Side Navigation
   -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   z-index:1000;
+  overflow:hidden;
+}
+#page.condensed nav{
+  width:50px;
+}
+#nav li{
+    height:50px;
+  overflow:hidden;
 }
 #nav a{
   padding:0;
@@ -115,6 +128,8 @@ Side Navigation
 
 #current{
   background-color:#444 !important;
+        height:50px;
+  overflow:hidden;
 }
 #current .title{
   background-color:inherit !important;
@@ -139,6 +154,9 @@ Side Navigation
   -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+#page.condensed .toolbar{
+  left:50px;
 }
 /*------------------------
 Chat
@@ -212,6 +230,9 @@ Main
   margin-left:250px;
   padding-bottom:50px;
   min-height:600px;
+}
+#page.condensed #content{
+  margin-left:50px;
 }
 /*------------------------
 Panels

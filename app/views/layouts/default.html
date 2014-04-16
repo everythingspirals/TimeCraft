@@ -1,15 +1,22 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
 	{% include '../includes/head.html' %}
-	<body>
-		<header ng-include="'views/header.html'"></header>
+	<body ng-controller="HeaderController">
+		<!-- header -->
+        <header ng-include="'views/header.html'"></header>
+        
+        <!-- page -->
+        <section id="page" ng-class="layout">
+            <!-- nav -->
+            <nav id="nav" ng-include="'views/nav.html'"></nav>
 
-        <!-- sidenav -->
-        <section id="content" class="container-fluid">
-  		        {% block content %}{% endblock %}
+            <!-- content -->
+            <section id="content" class="container-fluid">
+      		        {% block content %}{% endblock %}
+            </section>
         </section>
 
-        <!-- bottomnav -->
+        <!-- footer -->
         <footer ng-include="'views/footer.html'"></footer>
         {% include '../includes/foot.html' %}
     </body>
